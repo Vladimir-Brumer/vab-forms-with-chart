@@ -512,7 +512,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 				return;
 			}
 			$VABFWC_FORMS_filds 	= array();
-			$VABFWC_FORMS_All 		= isset( $_POST[$post_ID] ) ? $_POST[$post_ID] : '';
+			$VABFWC_FORMS_All 		= isset( $_POST[$post_ID] ) ? vabfwc_sanitize_text_field( $_POST[$post_ID] ) : '';
 			$VABFWC_FORMS_All ? $VABFWC_FORMS_filds[$post_ID] = vabfwc_sanitize_text_field( $VABFWC_FORMS_All ) : true;
 			$VABFWC_Class = new VABFWC_Class( $post_ID );
 			if ( ! empty( $VABFWC_FORMS_filds ) ) {
