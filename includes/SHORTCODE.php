@@ -454,7 +454,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					$vabFilesName[$i]				= sanitize_file_name( $_FILES['VABFWC_file']['name'][$i] );
 					$fileInfo = wp_check_filetype( basename( $_FILES['VABFWC_file']['name'][$i] ) );
 					if ( ! empty( $fileInfo['ext'] ) && is_uploaded_file( $_FILES['VABFWC_file']['tmp_name'][$i] ) ) { /* This file is valid and file uploaded using HTTP POST */
-						$FILES_tmp_name[$i]			=  $_FILES['VABFWC_file']['tmp_name'][$i];
+						$FILES_tmp_name[$i]			= $_FILES['VABFWC_file']['tmp_name'][$i];
 						$FILES_type[$i]					= sanitize_mime_type( $_FILES['VABFWC_file']['type'][$i] );
 						$FILES_size[$i]					= intval( $_FILES['VABFWC_file']['size'][$i] );
 						$FILES_size_Mb[$i]			= intval( $FILES_size[$i] )/1024/1024;
