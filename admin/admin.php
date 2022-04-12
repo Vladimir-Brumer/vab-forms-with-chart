@@ -35,28 +35,6 @@ if ( ! function_exists( 'VABFWC' ) ) {
 		) );
 	}
 }
-/*copy to clipboard on click*/
-if ( ! function_exists( 'VABFWC_click_copy' ) ) {
-	function VABFWC_click_copy() {
-		$out = '<script async="async" type="text/javascript">
-							jQuery ( document ).ready( function( $ ) {
-								$( document ).on( \'click\', \'.VABFWC_ShortCode\', function() {
-									var w = window.getSelection(),range = document.createRange(), rStr;
-									range.selectNode( this );
-									w.addRange( range );
-									rStr = range.toString();
-									document.addEventListener( \'copy\', function( e ) {
-										e.clipboardData.setData( \'text/plain\', rStr );
-										e.preventDefault();
-									} );
-										document.execCommand( "copy" );
-										alert( "' . esc_html__( 'Shortcode copied to clipboard', 'VABFWC' ) . '");
-								});
-							});
-					 </script>';
-		return $out;
-	}
-}
 /*add a meta box for basic form settings and create a list of questions*/
 add_action( 'add_meta_boxes', 'vabfwc_contact_forms_meta_box' );
 if ( ! function_exists( 'vabfwc_contact_forms_meta_box' ) ) {
@@ -195,13 +173,25 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 			$( document ).on( 'click', '.spoiler-head', function() {
 				jQuery( this ).next().slideToggle( 400 );
 			} );
+		$( document ).on( 'click', '.VABFWC_ShortCode', function() {
+			var w = window.getSelection(),range = document.createRange(), rStr;
+			range.selectNode( this );
+			w.addRange( range );
+			rStr = range.toString();
+			document.addEventListener( 'copy', function( e ) {
+				e.clipboardData.setData( 'text/plain', rStr );
+				e.preventDefault();
+			} );
+				document.execCommand( "copy" );
+				alert( "<?php esc_html_e( 'Shortcode copied to clipboard', 'VABFWC' ); ?>");
+		});
 	} );</script>
 	<?php
 	$ButMas = array(
 		esc_html__( 'Saved List:', 'VABFWC' ),
 		esc_html__( 'List preparation block:', 'VABFWC' )
 	);
-	echo VABFWC_click_copy() . '<span class="VABFWC_ShortCode">[VABFWC id="' . $id . '"]</span>';
+	echo '<span class="VABFWC_ShortCode">[VABFWC id="' . esc_html( $id ) . '"]</span>';
 	$typeText = array(
 		"text"							=>	esc_html__( 'Text', 'VABFWC' ),
 		"url"								=>	esc_html__( 'Link', 'VABFWC' ),
@@ -617,7 +607,7 @@ add_filter( 'manage_vab_fwc_posts_custom_column', 'vabfwc_fill_views_column', 5,
 if ( ! function_exists( 'vabfwc_fill_views_column' ) ) {
 	function vabfwc_fill_views_column( $colname, $post_id ) {
 		if ( $colname === 'vab_fwc_shortcode' ) {
-			echo '<div class="VABFWC_ShortCode">[VABFWC id="' . $post_id . '"]</div>';
+			echo '<div class="VABFWC_ShortCode">[VABFWC id="' . esc_html( $post_id ) . '"]</div>';
 		}
 	}
 }

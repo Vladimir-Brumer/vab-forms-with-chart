@@ -452,31 +452,34 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					$vab 										= $i+1;
 					$vabContent[$i] 				= chunk_split( base64_encode( file_get_contents( esc_html( $_FILES['VABFWC_file']['tmp_name'][$i] ) ) ) );
 					$vabFilesName[$i]				= sanitize_file_name( $_FILES['VABFWC_file']['name'][$i] );
-					$FILES_tmp_name[$i]			= esc_html( $_FILES['VABFWC_file']['tmp_name'][$i] );
-					$FILES_type[$i]					= esc_html( $_FILES['VABFWC_file']['type'][$i] );
-					$FILES_size[$i]					= intval( $_FILES['VABFWC_file']['size'][$i] );
-					$FILES_size_Mb[$i]			= intval( $FILES_size[$i] )/1024/1024;
-					$ext[$i]								=	substr( $vabFilesName[$i], strpos( $vabFilesName[$i], '.' ), strlen( $vabFilesName[$i] ) - 1 );
-					if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_AddFileMulti'] ) ) {
-						$VABFWC_SizeSum 		 += $FILES_size[$i];
-					}
-					if ( $FILES_size[$i] > 1024 * $F_S_M * 1024 ) {
-						$FileSendErorSize		 .= '<span class="er">***</span>' . esc_html__(' One or more files exceed the allowed size ', 'VABFWC') . '' . $F_S_M . '' . esc_html__(' Мб','VABFWC') . '<br />';
-						$FileSendErorSizeInf .= '<br />' . $vabFilesName[$i] . ' : ' . $SiZeS . ' - ' . $FILES_size[$i] . " / " . $FILES_size_Mb[$i] . '<br />';
-						$hasError 						= true;
-					}
-					if( is_array( $VABFWC_EXT ) && sizeof($VABFWC_EXT) !== 0 && ! in_array( str_replace( '.', '', $ext[$i] ), $VABFWC_EXT ) ){
-						$FileSendErorSize		 .= '<span class="er">***</span>' . esc_html__(' One or more files are not in a valid format', 'VABFWC') . '<br />';
-						$FileSendErorSizeInf .= ':<br />' . esc_html__('File', 'VABFWC') . ' ' . $vabFilesName[$i];
-						$FileSendErorSizeInf .= ' ' . esc_html__('have extension', 'VABFWC') . ' - ' . $ext[$i] . '<br />';
-						$hasError 						= true;
-					}
-					if ( $hasError !== true ) {
-						if ( ! file_exists( $VABFWC_TEMP ) ) {
-							mkdir( $VABFWC_TEMP, 0755, true );
+					$fileInfo = wp_check_filetype( basename( $_FILES['VABFWC_file']['name'][$i] ) );
+					if ( ! empty( $fileInfo['ext'] ) && is_uploaded_file( $_FILES['VABFWC_file']['tmp_name'][$i] ) ) { /* This file is valid and file uploaded using HTTP POST */
+						$FILES_tmp_name[$i]			=  $_FILES['VABFWC_file']['tmp_name'][$i];
+						$FILES_type[$i]					= sanitize_mime_type( $_FILES['VABFWC_file']['type'][$i] );
+						$FILES_size[$i]					= intval( $_FILES['VABFWC_file']['size'][$i] );
+						$FILES_size_Mb[$i]			= intval( $FILES_size[$i] )/1024/1024;
+						$ext[$i]								=	substr( $vabFilesName[$i], strpos( $vabFilesName[$i], '.' ), strlen( $vabFilesName[$i] ) - 1 );
+						if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_AddFileMulti'] ) ) {
+							$VABFWC_SizeSum 		 += $FILES_size[$i];
 						}
-						move_uploaded_file( $FILES_tmp_name[$i], $VABFWC_TEMP . '/' . basename( $vabFilesName[$i] ) );
-						$attachment[]					= $VABFWC_TEMP . '/' . basename( $vabFilesName[$i] );
+						if ( $FILES_size[$i] > 1024 * $F_S_M * 1024 ) {
+							$FileSendErorSize		 .= '<span class="er">***</span>' . esc_html__(' One or more files exceed the allowed size ', 'VABFWC') . '' . $F_S_M . '' . esc_html__(' Мб','VABFWC') . '<br />';
+							$FileSendErorSizeInf .= '<br />' . $vabFilesName[$i] . ' : ' . $SiZeS . ' - ' . $FILES_size[$i] . " / " . $FILES_size_Mb[$i] . '<br />';
+							$hasError 						= true;
+						}
+						if( is_array( $VABFWC_EXT ) && sizeof($VABFWC_EXT) !== 0 && ! in_array( str_replace( '.', '', $ext[$i] ), $VABFWC_EXT ) ){
+							$FileSendErorSize		 .= '<span class="er">***</span>' . esc_html__(' One or more files are not in a valid format', 'VABFWC') . '<br />';
+							$FileSendErorSizeInf .= ':<br />' . esc_html__('File', 'VABFWC') . ' ' . $vabFilesName[$i];
+							$FileSendErorSizeInf .= ' ' . esc_html__('have extension', 'VABFWC') . ' - ' . $ext[$i] . '<br />';
+							$hasError 						= true;
+						}
+						if ( $hasError !== true ) {
+							if ( ! file_exists( $VABFWC_TEMP ) ) {
+								mkdir( $VABFWC_TEMP, 0755, true );
+							}
+							move_uploaded_file( $FILES_tmp_name[$i], $VABFWC_TEMP . '/' . basename( $vabFilesName[$i] ) );
+							$attachment[]					= $VABFWC_TEMP . '/' . basename( $vabFilesName[$i] );
+						}
 					}
 				}
 			}
