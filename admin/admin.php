@@ -191,7 +191,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 		esc_html__( 'Saved List:', 'VABFWC' ),
 		esc_html__( 'List preparation block:', 'VABFWC' )
 	);
-	echo '<span class="VABFWC_ShortCode">[VABFWC id="' . esc_html( $id ) . '"]</span>';
+	echo '<span class="VABFWC_ShortCode">[VABFWC id="' . $id . '"]</span>';
 	$typeText = array(
 		"text"							=>	esc_html__( 'Text', 'VABFWC' ),
 		"url"								=>	esc_html__( 'Link', 'VABFWC' ),
@@ -227,7 +227,7 @@ if ( ! empty( $VABFWC_FORMSA ) ) {
 								'<tbody>',
 									'<tr>',
 										'<td>',
-											'<input type="text" size="25" name="'.$id.'['.$k.'][min]" value="'.$v['min'].'" placeholder="' . esc_html__( 'Minimum value', 'VABFWC' ) . '" required />',
+											'<input type="text" size="25" name="' .$id.'['.$k.'][min]" value="'.$v['min'].'" placeholder="' . esc_html__( 'Minimum value', 'VABFWC' ) . '" required />',
 										'</td>',
 										'<td>',
 											'<input type="text" size="25" name="'.$id.'['.$k.'][max]" value="'.$v['max'].'" placeholder="' . esc_html__( 'Maximum value', 'VABFWC' ) . '" required />',
