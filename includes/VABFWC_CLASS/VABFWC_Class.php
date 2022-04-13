@@ -9,11 +9,11 @@ class VABFWC_Class {
 	public $mDATE;
 	public $mAGENT;
 	function __construct( $PostID ) {
-		$this->PostID 		= $PostID;
+		$this->PostID 		= intval( $PostID );
 		$this->FD 				= VABFWC_UPLOAD_DIR . '/VABFWC/' . sanitize_title( stristr( VABFWCGSU, '://' ) ) . '/Diagram/' . $this->PostID . '/';
 		$VABFWC_FORMSA		= get_post_meta( $this->PostID, 'VABFWC_FORM' ,true );
 		if ( !empty($VABFWC_FORMSA) ) {
-			$VABFWC_FORMSA	= $VABFWC_FORMSA[$this->PostID];
+			$VABFWC_FORMSA	= vabfwc_sanitize_text_field( $VABFWC_FORMSA[$this->PostID] );
 			foreach( $VABFWC_FORMSA as $k => $v ) {
 				$this->$k 		= $this->FD . "$k.txt";
 			}
@@ -57,9 +57,9 @@ function __call( $n, $ag ) {
 	for( $i = 1, $icount = $ag[1]; $i <= $icount; $i++ ) {
 		if ( $i > 1 ) {
 			$ii = $i - 1;
-			${$ag[0] . $i . 'Gr'} = ( constant( esc_html( $ag[0] . $i . 'Per' ) ) / 100 ) * 180 + esc_html( ${$ag[0] . $ii . 'Gr'} );
+			${$ag[0] . $i . 'Gr'} = ( constant( sanitize_text_field( $ag[0] . $i . 'Per' ) ) / 100 ) * 180 + sanitize_text_field( ${$ag[0] . $ii . 'Gr'} );
 		} else {
-			${$ag[0] . $i . 'Gr'} = ( constant( esc_html( $ag[0] . $i . 'Per' ) ) / 100 ) * 180;
+			${$ag[0] . $i . 'Gr'} = ( constant( sanitize_text_field( $ag[0] . $i . 'Per' ) ) / 100 ) * 180;
 		}
 		echo	'.' . esc_html( $ag[0] ) . ' li:nth-child(' . esc_html( $i ) . '){',
 						'transform:rotate(' . esc_html( ${$ag[0] . $i . 'Gr'} ) . 'deg);',

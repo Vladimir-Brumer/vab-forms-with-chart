@@ -498,14 +498,16 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				if ( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDate']) || empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoIP']) || empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoAgent']) ) {
 					$mDATEp 	= empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDate']) ? date("r") . "\n" : " - \n";
 					file_put_contents( $VABFWC_Class->mDATE, $mDATEp, FILE_APPEND );
-					$mIPp 		= empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoIP']) ? $GLOBALS['VABFWC_IP'] . "\n" : " - \n";
+					$mIPp 		= empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoIP']) ? sanitize_text_field( $GLOBALS['VABFWC_IP'] ) . "\n" : " - \n";
 					file_put_contents( $VABFWC_Class->mIP, $mIPp, FILE_APPEND );
-					$AGENTp		= empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoAgent']) ? $_SERVER['HTTP_USER_AGENT'] . "\n" : " - \n";
+					$AGENTp		= empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoAgent']) ? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ) . "\n" : " - \n";
 					file_put_contents( $VABFWC_Class->mAGENT, $AGENTp, FILE_APPEND );
 				}
 			}
 			$ADMEm    = get_option('admin_email');
+			$ADMEm    = sanitize_email( $ADMEm );
 			$emailTo	= $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] : get_option('admin_email');
+			$emailTo	= sanitize_email( $emailTo );
 			$headers	= "From:" . $emailTo . "\r\n";
 			$headers .= "Reply-To: " . $ADMEm . "\r\n";
 			if ( $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL_Copy']) ) {
@@ -680,7 +682,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						'</fieldset>';
 		}
 		ECHO '</div>';
-		ECHO wp_kses( $VABFWC->FieldS(), $VABFWC_Prot_Arg ).
+		ECHO wp_kses( $VABFWC->FieldS(), $VABFWC_Prot_Arg ) .
 						'<input id="anketaSbros" type="reset" name="profilereset" value="' . esc_attr__( 'Resetting the filled fields', 'VABFWC') . '">',
 						'&nbsp;&nbsp;&nbsp;&nbsp;',
 						'<input id="anketaSend" type="submit" name="profilesubmit" value="' . esc_attr__( 'Send', 'VABFWC') . '">',

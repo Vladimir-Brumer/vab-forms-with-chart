@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class VABFWC_Forms_Protect {
 	public $text;
 	function __construct( $text ) {
-		$this->text = !empty($text) ? $text : '';
+		$this->text = !empty($text) ? sanitize_text_field( $text ) : '';
 	}
 	function CheckFields() {
 		$i								=	$this->text;

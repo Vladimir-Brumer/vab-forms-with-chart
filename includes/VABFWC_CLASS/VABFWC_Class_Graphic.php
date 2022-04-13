@@ -11,7 +11,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 		$VABFWC_FORMSA					= get_post_meta( $this->PostID, 'VABFWC_FORM', true );
 		$VABFWC_FORMSA_OPT			= get_post_meta( $this->PostID, 'VABFWC_FORM_OPT', true );
 		if ( !empty($VABFWC_FORMSA) ) {
-			$VABFWC_FORMSA				= $VABFWC_FORMSA[$this->PostID];
+			$VABFWC_FORMSA				= vabfwc_sanitize_text_field( $VABFWC_FORMSA[$this->PostID] );
 		}
 		$AnswerCount						= 0;
 		$countmassivfile				= 0;
@@ -27,7 +27,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 					$total[]				 .= $countmassivfile;
 					for( $i = 0; $i < $coanswer; $i++ ) {
 						${$k . 'Count_' . $i} = 0;
-						${$k . '_' . $i} = $v['answer'][$i] . "\n";
+						${$k . '_' . $i} = sanitize_text_field( $v['answer'][$i] ) . "\n";
 						if ( is_array( $massivfile ) ) {
 							foreach( $massivfile as $kf ) {
 								if ( $kf === ${$k . '_' . $i} ) {
@@ -55,8 +55,11 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 							}
 						}
 					}
-					$Every = !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_circ']) ? '<span>' . esc_html( $otv ) . ' - ' . esc_html( $countmassivfile ) . '</span>':'';
-					echo "<br><center><legend><h4> › " . esc_html( $v['question'] ) . ":</h4></legend>" . $Every . '<br>';
+					$Every = !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_circ']) ? '<span>' . sanitize_text_field( $otv ) . ' - ' . intval( $countmassivfile ) . '</span>':'';
+					$Every_Arg						= 	array( /* wp_kses */
+						'span'							=>	array(),
+					);
+					echo "<br><center><legend><h4> › " . esc_html( $v['question'] ) . ":</h4></legend>" . wp_kses( $Every, $Every_Arg ) . '<br>';
 					for( $i = 0; $i < $coanswer; $i++ ) {
 						if ( isset($v['answer'][$i]) ) {
 							echo '<center>' . esc_html( $v['answer'][$i] ) . ' - <span class="cub" style="background-color:' . esc_html( $v['color'][$i] ) . ';"></span>&nbsp;&nbsp;</center>';
@@ -66,7 +69,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 					for( $i = 0; $i < $coanswer; $i++ ) {
 						${$k . 'Count_' . $i} = 0;
 						if ( isset($v['answer'][$i]) ) {
-						${$k . '_' . $i} = $v['answer'][$i] . "\n";
+						${$k . '_' . $i} = sanitize_text_field( $v['answer'][$i] ) . "\n";
 						$color = $v['color'][$i];
 							if ( is_array( $massivfile ) ) {
 								foreach( $massivfile as $kf ) {
@@ -91,7 +94,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 							define( sanitize_text_field( $k . $coanswer . 'Per' ), $perAr );
 						}
 					}
-					$this->VABFWC_Class( $k, $coanswer );
+					$this->VABFWC_Class( sanitize_text_field( $k ), intval( $coanswer ) );
 				}
 				if ( $v['type'] == 'checkbox' ) {
 					echo	"<br><center><legend><h4> › " . esc_html( $v['question'] ) . ":</h4></legend><span style=\"display:none;\">" . esc_html( $otv ) . ' - ' . esc_html( $countmassivfile ) ."</span><br></center>";
@@ -100,7 +103,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 					$countmassivfilechec		= count( $massivfilechec );
 					for( $i = 0; $i < $coanswerchec; $i++ ) {
 						${$k . 'Countchec_' . $i} = 0;
-						${$k . 'C_' . $i} = $v['answer'][$i] . "\n";
+						${$k . 'C_' . $i} = sanitize_text_field( $v['answer'][$i] ) . "\n";
 						if ( is_array( $massivfilechec ) ) {
 							foreach( $massivfilechec as $kfchec ) {
 								if ( $kfchec === ${$k . 'C_' . $i} ) {
@@ -147,7 +150,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 								$countmassivfilechec = 1;
 							}
 							$Per = round( intval( ${$k . 'Countchec_' . $i} ) * 100 / intval( $countmassivfilechec ), 1 );
-							$EveryCh = empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_ceck']) ? '(' . ${$k . 'Countchec_' . $i} . ')' : '';
+							$EveryCh = empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_ceck']) ? '(' . intval( ${$k . 'Countchec_' . $i} ) . ')' : '';
 							echo	'.bar_' . esc_html( $k . $ii ) . ':after{content:"' . esc_html ( $Per ) . '% ' . esc_html( $EveryCh ) . '";} ';?>
 							.bar_<?php
 								echo esc_html( $k . $ii );
@@ -180,7 +183,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 						echo	'.' . esc_html( $k ) . ' li:nth-child(' . esc_html( $i ) . '){border-color:' . esc_html( $v['color'][$ii] ) . ';}';
 					}
 					if ( $v['type'] !== 'select' && $v['plusArea'] == 'yes' ) {
-						$colCol = $colCol + 1;
+						$colCol = intval( $colCol ) + 1;
 						echo	'.' . esc_html( $k ) . ' li:nth-child(' . esc_html( $colCol ) . '){border-color:#A8A8A8;}';
 					}
 					for( $i = 1, $num = $colCol; $i <= $colCol; $i++ ) {

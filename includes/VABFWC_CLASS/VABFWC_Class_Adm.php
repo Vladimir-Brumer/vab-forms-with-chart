@@ -40,9 +40,9 @@ class VABFWC_Class_Adm extends VABFWC_Class {
 												<input style="color:inherit;cursor:pointer;" type="submit" name="ressubmit" value="' . esc_attr__( 'Send', 'VABFWC' ) . '" onclick="' . esc_js( 'return confirm("' . esc_html__( 'Are you sure?', 'VABFWC' ) . '")' ) . '">
 											</thead>
 											<tfoot>'.
-												$ALF . esc_url( $SRC . '/mIP.txt' ) . '">' . esc_html( $LF ) . ' mIP.txt</a>'.
-												$ALF . esc_url( $SRC . '/mDATE.txt' ) . '">' . esc_html( $LF ) . ' mDATE.txt</a>'.
-												$ALF . esc_url( $SRC . '/mAGENT.txt' ) . '">' . esc_html( $LF ) . ' mAGENT.txt</a>
+												wp_kses_post( $ALF . esc_url( $SRC . '/mIP.txt' ) . '">' . esc_html( $LF ) . ' mIP.txt</a>' ) .
+												wp_kses_post( $ALF . esc_url( $SRC . '/mDATE.txt' ) . '">' . esc_html( $LF ) . ' mDATE.txt</a>' ) .
+												wp_kses_post( $ALF . esc_url( $SRC . '/mAGENT.txt' ) . '">' . esc_html( $LF ) . ' mAGENT.txt</a>' ) . '
 											</tfoot>
 											<tbody>
 												<tr>
@@ -51,7 +51,7 @@ class VABFWC_Class_Adm extends VABFWC_Class {
 													<th>' . esc_html__( 'Date', 'VABFWC' ) . '</th>
 													<th>' . esc_html__( 'OS and browser', 'VABFWC' ) . '</th>
 												</tr>';
-			$ret.=					$echoTR . '
+			$ret.=					wp_kses_post( $echoTR ) . '
 										</tbody>
 									</table>
 								</div>
