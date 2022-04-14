@@ -5,7 +5,7 @@ Donate link: https://it-vab.ru/vab-forms-with-chart/
 Tags: chart, contact, form, contact form, forms with chart, feedback, email, multilingual
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
-Tested up to: 5.9.2
+Tested up to: 5.9.3
 Stable tag: 1.1.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
