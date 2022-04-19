@@ -22,7 +22,7 @@ You can find more detailed information about Forms with chart from VAB on [it-va
 
 = Forms with chart from VAB needs your support =
 
-It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Forms with chart from VAB and find it useful, please consider [making a donation](https://it-vab.ru/vab-forms-with-chart#donate/). Your donation will help encourage and support the plugin's continued development and better user support.
+It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Forms with chart from VAB and find it useful, please consider [making a donation](https://it-vab.ru/vab-forms-with-chart#donate). Your donation will help encourage and support the plugin's continued development and better user support.
 
 = Privacy notices =
 

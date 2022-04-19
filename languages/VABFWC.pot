@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Forms with chart from VAB\n"
-"POT-Creation-Date: 2022-04-08 21:18+0500\n"
+"POT-Creation-Date: 2022-04-19 16:31+0500\n"
 "PO-Revision-Date: 2022-02-22 15:05+0500\n"
 "Last-Translator: \n"
 "Language-Team: VAB Team <m@it-vab.ru>\n"
@@ -52,78 +52,78 @@ msgstr ""
 msgid "Not found"
 msgstr ""
 
-#: admin/admin.php:53
-msgid "Shortcode copied to clipboard"
-msgstr ""
-
-#: admin/admin.php:67
+#: admin/admin.php:45
 msgid ""
 "Copy the shortcode below and paste it into your posts, pages or text widget "
 "content"
 msgstr ""
 
-#: admin/admin.php:89 admin/admin.php:102
+#: admin/admin.php:77 admin/admin.php:90
 msgid "Russian alphabet, some characters and spaces are prohibited!"
 msgstr ""
 
-#: admin/admin.php:100
+#: admin/admin.php:88
 msgid "Specify ID for the question. Use only the Latin alphabet"
 msgstr ""
 
-#: admin/admin.php:106
+#: admin/admin.php:94
 msgid "Specify ID"
 msgstr ""
 
-#: admin/admin.php:107 admin/admin.php:222
+#: admin/admin.php:95 admin/admin.php:222
 msgid "Formulate your question"
 msgstr ""
 
-#: admin/admin.php:114 admin/admin.php:230
+#: admin/admin.php:102 admin/admin.php:230
 msgid "Minimum value"
 msgstr ""
 
-#: admin/admin.php:117 admin/admin.php:233
+#: admin/admin.php:105 admin/admin.php:233
 msgid "Maximum value"
 msgstr ""
 
-#: admin/admin.php:122 admin/admin.php:234
+#: admin/admin.php:110 admin/admin.php:234
 msgid "Specify step"
 msgstr ""
 
-#: admin/admin.php:128 admin/admin.php:168 admin/admin.php:252
+#: admin/admin.php:116 admin/admin.php:156 admin/admin.php:252
 msgid "Specify option answer"
 msgstr ""
 
-#: admin/admin.php:130 admin/admin.php:171 admin/admin.php:255
+#: admin/admin.php:118 admin/admin.php:159 admin/admin.php:255
 msgid "Pick a color on the chart"
 msgstr ""
 
-#: admin/admin.php:135 admin/admin.php:264
+#: admin/admin.php:123 admin/admin.php:264
 msgid "Add an answer option"
 msgstr ""
 
-#: admin/admin.php:139 admin/admin.php:246
+#: admin/admin.php:127 admin/admin.php:246
 msgid "Answer options"
 msgstr ""
 
-#: admin/admin.php:139 admin/admin.php:247
+#: admin/admin.php:127 admin/admin.php:247
 msgid "Color on chart"
 msgstr ""
 
-#: admin/admin.php:152 admin/admin.php:271
+#: admin/admin.php:140 admin/admin.php:271
 msgid "Add «Other» textbox to the end?"
 msgstr ""
 
-#: admin/admin.php:152 admin/admin.php:268 admin/admin.php:274
+#: admin/admin.php:140 admin/admin.php:268 admin/admin.php:274
 msgid "Do not add"
 msgstr ""
 
-#: admin/admin.php:152 admin/admin.php:268 admin/admin.php:275
+#: admin/admin.php:140 admin/admin.php:268 admin/admin.php:275
 msgid "Add"
 msgstr ""
 
-#: admin/admin.php:160
+#: admin/admin.php:148
 msgid "No type selected"
+msgstr ""
+
+#: admin/admin.php:186
+msgid "Shortcode copied to clipboard"
 msgstr ""
 
 #: admin/admin.php:191
@@ -150,7 +150,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: admin/admin.php:200 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:49
+#: admin/admin.php:200 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:51
 msgid "Date"
 msgstr ""
 
@@ -270,164 +270,164 @@ msgstr ""
 msgid "Shortcode"
 msgstr ""
 
-#: includes/SHORTCODE.php:22
+#: includes/SHORTCODE.php:78
 msgid "Check entered data"
 msgstr ""
 
-#: includes/SHORTCODE.php:27
+#: includes/SHORTCODE.php:83
 msgid "Uploaded file size bytes/Mb"
 msgstr ""
 
-#: includes/SHORTCODE.php:66
+#: includes/SHORTCODE.php:122
 msgid "Message from the site"
 msgstr ""
 
-#: includes/SHORTCODE.php:70
+#: includes/SHORTCODE.php:126
 msgid "Form"
 msgstr ""
 
-#: includes/SHORTCODE.php:74
+#: includes/SHORTCODE.php:130
 msgid "Questionnaire content"
 msgstr ""
 
-#: includes/SHORTCODE.php:75
+#: includes/SHORTCODE.php:131
 msgid "IP address"
 msgstr ""
 
-#: includes/SHORTCODE.php:77
+#: includes/SHORTCODE.php:133
 msgid "The form author Vladimir Anatolyevich Brumer"
 msgstr ""
 
-#: includes/SHORTCODE.php:86
+#: includes/SHORTCODE.php:142
 msgid "Question"
 msgstr ""
 
-#: includes/SHORTCODE.php:87
+#: includes/SHORTCODE.php:143
 msgid "Possible answer"
 msgstr ""
 
-#: includes/SHORTCODE.php:88
+#: includes/SHORTCODE.php:144
 msgid "Your own answer"
 msgstr ""
 
-#: includes/SHORTCODE.php:270
+#: includes/SHORTCODE.php:326
 msgid "Links not allowed"
 msgstr ""
 
-#: includes/SHORTCODE.php:362
+#: includes/SHORTCODE.php:466
 msgid " One or more files exceed the allowed size "
 msgstr ""
 
-#: includes/SHORTCODE.php:362 includes/SHORTCODE.php:382
+#: includes/SHORTCODE.php:466 includes/SHORTCODE.php:487
 msgid " Мб"
 msgstr ""
 
-#: includes/SHORTCODE.php:367
+#: includes/SHORTCODE.php:471
 msgid " One or more files are not in a valid format"
 msgstr ""
 
-#: includes/SHORTCODE.php:368
+#: includes/SHORTCODE.php:472
 msgid "File"
 msgstr ""
 
-#: includes/SHORTCODE.php:369
+#: includes/SHORTCODE.php:473
 msgid "have extension"
 msgstr ""
 
-#: includes/SHORTCODE.php:382
+#: includes/SHORTCODE.php:487
 msgid " The total size of files exceeds the allowed size "
 msgstr ""
 
-#: includes/SHORTCODE.php:420
+#: includes/SHORTCODE.php:527
 msgid "Data array is empty"
 msgstr ""
 
-#: includes/SHORTCODE.php:422
+#: includes/SHORTCODE.php:529
 msgid "Text input field..."
 msgstr ""
 
-#: includes/SHORTCODE.php:423
+#: includes/SHORTCODE.php:530
 msgid "Write your answer"
 msgstr ""
 
-#: includes/SHORTCODE.php:425
+#: includes/SHORTCODE.php:532
 msgid "Your message was successfully sent"
 msgstr ""
 
-#: includes/SHORTCODE.php:426
+#: includes/SHORTCODE.php:533
 msgid "Message not sent"
 msgstr ""
 
-#: includes/SHORTCODE.php:429
+#: includes/SHORTCODE.php:536
 msgid "The results are displayed at the end of the questionnaire"
 msgstr ""
 
-#: includes/SHORTCODE.php:430
+#: includes/SHORTCODE.php:537
 msgid ""
 "Results will be displayed after filling out and sending the questionnaire"
 msgstr ""
 
-#: includes/SHORTCODE.php:460
+#: includes/SHORTCODE.php:567
 msgid "URL input field"
 msgstr ""
 
-#: includes/SHORTCODE.php:466
+#: includes/SHORTCODE.php:573
 msgid "Phone input field"
 msgstr ""
 
-#: includes/SHORTCODE.php:472
+#: includes/SHORTCODE.php:579
 msgid "Email input field"
 msgstr ""
 
-#: includes/SHORTCODE.php:478
+#: includes/SHORTCODE.php:585
 msgid "Input field type «Date»"
 msgstr ""
 
-#: includes/SHORTCODE.php:485
+#: includes/SHORTCODE.php:591
 msgid "Input field type «Range»"
 msgstr ""
 
-#: includes/SHORTCODE.php:485
+#: includes/SHORTCODE.php:591
 msgid "Input field type «Number»"
 msgstr ""
 
-#: includes/SHORTCODE.php:508
+#: includes/SHORTCODE.php:614
 msgid "Input field type «Dropdown list»"
 msgstr ""
 
-#: includes/SHORTCODE.php:510
+#: includes/SHORTCODE.php:616
 msgid "Choose a variant"
 msgstr ""
 
-#: includes/SHORTCODE.php:539 includes/SHORTCODE.php:543
-#: includes/SHORTCODE.php:544
+#: includes/SHORTCODE.php:645 includes/SHORTCODE.php:649
+#: includes/SHORTCODE.php:650
 #: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:48
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:64
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:82
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:67
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:85
 msgid "Other"
 msgstr ""
 
-#: includes/SHORTCODE.php:557
+#: includes/SHORTCODE.php:672
 msgid " Sorry, the message was not sent."
 msgstr ""
 
-#: includes/SHORTCODE.php:561 includes/controller.php:13
+#: includes/SHORTCODE.php:676 includes/controller.php:13
 msgid "Select files"
 msgstr ""
 
-#: includes/SHORTCODE.php:562
+#: includes/SHORTCODE.php:677
 msgid "Valid File Format"
 msgstr ""
 
-#: includes/SHORTCODE.php:571
+#: includes/SHORTCODE.php:686
 msgid "Resetting the filled fields"
 msgstr ""
 
-#: includes/SHORTCODE.php:573 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:38
+#: includes/SHORTCODE.php:688 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:40
 msgid "Send"
 msgstr ""
 
-#: includes/SHORTCODE.php:582
+#: includes/SHORTCODE.php:697
 msgid "Table deleted successfully"
 msgstr ""
 
@@ -440,18 +440,19 @@ msgid "Information for administrator"
 msgstr ""
 
 #: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:37
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:38
 msgid "Reset table"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:38
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:40
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:48
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:50
 msgid "IP - adress"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:50
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:52
 msgid "OS and browser"
 msgstr ""
 
@@ -459,11 +460,11 @@ msgstr ""
 msgid "Answers to the question"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:195
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:198
 msgid "Questionnaire completed"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:195
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:198
 msgid "times"
 msgstr ""
 
