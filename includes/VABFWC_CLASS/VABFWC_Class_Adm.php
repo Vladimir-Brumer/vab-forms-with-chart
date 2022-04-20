@@ -34,9 +34,9 @@ class VABFWC_Class_Adm extends VABFWC_Class {
 			$SRC	= VABFWC_UPLOAD_URL . '/VABFWC/' . sanitize_title( stristr( VABFWCGSU, '://' ) ) . '/Diagram/' . $this->PostID;
 			$ALF	= '&nbsp;&nbsp;&nbsp;<a target="_blank" href="';
 			$LF		= esc_html__( 'Open', 'VABFWC' );
-			$ret .=	'<div class="spoiler-wrap">
-								<div class="spoiler-head folded" tabindex="0">' . esc_html__('Information for administrator', 'VABFWC') . '</div>
-									<div class="spoiler-body">
+			$ret .=	'<div class="vabfwc_spoiler-wrap">
+								<div class="vabfwc_spoiler-head folded" tabindex="0">' . esc_html__('Information for administrator', 'VABFWC') . '</div>
+									<div class="vabfwc_spoiler-body">
 										<table>
 											<thead>
 												<label for="resTable" style="color:inherit;cursor:pointer;">

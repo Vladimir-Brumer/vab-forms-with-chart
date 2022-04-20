@@ -1,7 +1,7 @@
 var VABFWC_Chu_F=VABFWC_SenD_In.VABFWC_Chu_F_Out,VABFWC_Chu_Fs=VABFWC_SenD_In.VABFWC_Chu_Fs_Out;
 jQuery ( document ).ready( function ( $ ) {
 	'use strict';
-	$( document ).on( 'click', '.spoiler-head', function() {
+	$( document ).on( 'click', '.vabfwc_spoiler-head', function() {
 		jQuery( this ).next().slideToggle( 400 );
 	} );
 	if ( window.history.replaceState ) {

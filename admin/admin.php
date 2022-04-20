@@ -170,7 +170,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 			$( document ).on( 'click', '.remove_Parent_Parent', function() {
 				$( this ).parent().parent().remove();
 			} );
-			$( document ).on( 'click', '.spoiler-head', function() {
+			$( document ).on( 'click', '.vabfwc_spoiler-head', function() {
 				jQuery( this ).next().slideToggle( 400 );
 			} );
 		$( document ).on( 'click', '.VABFWC_ShortCode', function() {
@@ -229,8 +229,8 @@ if ( ! empty( $VABFWC_FORMSA ) ) {
 							'<span class="vabfwc_moving vabfwc_down" title="' . esc_html__( 'Down', 'VABFWC' ) . '">' . esc_html__( 'Down', 'VABFWC' ) . '</span>';
 			$type = $v['type'];
 			$type = $typeText["$type"];
-			echo	'<div class="spoiler-head folded" style="text-align:center;cursor:pointer;background:#282828!important;color:#FFF;padding:7px;">' . esc_html( $iB ) . ' - ' . esc_html__( 'Collapse/Expand block', 'VABFWC' ) . '</div>
-						<div class="spoiler-body" style="display:none;border:4px double rgba(125,125,125,.75);">';
+			echo	'<div class="vabfwc_spoiler-head folded" style="text-align:center;cursor:pointer;background:#282828!important;color:#FFF;padding:7px;">' . esc_html( $iB ) . ' - ' . esc_html__( 'Collapse/Expand block', 'VABFWC' ) . '</div>
+						<div class="vabfwc_spoiler-body" style="display:none;border:4px double rgba(125,125,125,.75);">';
 			echo	'<textarea cols="11" rows="1" placeholder="' . esc_html__( 'Specify an identifier', 'VABFWC' ) . '" class="VALTEXTARREA" name="' . $id . '[' . $k . ']" value="' . esc_html( $k ) . '" required="">' . esc_html( $k ) . '</textarea>
 						<textarea cols="44" rows="1" placeholder="' . esc_html__( 'Formulate your question', 'VABFWC' ) . '" name="' . $id . '[' . $k . '][question]" value="" required="">' . esc_html( $v['question'] ) . '</textarea>
 						<input type="hidden" size="7" name="' . $id . '[' . $k . '][type]" value="' . esc_html( $v['type'] ) . '" required="" readonly="">' . wp_kses( $Button_del, $Button_del_arg ) . ' - ' . esc_html( $type );
