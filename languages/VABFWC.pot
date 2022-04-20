@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Forms with chart from VAB\n"
-"POT-Creation-Date: 2022-04-19 16:31+0500\n"
+"POT-Creation-Date: 2022-04-20 09:02+0500\n"
 "PO-Revision-Date: 2022-02-22 15:05+0500\n"
 "Last-Translator: \n"
 "Language-Team: VAB Team <m@it-vab.ru>\n"
@@ -70,51 +70,51 @@ msgstr ""
 msgid "Specify ID"
 msgstr ""
 
-#: admin/admin.php:95 admin/admin.php:222
+#: admin/admin.php:95 admin/admin.php:235
 msgid "Formulate your question"
 msgstr ""
 
-#: admin/admin.php:102 admin/admin.php:230
+#: admin/admin.php:102 admin/admin.php:243
 msgid "Minimum value"
 msgstr ""
 
-#: admin/admin.php:105 admin/admin.php:233
+#: admin/admin.php:105 admin/admin.php:246
 msgid "Maximum value"
 msgstr ""
 
-#: admin/admin.php:110 admin/admin.php:234
+#: admin/admin.php:110 admin/admin.php:247
 msgid "Specify step"
 msgstr ""
 
-#: admin/admin.php:116 admin/admin.php:156 admin/admin.php:252
+#: admin/admin.php:116 admin/admin.php:156 admin/admin.php:265
 msgid "Specify option answer"
 msgstr ""
 
-#: admin/admin.php:118 admin/admin.php:159 admin/admin.php:255
+#: admin/admin.php:118 admin/admin.php:159 admin/admin.php:268
 msgid "Pick a color on the chart"
 msgstr ""
 
-#: admin/admin.php:123 admin/admin.php:264
+#: admin/admin.php:123 admin/admin.php:277
 msgid "Add an answer option"
 msgstr ""
 
-#: admin/admin.php:127 admin/admin.php:246
+#: admin/admin.php:127 admin/admin.php:259
 msgid "Answer options"
 msgstr ""
 
-#: admin/admin.php:127 admin/admin.php:247
+#: admin/admin.php:127 admin/admin.php:260
 msgid "Color on chart"
 msgstr ""
 
-#: admin/admin.php:140 admin/admin.php:271
+#: admin/admin.php:140 admin/admin.php:284
 msgid "Add «Other» textbox to the end?"
 msgstr ""
 
-#: admin/admin.php:140 admin/admin.php:268 admin/admin.php:274
+#: admin/admin.php:140 admin/admin.php:281 admin/admin.php:287
 msgid "Do not add"
 msgstr ""
 
-#: admin/admin.php:140 admin/admin.php:268 admin/admin.php:275
+#: admin/admin.php:140 admin/admin.php:281 admin/admin.php:288
 msgid "Add"
 msgstr ""
 
@@ -126,147 +126,155 @@ msgstr ""
 msgid "Shortcode copied to clipboard"
 msgstr ""
 
-#: admin/admin.php:191
+#: admin/admin.php:201
 msgid "Saved List:"
 msgstr ""
 
-#: admin/admin.php:192
+#: admin/admin.php:202
 msgid "List preparation block:"
 msgstr ""
 
-#: admin/admin.php:196
+#: admin/admin.php:206
 msgid "Text"
 msgstr ""
 
-#: admin/admin.php:197
+#: admin/admin.php:207
 msgid "Link"
 msgstr ""
 
-#: admin/admin.php:198
+#: admin/admin.php:208
 msgid "Phone"
 msgstr ""
 
-#: admin/admin.php:199
+#: admin/admin.php:209
 msgid "Email"
 msgstr ""
 
-#: admin/admin.php:200 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:51
+#: admin/admin.php:210 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:57
 msgid "Date"
 msgstr ""
 
-#: admin/admin.php:201
+#: admin/admin.php:211
 msgid "Number"
 msgstr ""
 
-#: admin/admin.php:202
+#: admin/admin.php:212
 msgid "Range"
 msgstr ""
 
-#: admin/admin.php:203
+#: admin/admin.php:213
 msgid "Radio buttons"
 msgstr ""
 
-#: admin/admin.php:204
+#: admin/admin.php:214
 msgid "Checkboxes"
 msgstr ""
 
-#: admin/admin.php:205
+#: admin/admin.php:215
 msgid "Drop-down list"
 msgstr ""
 
-#: admin/admin.php:206
+#: admin/admin.php:216
 msgid "Text area"
 msgstr ""
 
-#: admin/admin.php:219
+#: admin/admin.php:228
+msgid "Up"
+msgstr ""
+
+#: admin/admin.php:229
+msgid "Down"
+msgstr ""
+
+#: admin/admin.php:232
 msgid "Collapse/Expand block"
 msgstr ""
 
-#: admin/admin.php:221
+#: admin/admin.php:234
 msgid "Specify an identifier"
 msgstr ""
 
-#: admin/admin.php:295
+#: admin/admin.php:309
 msgid "Choose type"
 msgstr ""
 
-#: admin/admin.php:297
+#: admin/admin.php:311
 msgid "Add Question"
 msgstr ""
 
-#: admin/admin.php:307
+#: admin/admin.php:321
 msgid "Additional options"
 msgstr ""
 
-#: admin/admin.php:360
+#: admin/admin.php:374
 msgid "Write form responses to log files"
 msgstr ""
 
-#: admin/admin.php:368
+#: admin/admin.php:382
 msgid "Don`t write date to log files"
 msgstr ""
 
-#: admin/admin.php:376
+#: admin/admin.php:390
 msgid "Don`t write IP address to log files"
 msgstr ""
 
-#: admin/admin.php:384
+#: admin/admin.php:398
 msgid "Don`t write user Agent to log files"
 msgstr ""
 
-#: admin/admin.php:392
+#: admin/admin.php:406
 msgid "Block access to log files with htaccess"
 msgstr ""
 
-#: admin/admin.php:400
+#: admin/admin.php:414
 msgid "Don`t show chart"
 msgstr ""
 
-#: admin/admin.php:408
+#: admin/admin.php:422
 msgid "Always show the form at the end of the questionnaire"
 msgstr ""
 
-#: admin/admin.php:416
+#: admin/admin.php:430
 msgid "Hide the total number of completed questionnaires"
 msgstr ""
 
-#: admin/admin.php:424
+#: admin/admin.php:438
 msgid "Show total answers per question above pie chart"
 msgstr ""
 
-#: admin/admin.php:432
+#: admin/admin.php:446
 msgid "Hide the total selection number of each checkbox"
 msgstr ""
 
-#: admin/admin.php:440
+#: admin/admin.php:454
 msgid "Add the ability to send a file"
 msgstr ""
 
-#: admin/admin.php:447
+#: admin/admin.php:461
 msgid "Multiple File Upload"
 msgstr ""
 
-#: admin/admin.php:455
+#: admin/admin.php:469
 msgid "Total files size"
 msgstr ""
 
-#: admin/admin.php:463
+#: admin/admin.php:477
 msgid "Allowed extensions. Separate by comma"
 msgstr ""
 
-#: admin/admin.php:471
+#: admin/admin.php:485
 msgid "Send a copy of the form to the admin"
 msgstr ""
 
-#: admin/admin.php:471
+#: admin/admin.php:485
 msgid "The field below must be filled"
 msgstr ""
 
-#: admin/admin.php:479
+#: admin/admin.php:493
 msgid "Email to send the form to"
 msgstr ""
 
-#: admin/admin.php:599
+#: admin/admin.php:613
 msgid "Shortcode"
 msgstr ""
 
@@ -423,7 +431,7 @@ msgstr ""
 msgid "Resetting the filled fields"
 msgstr ""
 
-#: includes/SHORTCODE.php:688 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:40
+#: includes/SHORTCODE.php:688 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:46
 msgid "Send"
 msgstr ""
 
@@ -431,28 +439,28 @@ msgstr ""
 msgid "Table deleted successfully"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:30
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:36
 msgid "Open"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:32
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:38
 msgid "Information for administrator"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:37
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:38
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:43
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:44
 msgid "Reset table"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:40
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:46
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:50
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:56
 msgid "IP - adress"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:52
+#: includes/VABFWC_CLASS/VABFWC_Class_Adm.php:58
 msgid "OS and browser"
 msgstr ""
 

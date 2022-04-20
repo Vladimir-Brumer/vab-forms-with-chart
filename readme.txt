@@ -68,7 +68,9 @@ Do you have questions or issues with Forms with chart from VAB? Use these suppor
 
 == Changelog ==
 
-None
+= 1.1.3 =
+
+* Added the ability to move form elements (swap questions);
 
 == Upgrade Notice ==
 

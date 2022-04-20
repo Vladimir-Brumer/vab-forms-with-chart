@@ -58,3 +58,23 @@ if ( ! function_exists( 'VAB_add_preload_attribute' ) ) {
 	}
 }
 add_filter( 'style_loader_tag', 'VAB_add_preload_attribute', 10, 2 );
+add_action( 'current_screen', 'vabfwc__screen' );
+if ( ! function_exists( 'vabfwc__screen' ) ) {
+	function vabfwc__screen(){
+		$screen = get_current_screen();
+		if( 'vab_fwc' === $screen->post_type ){
+			add_action( 'admin_enqueue_scripts', 'vabfwc_enqueue_admin_scripts' );
+		}
+	}
+}
+if ( ! function_exists( 'vabfwc_enqueue_admin_scripts' ) ) {
+	function vabfwc_enqueue_admin_scripts() {
+		wp_enqueue_style(
+			'vabfwc-admin-styles',
+			VABFWC_PLUGIN_URL . '/includes/css/vabfwc-admin-styles.css',
+			array(),
+			VABFWC_VERSION,
+			'all'
+		);
+	}
+}

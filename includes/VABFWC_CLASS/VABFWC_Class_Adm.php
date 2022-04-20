@@ -16,6 +16,12 @@ class VABFWC_Class_Adm extends VABFWC_Class {
 			$massiveAgent					= file( $this->mAGENT );
 			$countTR							= count( $massiveDate );
 			$echoTR								= "";
+			$kses_link_Arg				= 	array( /* wp_kses */
+				'a'									=>	array(
+					'href'						=>	array(),
+					'target'					=>	array(),
+				),
+			);
 			for( $tr = 0; $tr < $countTR; $tr++ ) {
 				$b = $tr + 1;
 				$echoTR .=	'<tr>
@@ -40,9 +46,9 @@ class VABFWC_Class_Adm extends VABFWC_Class {
 												<input style="color:inherit;cursor:pointer;" type="submit" name="ressubmit" value="' . esc_attr__( 'Send', 'VABFWC' ) . '" onclick="' . esc_js( 'return confirm("' . esc_html__( 'Are you sure?', 'VABFWC' ) . '")' ) . '">
 											</thead>
 											<tfoot>'.
-												wp_kses_post( $ALF . esc_url( $SRC . '/mIP.txt' ) . '">' . esc_html( $LF ) . ' mIP.txt</a>' ) .
-												wp_kses_post( $ALF . esc_url( $SRC . '/mDATE.txt' ) . '">' . esc_html( $LF ) . ' mDATE.txt</a>' ) .
-												wp_kses_post( $ALF . esc_url( $SRC . '/mAGENT.txt' ) . '">' . esc_html( $LF ) . ' mAGENT.txt</a>' ) . '
+												wp_kses( $ALF . esc_url( $SRC . '/mIP.txt' ) . '">' . esc_html( $LF ) . ' mIP.txt</a>', $kses_link_Arg ) .
+												wp_kses( $ALF . esc_url( $SRC . '/mDATE.txt' ) . '">' . esc_html( $LF ) . ' mDATE.txt</a>', $kses_link_Arg ) .
+												wp_kses( $ALF . esc_url( $SRC . '/mAGENT.txt' ) . '">' . esc_html( $LF ) . ' mAGENT.txt</a>', $kses_link_Arg ) . '
 											</tfoot>
 											<tbody>
 												<tr>

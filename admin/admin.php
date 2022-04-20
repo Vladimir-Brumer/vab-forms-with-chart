@@ -185,7 +185,17 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 				document.execCommand( "copy" );
 				alert( "<?php esc_html_e( 'Shortcode copied to clipboard', 'VABFWC' ); ?>");
 		});
-	} );</script>
+		$( document ).on( 'click', '.vabfwc_up', function() {
+        var vabfwc_p_div = $( this ).parent( 'div' );
+        vabfwc_p_div.insertBefore( vabfwc_p_div.prev() );
+        return false;
+    });
+		$( document ).on( 'click', '.vabfwc_down', function() {
+        var vabfwc_p_div = $( this ).parent( 'div' );
+        vabfwc_p_div.insertAfter( vabfwc_p_div.next() );
+        return false;
+    });
+	});</script>
 	<?php
 	$ButMas = array(
 		esc_html__( 'Saved List:', 'VABFWC' ),
@@ -214,6 +224,9 @@ if ( ! empty( $VABFWC_FORMSA ) ) {
 						</legend>';
 		$iB = 1;
 		foreach( $VABFWC_FORMSA as $k => $v ) {
+			echo	'<div>',
+							'<span class="vabfwc_moving vabfwc_up" title="' . esc_html__( 'Up', 'VABFWC' ) . '">' . esc_html__( 'Up', 'VABFWC' ) . '</span>',
+							'<span class="vabfwc_moving vabfwc_down" title="' . esc_html__( 'Down', 'VABFWC' ) . '">' . esc_html__( 'Down', 'VABFWC' ) . '</span>';
 			$type = $v['type'];
 			$type = $typeText["$type"];
 			echo	'<div class="spoiler-head folded" style="text-align:center;cursor:pointer;background:#282828!important;color:#FFF;padding:7px;">' . esc_html( $iB ) . ' - ' . esc_html__( 'Collapse/Expand block', 'VABFWC' ) . '</div>
@@ -278,6 +291,7 @@ if ( ! empty( $VABFWC_FORMSA ) ) {
 			}
 			echo '</tbody></table>';
 		} echo	"</div><br>";
+		echo	"</div>";
 		$iB++;
 	}
 	echo		'</fieldset></div>';
