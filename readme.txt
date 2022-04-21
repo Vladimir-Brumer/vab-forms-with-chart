@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 5.9.3
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,7 +64,10 @@ Do you have questions or issues with Forms with chart from VAB? Use these suppor
 
 == Screenshots ==
 
-1. screenshot-1.png
+1. General view of the list of questions, editing and adding new ones
+2. General view of diagrams on the frontend
+3. General view of additional options
+4. General view of an incoming E-mail message
 
 == Changelog ==
 
