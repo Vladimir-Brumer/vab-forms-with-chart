@@ -558,31 +558,31 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		if ( $v['type'] == 'text' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
 			ECHO	'<li tabindex="0">',
-							'<input size="40" type="text" id="' . esc_attr( $k ) . '" name="' . esc_attr( $k ). '" placeholder="' . esc_html( $placeHolder ) . '" value="' . esc_attr( $isset ) . '">',
+							'<input size="33" type="text" id="' . esc_attr( $k ) . '" name="' . esc_attr( $k ). '" placeholder="' . esc_html( $placeHolder ) . '" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'url' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
 			ECHO	'<li tabindex="0">',
-							'<input size="40" type="url" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'URL input field', 'VABFWC' ) . '" placeholder="' . esc_html( $placeHolder ) . '" value="' . esc_url( $isset ) . '">',
+							'<input size="33" type="url" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'URL input field', 'VABFWC' ) . '" placeholder="' . esc_html( $placeHolder ) . '" value="' . esc_url( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'tel' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
 			ECHO	'<li tabindex="0">',
-							'<input size="40" type="tel" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Phone input field', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
+							'<input size="33" type="tel" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Phone input field', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ($v['type'] == 'email' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
 			ECHO	'<li tabindex="0">',
-							'<input size="40" type="email" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Email input field', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
+							'<input size="33" type="email" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Email input field', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'date' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
 			ECHO	'<li tabindex="0">',
-							'<input size="40" type="date" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Input field type «Date»', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
+							'<input size="33" type="date" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Input field type «Date»', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'number' || $v['type'] == 'range' ) {
@@ -595,7 +595,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			$sTEp			= !empty($v['step']) 			? $v['step'] : '1';
 			ECHO	$TyPe == 'range' ? '<span id="' . esc_attr( $k . '_s' ) . '">' . esc_html( $isset ) . '</span>' : '' .
 						'<li tabindex="0">',
-							'<input size="40" type="' . esc_attr( $TyPe ) . '" id="' . esc_attr( $k ). '" ' . esc_js( $ScRiPt ) .' name="' . esc_attr( $k ). '" title="' . esc_html( $titles ) . '" min="' . esc_attr( $mIn ) . '"  max="' . esc_attr( $mAx ) . '" step="' . esc_attr( $sTEp ) .'" value="' . esc_attr( $isset ) . '">',
+							'<input size="33" type="' . esc_attr( $TyPe ) . '" id="' . esc_attr( $k ). '" ' . esc_js( $ScRiPt ) .' name="' . esc_attr( $k ). '" title="' . esc_html( $titles ) . '" min="' . esc_attr( $mIn ) . '"  max="' . esc_attr( $mAx ) . '" step="' . esc_attr( $sTEp ) .'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'textarea' ) {

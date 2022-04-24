@@ -1,7 +1,7 @@
 === Forms with chart from VAB ===
 Plugin Name: Forms with chart from VAB
 Contributors: vabtopic
-Donate link: https://it-vab.ru/vab-forms-with-chart/
+Donate link: https://it-vab.ru/vab-forms-with-chart#donate
 Tags: chart, contact, form, contact form, forms with chart, feedback, email, multilingual
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
