@@ -110,12 +110,21 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		}
 	if ( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDate']) || empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoIP']) || empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoAgent']) ) {
 			if ( ! file_exists( $VABFWC_Class->mIP ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'] ) ) {
+				if ( file_exists( $VABFWC_Class->FD . 'mIP.txt' ) ) {
+					rename ( $VABFWC_Class->FD . 'mIP.txt', $VABFWC_Class->mIP );
+				}
 				file_put_contents( $VABFWC_Class->mIP, '', FILE_APPEND );
 			}
 			if ( ! file_exists( $VABFWC_Class->mDATE ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'] ) ) {
+				if ( file_exists( $VABFWC_Class->FD . 'mDATE.txt' ) ) {
+					rename ( $VABFWC_Class->FD . 'mDATE.txt', $VABFWC_Class->mDATE );
+				}
 				file_put_contents( $VABFWC_Class->mDATE, '', FILE_APPEND );
 			}
 			if ( ! file_exists( $VABFWC_Class->mAGENT ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'] ) ) {
+				if ( file_exists( $VABFWC_Class->FD . 'mAGENT.txt' ) ) {
+					rename ( $VABFWC_Class->FD . 'mAGENT.txt', $VABFWC_Class->mAGENT );
+				}
 				file_put_contents( $VABFWC_Class->mAGENT, '', FILE_APPEND );
 			}
 	}

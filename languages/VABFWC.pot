@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Forms with chart from VAB\n"
-"POT-Creation-Date: 2022-04-21 22:46+0500\n"
+"POT-Creation-Date: 2022-05-02 10:43+0500\n"
 "PO-Revision-Date: 2022-02-22 15:05+0500\n"
 "Last-Translator: \n"
 "Language-Team: VAB Team <m@it-vab.ru>\n"
@@ -409,9 +409,9 @@ msgstr ""
 
 #: includes/SHORTCODE.php:645 includes/SHORTCODE.php:649
 #: includes/SHORTCODE.php:650
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:48
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:67
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:85
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:50
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:69
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:87
 msgid "Other"
 msgstr ""
 
@@ -468,11 +468,11 @@ msgstr ""
 msgid "Answers to the question"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:198
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:202
 msgid "Questionnaire completed"
 msgstr ""
 
-#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:198
+#: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:202
 msgid "times"
 msgstr ""
 
