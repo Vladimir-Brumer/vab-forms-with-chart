@@ -115,8 +115,9 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 						answer = ''
 									+ '<textarea cols="44" rows="1" placeholder="<?php esc_html_e( 'Specify option answer', 'VABFWC' ); ?>" name="<?php echo $id; ?>[' + keyq + '][answer][]" value=""required></textarea>',
 						coLors = ''
-									+ '<input type="text" size="11" placeholder="<?php esc_html_e('Pick a color on the chart', 'VABFWC' ); ?>" name="<?php echo $id; ?>[' + keyq + '][color][]" value=""required/>'
-									+ '<input type="color" name="ColorChoose" class="ColorChoose" onchange="<?php echo esc_js( $this_value ); ?>" />',
+									+ '<input class="vabfwcColorChoose" type="text" size="11" placeholder="<?php esc_html_e('Pick a color on the chart', 'VABFWC' ); ?>" name="<?php echo $id; ?>[' + keyq + '][color][]" value=""required/>'
+									//+ '<input type="color" name="ColorChoose" class="ColorChoose" onchange="<?php echo esc_js( $this_value ); ?>" />'
+									+'',
 						tR = ''
 									+ '<tr><td>' + answer + '</td><td>' + coLors + '</td><td><?php echo wp_kses( $Button_del_PP, $Button_del_arg );?></td></tr>',
 						add_answer = ''
@@ -147,6 +148,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 			}else{
 				alert( '<?php _e( "No type selected", "VABFWC" ); ?>' );
 			}
+			$('.vabfwcColorChoose').wpColorPicker();
 		} );
 			$( document ).on( 'click', '.add_answer_option', function() {
 				var paRr = $( this ).parent().parent().parent().parent().parent().find( 'textarea:first' ).attr( 'value' );
@@ -156,13 +158,14 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 							+ '<textarea cols="44" rows="1" placeholder="<?php esc_html_e( 'Specify option answer', 'VABFWC' ); ?>" name="<?php echo $id; ?>[' + paRr + '][answer][]" value=""required></textarea>'
 						+ '</td>'
 						+ '<td>'
-							+ '<input type="text" size="11" placeholder="<?php esc_html_e( 'Pick a color on the chart', 'VABFWC' ); ?>" name="<?php echo $id; ?>[' + paRr + '][color][]" value=""required/>'
-							+ '<input type="color" name="ColorChoose" class="ColorChoose" onchange="<?php echo esc_js( $this_value ); ?>" />'
+							+ '<input class="vabfwcColorChoose" type="text" size="11" placeholder="<?php esc_html_e( 'Pick a color on the chart', 'VABFWC' ); ?>" name="<?php echo $id; ?>[' + paRr + '][color][]" value=""required/>'
+							//+ '<input type="color" name="ColorChoose" class="ColorChoose" onchange="<?php echo esc_js( $this_value ); ?>" />'
 						+ '</td>'
 						+ '<td><?php echo wp_kses( $Button_del_PP, $Button_del_arg ); ?>'
 						+ '</td>'
 					+ '</tr>'
 				);
+				$('.vabfwcColorChoose').wpColorPicker();
 			} );
 			$( document ).on( 'click', '.VABFWC_remove_Volna_Soc', function() {
 				$( this ).parent().remove();
