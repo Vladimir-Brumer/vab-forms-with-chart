@@ -57,6 +57,11 @@ For basic usage, have a look at the [plugin's website](https://it-vab.ru/vab-for
 
 == Frequently Asked Questions ==
 
+Do you have questions or issues with Forms with chart from VAB? Use these support channels appropriately.
+
+1. [FeedBack](https://it-vab.ru/контактная-форма/)
+2. [Plugin's website](https://it-vab.ru/vab-forms-with-chart/)
+
 = How to display form results anywhere else using shortcode =
 
 To display the results of the form in any other place, you need to add the shortcode «VABFWC_Graphic».
@@ -67,6 +72,7 @@ For example.
 `[VABFWC_Graphic id="2228" title="Title for shortcode" tag="h4" class="my_class"]`
 
 **2.** HTML code
+
 `echo do_shortcode( '[VABFWC_Graphic id="2228" title="Title for shortcode" tag="h4" class="my_class"]' );`
 
 Where:
@@ -104,10 +110,6 @@ The log files are in the uploads folder. Folder structure example:
 	├── wp-config.php
 	...`
 
-Do you have questions or issues with Forms with chart from VAB? Use these support channels appropriately.
-
-1. [FeedBack](https://it-vab.ru/контактная-форма/)
-2. [plugin's website](https://it-vab.ru/vab-forms-with-chart/)
 
 == Screenshots ==
 
