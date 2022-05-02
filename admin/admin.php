@@ -195,6 +195,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
         vabfwc_p_div.insertAfter( vabfwc_p_div.next() );
         return false;
     });
+		$('.wpColorChoose').wpColorPicker();
 	});</script>
 	<?php
 	$ButMas = array(

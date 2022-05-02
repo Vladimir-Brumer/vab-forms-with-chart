@@ -3,7 +3,7 @@ jQuery ( document ).ready( function ( $ ) {
 	'use strict';
 	$( document ).on( 'click', '.vabfwc_spoiler-head', function() {
 		jQuery( this ).next().slideToggle( 400 );
-	} );
+	});
 	if ( window.history.replaceState ) {
 		window.history.replaceState( null, null, window.location.href );
 	}
@@ -15,7 +15,7 @@ jQuery ( document ).ready( function ( $ ) {
 			$( this ).prev().text( VABFWC_Chu_F );
 		}
 	});
-} );
+});
 function getVABFWC( name ) {
 	'use strict';
 	jQuery( name ).attr( 'required', 'required' ).val( 'GAME OVER' );

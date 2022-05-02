@@ -126,6 +126,7 @@ The log files are in the uploads folder. Folder structure example:
 = 1.1.4 =
 
 * Added shortcode to display form results anywhere;
+* Include wp-color-picker;
 * Now the name of the log files depends on the form ID;
 
 = 1.1.3 =
