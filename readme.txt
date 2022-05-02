@@ -62,7 +62,7 @@ Do you have questions or issues with Forms with chart from VAB? Use these suppor
 1. [FeedBack](https://it-vab.ru/контактная-форма/)
 2. [Plugin's website](https://it-vab.ru/vab-forms-with-chart/)
 
-= How to display form results anywhere else using shortcode =
+= How to display form results anywhere else using shortcode? =
 
 To display the results of the form in any other place, you need to add the shortcode «VABFWC_Graphic».
 For example.
@@ -71,7 +71,7 @@ For example.
 
 `[VABFWC_Graphic id="2228" title="Title for shortcode" tag="h4" class="my_class"]`
 
-**2.** HTML code
+**2.** PHP code
 
 `echo do_shortcode( '[VABFWC_Graphic id="2228" title="Title for shortcode" tag="h4" class="my_class"]' );`
 
@@ -82,7 +82,7 @@ Where:
 * tag - the tag in which the title will be wrapped (optional). Allowed tags - h1, h2, h3, h4, h5, h6, div, p, center;
 * class - Sets the style class for the tag (optional);
 
-= Where are of the log files =
+= Where are of the log files? =
 
 The log files are in the uploads folder. Folder structure example:
 
