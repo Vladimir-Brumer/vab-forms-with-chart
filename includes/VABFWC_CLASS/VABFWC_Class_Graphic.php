@@ -40,7 +40,9 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 							if ( $countmassivfile == 0 ) {
 								$countmassivfile = 1;
 							}
-							define( sanitize_text_field( $k . $ii . 'Per' ), round( intval( ${$k . 'Count_' . $i} ) * 100 / intval( $countmassivfile ), 1 ) );
+							if ( ! defined( sanitize_text_field( $k . $ii . 'Per' ) ) ) {
+								define( sanitize_text_field( $k . $ii . 'Per' ), round( intval( ${$k . 'Count_' . $i} ) * 100 / intval( $countmassivfile ), 1 ) );
+							}
 					}
 					if ( $v['type'] !== 'select' && $v['plusArea'] == 'yes' ) {
 						$coanswer++;
@@ -91,7 +93,9 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 								}
 							}
 							$perAr = round( intval( ${$k . 'Count_' . $coanswer} ) * 100 / intval( $countmassivfile ), 1 );
-							define( sanitize_text_field( $k . $coanswer . 'Per' ), $perAr );
+							if ( ! defined( sanitize_text_field( $k . $coanswer . 'Per' ) ) ) {
+								define( sanitize_text_field( $k . $coanswer . 'Per' ), $perAr );
+							}
 						}
 					}
 					$this->VABFWC_Class( sanitize_text_field( $k ), intval( $coanswer ) );

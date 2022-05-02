@@ -46,9 +46,9 @@ class VABFWC_Class_Adm extends VABFWC_Class {
 												<input style="color:inherit;cursor:pointer;" type="submit" name="ressubmit" value="' . esc_attr__( 'Send', 'VABFWC' ) . '" onclick="' . esc_js( 'return confirm("' . esc_html__( 'Are you sure?', 'VABFWC' ) . '")' ) . '">
 											</thead>
 											<tfoot>'.
-												wp_kses( $ALF . esc_url( $SRC . '/mIP.txt' ) . '">' . esc_html( $LF ) . ' mIP.txt</a>', $kses_link_Arg ) .
-												wp_kses( $ALF . esc_url( $SRC . '/mDATE.txt' ) . '">' . esc_html( $LF ) . ' mDATE.txt</a>', $kses_link_Arg ) .
-												wp_kses( $ALF . esc_url( $SRC . '/mAGENT.txt' ) . '">' . esc_html( $LF ) . ' mAGENT.txt</a>', $kses_link_Arg ) . '
+												wp_kses( $ALF . esc_url( $SRC . '/mIP_' . $this->PostID . '.txt' ) . '">' . esc_html( $LF ) . ' mIP.txt</a>', $kses_link_Arg ) .
+												wp_kses( $ALF . esc_url( $SRC . '/mDATE_' . $this->PostID . '.txt' ) . '">' . esc_html( $LF ) . ' mDATE.txt</a>', $kses_link_Arg ) .
+												wp_kses( $ALF . esc_url( $SRC . '/mAGENT_' . $this->PostID . '.txt' ) . '">' . esc_html( $LF ) . ' mAGENT.txt</a>', $kses_link_Arg ) . '
 											</tfoot>
 											<tbody>
 												<tr>

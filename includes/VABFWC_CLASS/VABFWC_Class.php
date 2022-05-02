@@ -18,9 +18,9 @@ class VABFWC_Class {
 				$this->$k 		= $this->FD . "$k.txt";
 			}
 		}
-		$this->mIP				= $this->FD . 'mIP.txt';
-		$this->mDATE			= $this->FD . 'mDATE.txt';
-		$this->mAGENT			= $this->FD . 'mAGENT.txt';
+		$this->mIP				= $this->FD . 'mIP_' . $this->PostID . '.txt';
+		$this->mDATE			= $this->FD . 'mDATE_' . $this->PostID . '.txt';
+		$this->mAGENT			= $this->FD . 'mAGENT_' . $this->PostID . '.txt';
 	}
 	function DirDel() {
 		if ( file_exists( $this->FD ) ) {
@@ -34,7 +34,10 @@ class VABFWC_Class {
 			if ( !empty($VABFWC_FORMSA) ) {
 				$VABFWC_FORMSA	= $VABFWC_FORMSA[$this->PostID];
 				foreach( $FileDir as $file ) {
-					if ( $file != "." && $file != ".." && $file != "mIP.txt" && $file != "mDATE.txt" && $file != "mAGENT.txt" ) {
+					if ( $file != "." && $file != ".." &&
+							 $file != 'mIP_' . $this->PostID . '.txt' &&
+							 $file != 'mDATE_' . $this->PostID . '.txt' &&
+							 $file != 'mAGENT_' . $this->PostID . '.txt' ) {
 						$name				= basename( $file, ".txt" );
 						if ( !array_key_exists( $name, $VABFWC_FORMSA ) ) {
 							unlink( $this->FD . $file );

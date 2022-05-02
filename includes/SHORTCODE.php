@@ -718,3 +718,66 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	return ob_get_clean();
 	}
 }
+/********************************
+****CREATE SHORTCODE FOR GRAPHIC
+*********************************/
+add_shortcode( "VABFWC_Graphic", "vabfwc_short_Graphic" );
+if ( ! function_exists( 'vabfwc_short_Graphic' ) ) {
+	function vabfwc_short_Graphic( $atts ) {
+		ob_start();
+		$id										= ! empty( $atts['id'] ) 				? intval( $atts['id'] ) : '';
+		$short_class					= ! empty( $atts['class'] )			? 'class="' . sanitize_text_field( $atts['class'] ) . '"' : '';
+		$short_tag						= ! empty( $atts['tag'] ) 			? sanitize_text_field( $atts['tag'] ) : '';
+		$short_tags_st				= ! empty( $short_tag )					? '<' . sanitize_text_field( $short_tag ) . ' ' . $short_class . '>' : '';
+		$short_tag_end				= ! empty( $short_tag )					? '</' . sanitize_text_field( $short_tag ) . '>' : '';
+		$short_title					= ! empty( $atts['title'] ) 		? $short_tags_st . sanitize_text_field( $atts['title'] ) . $short_tag_end : '';
+		$title_Arg		= 	array( /* wp_kses */
+			'h1'								=>	array(
+				'class'						=>	array(),
+			),
+			'h2'								=>	array(
+				'class'						=>	array(),
+			),
+			'h3'								=>	array(
+				'class'						=>	array(),
+			),
+			'h4'								=>	array(
+				'class'						=>	array(),
+			),
+			'h5'								=>	array(
+				'class'						=>	array(),
+			),
+			'h6'								=>	array(
+				'class'						=>	array(),
+			),
+			'div'								=>	array(
+				'class'						=>	array(),
+			),
+			'p'									=>	array(
+				'class'						=>	array(),
+			),
+			'center'						=>	array(
+				'class'						=>	array(),
+			),
+		);
+		ECHO	wp_kses( $short_title, $title_Arg );
+		$Class_Graphic_Arg		= 	array( /* wp_kses */
+			'div'								=>	array(
+				'class'						=>	array(),
+				'style'						=>	array(),
+			),
+			'br'								=>	array(),
+			'center'						=>	array(),
+			'style'							=>	array(
+				'type'						=>	array(),
+			),
+			'span'							=>	array(
+				'class'						=>	array(),
+				'style'						=>	array(),
+			),
+		);
+		$VABFWC = new VABFWC_Class_Graphic( $id );
+		ECHO	wp_kses( $VABFWC->ShoW(), $Class_Graphic_Arg );
+		return ob_get_clean();
+	}
+}

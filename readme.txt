@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 5.9.3
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,10 +57,57 @@ For basic usage, have a look at the [plugin's website](https://it-vab.ru/vab-for
 
 == Frequently Asked Questions ==
 
+= How to display form results anywhere else using shortcode =
+
+To display the results of the form in any other place, you need to add the shortcode «VABFWC_Graphic».
+For example.
+
+**1.** For page and post editor
+
+`[VABFWC_Graphic id="2228" title="Title for shortcode" tag="h4" class="my_class"]`
+
+**2.** HTML code
+`echo do_shortcode( '[VABFWC_Graphic id="2228" title="Title for shortcode" tag="h4" class="my_class"]' );`
+
+Where:
+
+* id - form identifier (required);
+* title - text before displaying form results (optional);
+* tag - the tag in which the title will be wrapped (optional). Allowed tags - h1, h2, h3, h4, h5, h6, div, p, center;
+* class - Sets the style class for the tag (optional);
+
+= Where are of the log files =
+
+The log files are in the uploads folder. Folder structure example:
+
+`...
+├── your.site.com
+	...
+	├── wp-content
+	│		├── languages
+	│		├── plugins
+	│		├── themes
+	│		├── upgrade
+	│		├── uploads
+	│		│		...
+	│		│		├── VABFWC
+	│		│		│		├── your-site-com
+	│		│		│		│		└── Diagram
+	│		│		│		│				├── «form ID»
+	│		│		│		│				│		├── .htaccess
+	│		│		│		│				│		...
+	│		│		│		│				│		├── «log files»
+	│		│		│		│				│		...
+	│		│		│		│				│		└── index.php
+	│		│		...
+	│		└── index.php
+	├── wp-config.php
+	...`
+
 Do you have questions or issues with Forms with chart from VAB? Use these support channels appropriately.
 
 1. [FeedBack](https://it-vab.ru/контактная-форма/)
-2. [FeedBack](https://it-vab.ru/vab-forms-with-chart/)
+2. [plugin's website](https://it-vab.ru/vab-forms-with-chart/)
 
 == Screenshots ==
 
@@ -74,6 +121,11 @@ Do you have questions or issues with Forms with chart from VAB? Use these suppor
 = 1.1.3 =
 
 * Added the ability to move form elements (swap questions);
+
+= 1.1.4 =
+
+* Added shortcode to display form results anywhere;
+* Now the name of the log files depends on the form ID;
 
 == Upgrade Notice ==
 
