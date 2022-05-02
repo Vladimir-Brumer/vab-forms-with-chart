@@ -48,8 +48,11 @@ The plugin supports the ability to translate into any language. You can use spec
 
 == Installation ==
 
-1. Upload the entire `vab-forms-with-chart` folder to the `/wp-content/plugins/` directory.
-1. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
+1. Download the plugin, unzip it and move the unzipped folder to the "wp-content/plugins" directory in your WordPress installation.
+2. In your admin panel, go to **Plugins** screen (**Plugins > Installed Plugins**) and you'll find Forms with chart from VAB in the plugins section
+3. Click on the 'Activate' button to use your new plugin right away.
+4. Done  ¯\_(ツ)_/¯
+5. PS: Remember to click the **Enable auto-updates** link for this plugin so that you don't miss cool new features as they come in.
 
 You will find **Contact** menu in your WordPress admin screen.
 
@@ -120,14 +123,14 @@ The log files are in the uploads folder. Folder structure example:
 
 == Changelog ==
 
-= 1.1.3 =
-
-* Added the ability to move form elements (swap questions);
-
 = 1.1.4 =
 
 * Added shortcode to display form results anywhere;
 * Now the name of the log files depends on the form ID;
+
+= 1.1.3 =
+
+* Added the ability to move form elements (swap questions);
 
 == Upgrade Notice ==
 
