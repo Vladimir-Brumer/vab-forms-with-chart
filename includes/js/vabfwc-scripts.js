@@ -8,6 +8,9 @@ jQuery ( document ).ready( function ( $ ) {
 		window.history.replaceState( null, null, window.location.href );
 	}
 	$( '.vabfwc_veri' ).prop( 'checked', false );
+	$( document ).on( 'ready pjax:end', function() {
+		$( '.vabfwc_veri' ).prop( 'checked', false);
+	});
 	$( '.VABFWC_file' ).change(function() {
     if ( $( this ).val() != '' ) {
 			$(this).prev().text( VABFWC_Chu_Fs + ': ' + $( this )[0].files.length );
