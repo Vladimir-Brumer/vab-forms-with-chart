@@ -8,7 +8,7 @@ if ( ! function_exists( 'VABFWC' ) ) {
 	function VABFWC() {
 		register_post_type( 'vab_fwc', array(
 			'labels'							=>	array(
-				'name'							=>	esc_html__( 'Forms', 'VABFWC' ),
+				'name'							=>	esc_html__( 'Forms with Charts', 'VABFWC' ),
 				'singular_name'			=>	esc_html__( 'Forms', 'VABFWC' ),
 				'add_new'						=>	esc_html__( 'Create Form', 'VABFWC' ),
 				'add_new_item'			=>	esc_html__( 'Create Form', 'VABFWC' ),
@@ -342,6 +342,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 			$VABFWC_FORMSA_OPT_PROT 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_PROT'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_HideDi 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_ShowDi 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi'] ) ? 'checked="checked"' : '';
+			$VABFWC_FORMSA_OPT_ShowOnlyAdm 			= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_TotaL 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_TotaL_Every_circ = $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_circ'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_TotaL_Every_ceck = $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_ceck'] ) ? 'checked="checked"' : '';
@@ -423,8 +424,16 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 								<tr>
 									<td>
 										<label for="VABFWC_FORMSA_OPT_ShowDi">
-											<span class="ch">' . esc_html__( 'Always show the form at the end of the questionnaire', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
+											<span class="ch">' . esc_html__( 'Always show the charts at the end of the questionnaire', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
 											<input id="VABFWC_FORMSA_OPT_ShowDi" type="checkbox" name="VABFWC_FORMSA_OPT_ShowDi" ' . esc_attr( $VABFWC_FORMSA_OPT_ShowDi ) . '>
+										</label>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="VABFWC_FORMSA_OPT_ShowOnlyAdm">
+											<span class="ch">' . esc_html__( 'Show the charts only for the administrators', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
+											<input id="VABFWC_FORMSA_OPT_ShowOnlyAdm" type="checkbox" name="VABFWC_FORMSA_OPT_ShowOnlyAdm" ' . esc_attr( $VABFWC_FORMSA_OPT_ShowOnlyAdm ) . '>
 										</label>
 									</td>
 								</tr>
@@ -551,6 +560,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_PROT							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_PROT', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_HideDi						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_HideDi', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_ShowDi						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_ShowDi', FILTER_VALIDATE_BOOLEAN );
+			$VABFWC_FORMSA_OPT_ShowOnlyAdm			=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_ShowOnlyAdm', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_TotaL						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_TotaL', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_TotaL_Every_circ	=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_TotaL_Every_circ', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_TotaL_Every_ceck	=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_TotaL_Every_ceck', FILTER_VALIDATE_BOOLEAN );
@@ -587,6 +597,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_NoAgent					?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoAgent']						= $VABFWC_FORMSA_OPT_NoAgent 					: true;
 			$VABFWC_FORMSA_OPT_HideDi						?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_HideDi']						= $VABFWC_FORMSA_OPT_HideDi 					: true;
 			$VABFWC_FORMSA_OPT_ShowDi						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_ShowDi']					  = $VABFWC_FORMSA_OPT_ShowDi 					: true;
+			$VABFWC_FORMSA_OPT_ShowOnlyAdm			? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']				= $VABFWC_FORMSA_OPT_ShowOnlyAdm 			: true;
 			$VABFWC_FORMSA_OPT_TotaL						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TotaL']							= $VABFWC_FORMSA_OPT_TotaL						: true;
 			$VABFWC_FORMSA_OPT_TotaL_Every_circ ? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TotaL_Every_circ']	= $VABFWC_FORMSA_OPT_TotaL_Every_circ : true;
 			$VABFWC_FORMSA_OPT_TotaL_Every_ceck ? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TotaL_Every_ceck']	= $VABFWC_FORMSA_OPT_TotaL_Every_ceck : true;

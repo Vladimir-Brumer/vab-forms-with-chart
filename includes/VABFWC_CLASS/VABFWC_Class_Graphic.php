@@ -205,11 +205,11 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 		<style type="text/css">
 			.semicircle_chart{margin:0 auto;padding:0;list-style-type:none;}
 			.semicircle_chart *,.semicircle_chart::before{box-sizing:border-box;}
-			.semicircle_chart{position:relative;width:350px;height:175px;overflow:hidden;}
+			.semicircle_chart{position:relative;width:330px!important;height:165px!important;overflow:hidden;}
 			.semicircle_chart::before,.semicircle_chart::after{position:absolute;}
 			.semicircle_chart::before{content:'';width:inherit;height:inherit;border:45px solid rgba(211, 211, 211, .3);border-bottom:none;border-top-left-radius:200px;border-top-right-radius:200px;}
 			.semicircle_chart::after{left:50%;bottom:10px;transform:translateX(-50%);font-weight:bold;}
-			.semicircle_chart li{position:absolute;top:100%;left:0;width:inherit;height:inherit;border:45px solid;border-top:none;border-bottom-left-radius:200px;border-bottom-right-radius:200px;transform-origin:50% 0;}
+			.semicircle_chart li{position:absolute;top:100%;left:0px;width:inherit;height:inherit;border:45px solid;border-top:none;border-bottom-left-radius:200px;border-bottom-right-radius:200px;transform-origin:50% 0;margin:0 !important;}
 			.semicircle_chart span{position:absolute;font-size:.85rem;}
 			.semicircle_chart::after{content:'%';}
 			/* //////////////////////////////////// */
@@ -220,4 +220,4 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 		</style>
 		<?php
 	}
-}/*<?php $VABFWC=new VABFWC_Class_Graphic();$VABFWC->ShoW();?>*/
+}

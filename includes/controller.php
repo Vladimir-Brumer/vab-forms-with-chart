@@ -10,6 +10,7 @@ add_action(
 			true
 		);
 		$VABFWC_SenD = array(
+			'VABFWC_p_now_Out'		=> is_singular(),
 			'VABFWC_Chu_F_Out'		=> esc_html__( 'Select files', 'VABFWC' ),
 			'VABFWC_Chu_Fs_Out'		=> esc_html__( 'Selected files', 'VABFWC' )
 		);

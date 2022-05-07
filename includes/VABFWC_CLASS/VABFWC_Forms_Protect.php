@@ -28,4 +28,4 @@ class VABFWC_Forms_Protect {
 						'<input name="for_dop_theme_' . esc_attr($this->text) . '" type="text" class="formInput" value="7"/>' .
 						'<input class="vabfwc_veri formInput" name="send_for_dop_' . esc_attr($this->text) . '" type="checkbox" checked="checked"/>';
 	}
-}/*<?php $VABFWC=new VABFWC_Forms_Protect('');$VABFWC->CheckFields();echo($VABFWC->FieldS());?>*/
+}

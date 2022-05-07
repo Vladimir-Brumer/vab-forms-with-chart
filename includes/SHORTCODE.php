@@ -84,6 +84,9 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	$VABFWC_multipart			= ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_AddFile'] ) ? esc_attr( 'enctype=multipart/form-data' ) : '';
 	$VABFWC_TEMP					=	esc_html( VABFWC_UPLOAD_DIR .'/VABFWC/temp' );
 	$VABFWC_EXT 					= ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_EXT'] ) ? explode( ",", $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_EXT'] ) : array();
+	$validate_VABFWC			=	false;
+	$fields_VABFWC				=	false;
+	$message_VABFWC				=	false;
 	if ( ! empty( $VABFWC_FORMSA ) ) {
 		$VABFWC_FORMSA		= $VABFWC_FORMSA[$id];
 		/* HANDLER */
@@ -449,8 +452,12 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 							'</table>' .
 						'</body>' .
 					'</html>';
-		$body =	wp_kses( $body, $body_Arg );
-		$CheckFieldsEror	=	$VABFWC->CheckFields();
+		$body 												=	wp_kses( $body, $body_Arg );
+		$validate_VABFWC							=	apply_filters( 'VABFWC_validate_filter', false );
+		if ( $validate_VABFWC != false ) {
+			$hasError										= true;
+		}
+		$CheckFieldsEror							=	$VABFWC->CheckFields();
 		if ( $CheckFieldsEror == true ) {
 			$hasError										= true;
 		}
@@ -541,8 +548,15 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	$SentY					= esc_html__( 'Your message was successfully sent', 'VABFWC' ) . '!';
 	$SentN					= esc_html__( 'Message not sent', 'VABFWC' ) . '!';
 	$ResF						= "";
-	$ResFY					= empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi']) || !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) ? ''
-										: ( !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) ? esc_html__( 'The results are displayed at the end of the questionnaire', 'VABFWC' ) . '!'
+	$ResFY					= (	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'])	) ||
+										(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) ) ||
+										(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
+											( ( is_user_logged_in() && !current_user_can( 'administrator' ) ) || !is_user_logged_in() ) ) ? ''
+										: ( !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) &&
+										(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||
+											(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
+												is_user_logged_in() &&
+												current_user_can( 'administrator' ) ) ) ? esc_html__( 'The results are displayed at the end of the questionnaire', 'VABFWC' ) . '!'
 										: esc_html__( 'Results will be displayed after filling out and sending the questionnaire', 'VABFWC' ) . '!' );
 	if ( isset($emailSent) && $emailSent == true ) {
 		$sentYN		= $SentY;
@@ -553,8 +567,10 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	} else {
 		if ( isset($hasError) ) {
 			$sentYN	= $SentN;
+			$message_VABFWC = apply_filters( 'VABFWC_message_filter', false );
 		}
 		ECHO	'<div class="contact_message"><span class="VABFWCotrazhenie" title="' . esc_attr( $sentYN ) . '">' . esc_html( $sentYN ) . '</span><br>',
+					esc_html( $message_VABFWC ),
 					'<h5>' . esc_html( $ResFY ) . '</h5></div><br>';
 		ECHO '<div id="anketa">',
 				 '<form ' . $VABFWC_multipart . ' class="FormS FormSContact" action="' . esc_url( get_the_permalink() ) . '" method="post">';
@@ -691,6 +707,10 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						'</fieldset>';
 		}
 		ECHO '</div>';
+		$fields_VABFWC = apply_filters( 'VABFWC_fields_filter', false );
+		if ( $fields_VABFWC != false ) {
+			ECHO wp_kses( $fields_VABFWC, $VABFWC_Prot_Arg );
+		}
 		ECHO wp_kses( $VABFWC->FieldS(), $VABFWC_Prot_Arg ) .
 						'<input id="anketaSbros" type="reset" name="profilereset" value="' . esc_attr__( 'Resetting the filled fields', 'VABFWC') . '">',
 						'&nbsp;&nbsp;&nbsp;&nbsp;',
@@ -713,12 +733,25 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				ECHO	wp_kses( $VABFWC_AD->FieldS(), $VABFWC_Prot_Arg ) .
 							'<input type="hidden" name="submitres" id="submitres" value="true" />';
 			ECHO	'</form>';
-			if ( !empty($VABFWC_FORMSA) && ( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) || $sentYN == $SentY ) && empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) ) {
+			if	( !empty($VABFWC_FORMSA) &&
+						( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) ||
+							$sentYN == $SentY ) &&
+						empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) &&
+						(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||
+							(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
+								is_user_logged_in() &&
+								current_user_can( 'administrator' ) ) ) ) {
 				$VABFWC = new VABFWC_Class_Graphic( $id );
 				ECHO	wp_kses( $VABFWC->ShoW(), $Class_Graphic_Arg );
 			}
 		}
-		if ( $sentYN != $SentY && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) && empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) ) {
+		if (	$sentYN != $SentY &&
+					!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) &&
+					empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) &&
+					(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||
+						(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
+							is_user_logged_in() &&
+							current_user_can( 'administrator' ) ) ) ) {
 			$VABFWC = new VABFWC_Class_Graphic( $id );
 			ECHO	wp_kses( $VABFWC->ShoW(), $Class_Graphic_Arg );
 		}

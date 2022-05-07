@@ -1,10 +1,12 @@
-var VABFWC_Chu_F=VABFWC_SenD_In.VABFWC_Chu_F_Out,VABFWC_Chu_Fs=VABFWC_SenD_In.VABFWC_Chu_Fs_Out;
+var VABFWC_p_now	=	VABFWC_SenD_In.VABFWC_p_now_Out,
+		VABFWC_Chu_F	=	VABFWC_SenD_In.VABFWC_Chu_F_Out,
+		VABFWC_Chu_Fs	=	VABFWC_SenD_In.VABFWC_Chu_Fs_Out;
 jQuery ( document ).ready( function ( $ ) {
 	'use strict';
 	$( document ).on( 'click', '.vabfwc_spoiler-head', function() {
 		jQuery( this ).next().slideToggle( 400 );
 	});
-	if ( window.history.replaceState ) {
+	if ( window.history.replaceState && VABFWC_p_now != '' ) {
 		window.history.replaceState( null, null, window.location.href );
 	}
 	$( '.vabfwc_veri' ).prop( 'checked', false );

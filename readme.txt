@@ -5,8 +5,8 @@ Donate link: https://it-vab.ru/vab-forms-with-chart#donate
 Tags: chart, contact, form, contact form, forms with chart, feedback, email, multilingual
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
-Tested up to: 5.9.3
-Stable tag: 1.1.4
+Tested up to: 6.0
+Stable tag: 1.1.5
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,6 +122,11 @@ The log files are in the uploads folder. Folder structure example:
 4. General view of an incoming E-mail message
 
 == Changelog ==
+
+= 1.1.5 =
+
+* Added an option to show charts to admins only;
+* Added filters for the ability to add (check) fields, as well as display a message;
 
 = 1.1.4 =
 
