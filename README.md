@@ -36,15 +36,15 @@ VABFWC_validate_filter
 
 ```
 add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
-if ( !function_exists(	'VABFWC_filter_function'	) )	{
-	function VABFWC_filter_function( $str ){
-		if	(	!isset(	$_COOKIE['VAB_cookie_agree']	)	||	$_COOKIE['VAB_cookie_agree']	!==	'yes'	)	{
-			return true;
-		}
-		if	( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) {
-			return true;
-		}
-	}}
+if ( !function_exists( 'VABFWC_filter_function' ) ) {
+ function VABFWC_filter_function( $str ){
+  if ( !isset( $_COOKIE['VAB_cookie_agree'] ) || $_COOKIE['VAB_cookie_agree'] !== 'yes'	) {
+   return true;
+  }
+  if ( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) {
+   return true;
+  }
+ }}
 ``` 
 <li>
 VABFWC_fields_filter
@@ -53,12 +53,12 @@ VABFWC_fields_filter
 ```
 add_filter( 'VABFWC_fields_filter', 'VABFWC_fields_filter', 10 );
 if ( !function_exists(	'VABFWC_fields_filter'	) ){
-	function VABFWC_fields_filter( $str ){
-		$str	=	'<label for="new_field" >' .
-							'<input id="new_field" name="new_field" type="text" class="formInput" value="WordPress"/>' .
-						'</label>';
-		return	$str;
-	}}
+ function VABFWC_fields_filter( $str ){
+  $str	= '<label for="new_field" >' .
+           '<input id="new_field" name="new_field" type="text" class="formInput" value="WordPress"/>' .
+          '</label>';
+  return $str;
+ }}
 ``` 
 <li>
 VABFWC_message_filter
@@ -67,10 +67,10 @@ VABFWC_message_filter
 ```
 add_filter( 'VABFWC_message_filter', 'VABFWC_message_filter', 10 );
 if ( !function_exists(	'VABFWC_message_filter'	) ){
-	function VABFWC_message_filter( $str ){
-		if	(	!isset(	$_COOKIE['VAB_cookie_agree']	)	||	$_COOKIE['VAB_cookie_agree']	!==	'yes'	)	{
-			return $str	=	esc_html__(	'Использование cookie отключено в настройках безопасности Вашего браузера, либо не дано согласие на их использование',	'VAB'	);
-		}
-	}}
+ function VABFWC_message_filter( $str ){
+  if ( !isset( $_COOKIE['VAB_cookie_agree'] ) || $_COOKIE['VAB_cookie_agree'] !== 'yes'	) {
+   return $str = esc_html__( 'Использование cookie отключено в настройках безопасности Вашего браузера, либо не дано согласие на их использование', 'VAB' );
+  }
+ }}
 ``` 
 </ul>
