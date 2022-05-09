@@ -85,6 +85,62 @@ Where:
 * tag - the tag in which the title will be wrapped (optional). Allowed tags - h1, h2, h3, h4, h5, h6, div, p, center;
 * class - Sets the style class for the tag (optional);
 
+= What filters exist? =
+
+* VABFWC_validate_filter - Returns either true or false. If any condition returns true, the form will stop working (message will not be sent)
+* VABFWC_fields_filter - Returns a string to display on the screen. Allowed HTML  tag <input> with attributes «type», «id», «class», «name», «value», «checked», «onfocus», «onchange»
+* VABFWC_message_filter - Returns a string to display as text (message)
+
+= How to use filters? =
+
+**1.** VABFWC_fields_filter.
+The code below will add a hidden field via the "formInput" class, which will be with a default value of "WordPress". Only the <input> tag without the <label> will be output (see description above for VABFWC_fields_filter)
+
+`add_filter( 'VABFWC_fields_filter', 'VABFWC_fields_filter', 10 );
+if ( !function_exists(	'VABFWC_fields_filter'	) ){
+ function VABFWC_fields_filter( $str ){
+  $str	= '<label for="new_field" >' .
+           '<input id="new_field" name="new_field" type="text" class="formInput" value="WordPress"/>' .
+          '</label>';
+  return $str;
+ }}`
+
+**2.** VABFWC_validate_filter. The code below will stop the form from submitting if at least one condition returns «true».
+* The first condition checks for a «cookie» with a value of «agree» set. Let's say you have an "I agree" button on your site that, when clicked, sets a «cookie» with the value «agree», which means that the user has consented to the use of cookies. Thus, until the user clicks the "I agree" button, the form will not work, and the life of the bots will become more complicated.
+* The second condition checks the value of the hidden field, if it is different from the default value («WordPress»), further processing of the form will be stopped.
+
+`add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
+if ( !function_exists( 'VABFWC_filter_function' ) ) {
+ function VABFWC_filter_function( $str ){
+  if ( !isset( $_COOKIE['my_cookie_agree'] ) || $_COOKIE['my_cookie_agree'] !== 'agree'	) { // Первое условие
+   return true;
+  }
+  if ( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) { // Второе условие
+   return true;
+  }
+ }}`
+
+**3.** VABFWC_message_filter. If a «cookie» with a value of «agree» is not present (the user has not consented to the use of the «cookie»), the code below will display a message to the user.
+
+`add_filter( 'VABFWC_message_filter', 'VABFWC_message_filter', 10 );
+if ( !function_exists(	'VABFWC_message_filter' ) ){
+ function VABFWC_message_filter( $str ){
+  if ( !isset( $_COOKIE['my_cookie_agree'] ) || $_COOKIE['my_cookie_agree'] !== 'agree'	) {
+   return $str = esc_html__( 'Использование cookie отключено в настройках безопасности Вашего браузера, либо не дано согласие на их использование', 'VAB' );
+  }
+ }}`
+
+If we need to add filters for a particular form, we can use the global variable «post» and check the post/page id:
+
+`add_filter( 'VABFWC_validate_filter', 'my_filter_function', 10 );
+function my_filter_function( $str ){
+ global $post;
+ if ( $post->ID == 1652 ) {
+  if ( !isset( $_COOKIE['my_cookie_agree'] ) || $_COOKIE['my_cookie_agree'] !== 'agree' ) {
+   return true;
+  }}}`
+
+
 = Where are of the log files? =
 
 The log files are in the uploads folder. Folder structure example:
