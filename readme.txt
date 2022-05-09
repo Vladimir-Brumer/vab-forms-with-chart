@@ -109,20 +109,26 @@ if ( !function_exists(	'VABFWC_fields_filter'	) ){
 
 **2.** VABFWC_validate_filter. The code below will stop the form from submitting if at least one condition returns «true».
 
-`add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
+`
+	// * The first condition checks for a «cookie» with a value of «agree» set.
+	// Let's say you have an "I agree" button on your site that, when clicked,
+	// sets a «cookie» with the value «agree», which means that the user has consented to the use of cookies.
+	// Thus, until the user clicks the "I agree" button, the form will not work, and the life of the bots will become more complicated.
+	// * The second condition checks the value of the hidden field, if it is different from the default value («WordPress»), further processing of the form will be stopped.
+
+add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
 if ( !function_exists( 'VABFWC_filter_function' ) ) {
  function VABFWC_filter_function( $str ){
-  if ( !isset( $_COOKIE['my_cookie_agree'] ) || $_COOKIE['my_cookie_agree'] !== 'agree'	) { // Первое условие
+  if ( !isset( $_COOKIE['my_cookie_agree'] ) || $_COOKIE['my_cookie_agree'] !== 'agree'	) { // first
    return true;
   }
-  if ( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) { // Второе условие
+  if ( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) { // second
    return true;
   }
- }}`
+ }}
+`
 
 
-	* The first condition checks for a «cookie» with a value of «agree» set. Let's say you have an "I agree" button on your site that, when clicked, sets a «cookie» with the value «agree», which means that the user has consented to the use of cookies. Thus, until the user clicks the "I agree" button, the form will not work, and the life of the bots will become more complicated.
-	* The second condition checks the value of the hidden field, if it is different from the default value («WordPress»), further processing of the form will be stopped.
 
 
 **3.** VABFWC_message_filter. If a «cookie» with a value of «agree» is not present (the user has not consented to the use of the «cookie»), the code below will display a message to the user.
