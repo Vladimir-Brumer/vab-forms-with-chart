@@ -31,7 +31,7 @@ Version: 1.1.5
 
 <ul class="ul">
 <li>
-VABFWC_fields_filter. Код ниже добавит скрытое поле за счет стилей через класс «formInput», которое будет со значением по умолчанию «WordPress».
+VABFWC_fields_filter. Код ниже добавит скрытое поле за счет стилей через класс «formInput», которое будет со значением по умолчанию «WordPress». Будет выведен только тег «input» без «label» (см. описание выше для VABFWC_fields_filter).
 </li>
 
 ```
