@@ -28,3 +28,22 @@ Version: 1.1.5
  <li>VABFWC_message_filter - Возвращает строку для вывода на экран как текст(сообщение)</li>
 </ul>
 Как использовать фильтры?
+
+<ul class="ul">
+<li>
+### VABFWC_validate_filter
+```
+add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
+if ( !function_exists(	'VABFWC_filter_function'	) )	{
+	function VABFWC_filter_function( $str ){
+		if	(	!isset(	$_COOKIE['VAB_cookie_agree']	)	||	$_COOKIE['VAB_cookie_agree']	!==	'yes'	)	{
+			return true;
+		}
+		if	( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) {
+			return true;
+		}
+	}}
+```
+ </li>
+ 
+ </ul>
