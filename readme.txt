@@ -110,17 +110,20 @@ if ( !function_exists(	'VABFWC_fields_filter'	) ){
 **2.** VABFWC_validate_filter. The code below will stop the form from submitting if at least one condition returns «true».
 
 `
-// * The first condition checks for a «cookie» with a value of «agree» set.
- // Let's say you have an "I agree" button on your site that, when clicked,
- // sets a «cookie» with the value «agree»,
- // which means that the user has consented to the use of cookies.
- // Thus, until the user clicks the "I agree" button, the form will not work,
- // and the life of the bots will become more complicated.
- 
- 
-// * The second condition checks the value of the hidden field,
- // if it is different from the default value («WordPress»),
- // further processing of the form will be stopped.
+/*************************************************************************
+**************************************************************************
+ 1. The first condition checks for a «cookie» with a value of «agree» set.
+Let's say you have an "I agree" button on your site that, when clicked,
+sets a «cookie» with the value «agree»,
+which means that the user has consented to the use of cookies.
+Thus, until the user clicks the "I agree" button, the form will not work,
+and the life of the bots will become more complicated.
+
+ 2. The second condition checks the value of the hidden field,
+if it is different from the default value («WordPress»),
+further processing of the form will be stopped.
+**************************************************************************
+**************************************************************************/
 
 add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
 if ( !function_exists( 'VABFWC_filter_function' ) ) {
