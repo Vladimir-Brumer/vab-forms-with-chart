@@ -31,6 +31,20 @@ Version: 1.1.5
 
 <ul class="ul">
 <li>
+VABFWC_fields_filter
+</li>
+
+```
+add_filter( 'VABFWC_fields_filter', 'VABFWC_fields_filter', 10 );
+if ( !function_exists(	'VABFWC_fields_filter'	) ){
+ function VABFWC_fields_filter( $str ){
+  $str	= '<label for="new_field" >' .
+           '<input id="new_field" name="new_field" type="text" class="formInput" value="WordPress"/>' .
+          '</label>';
+  return $str;
+ }}
+``` 
+<li>
 VABFWC_validate_filter
 </li>
 
@@ -44,20 +58,6 @@ if ( !function_exists( 'VABFWC_filter_function' ) ) {
   if ( sanitize_text_field( $_POST['new_field'] ) !== 'WordPress' ) {
    return true;
   }
- }}
-``` 
-<li>
-VABFWC_fields_filter
-</li>
-
-```
-add_filter( 'VABFWC_fields_filter', 'VABFWC_fields_filter', 10 );
-if ( !function_exists(	'VABFWC_fields_filter'	) ){
- function VABFWC_fields_filter( $str ){
-  $str	= '<label for="new_field" >' .
-           '<input id="new_field" name="new_field" type="text" class="formInput" value="WordPress"/>' .
-          '</label>';
-  return $str;
  }}
 ``` 
 <li>
