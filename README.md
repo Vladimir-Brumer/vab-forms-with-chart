@@ -32,6 +32,8 @@ Version: 1.1.5
 <ul class="ul">
 <li>
 ### VABFWC_validate_filter
+</li>
+
 ```
 add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
 if ( !function_exists(	'VABFWC_filter_function'	) )	{
@@ -43,7 +45,8 @@ if ( !function_exists(	'VABFWC_filter_function'	) )	{
 			return true;
 		}
 	}}
-```
- </li>
- 
+``` 
+<li>
+### VABFWC_fields_filter
+</li>
  </ul>
