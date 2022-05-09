@@ -95,7 +95,7 @@ Where:
 
 Examples of using filters:
 
-* VABFWC_fields_filter.
+**1.** VABFWC_fields_filter.
 The code below will add a hidden field via the "formInput" class, which will be with a default value of "WordPress". Only the <input> tag without the <label> will be output (see description above for VABFWC_fields_filter)
 
 `add_filter( 'VABFWC_fields_filter', 'VABFWC_fields_filter', 10 );
@@ -107,9 +107,7 @@ if ( !function_exists(	'VABFWC_fields_filter'	) ){
   return $str;
  }}`
 
-* VABFWC_validate_filter. The code below will stop the form from submitting if at least one condition returns «true».
-	* The first condition checks for a «cookie» with a value of «agree» set. Let's say you have an "I agree" button on your site that, when clicked, sets a «cookie» with the value «agree», which means that the user has consented to the use of cookies. Thus, until the user clicks the "I agree" button, the form will not work, and the life of the bots will become more complicated.
-	* The second condition checks the value of the hidden field, if it is different from the default value («WordPress»), further processing of the form will be stopped.
+**2.** VABFWC_validate_filter. The code below will stop the form from submitting if at least one condition returns «true».
 
 `add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
 if ( !function_exists( 'VABFWC_filter_function' ) ) {
@@ -122,7 +120,12 @@ if ( !function_exists( 'VABFWC_filter_function' ) ) {
   }
  }}`
 
-* VABFWC_message_filter. If a «cookie» with a value of «agree» is not present (the user has not consented to the use of the «cookie»), the code below will display a message to the user.
+
+	* The first condition checks for a «cookie» with a value of «agree» set. Let's say you have an "I agree" button on your site that, when clicked, sets a «cookie» with the value «agree», which means that the user has consented to the use of cookies. Thus, until the user clicks the "I agree" button, the form will not work, and the life of the bots will become more complicated.
+	* The second condition checks the value of the hidden field, if it is different from the default value («WordPress»), further processing of the form will be stopped.
+
+
+**3.** VABFWC_message_filter. If a «cookie» with a value of «agree» is not present (the user has not consented to the use of the «cookie»), the code below will display a message to the user.
 
 `add_filter( 'VABFWC_message_filter', 'VABFWC_message_filter', 10 );
 if ( !function_exists(	'VABFWC_message_filter' ) ){
@@ -132,7 +135,7 @@ if ( !function_exists(	'VABFWC_message_filter' ) ){
   }
  }}`
 
-* If we need to add filters for a particular form, we can use the global variable «post» and check the post/page id:
+**4.** If we need to add filters for a particular form, we can use the global variable «post» and check the post/page id:
 
 `add_filter( 'VABFWC_validate_filter', 'my_filter_function', 10 );
 function my_filter_function( $str ){
