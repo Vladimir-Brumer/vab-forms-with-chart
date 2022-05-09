@@ -33,6 +33,7 @@ Version: 1.1.5
 <li>
 VABFWC_fields_filter. Код ниже добавит скрытое поле за счет стилей через класс «formInput», которое будет со значением по умолчанию «WordPress». Будет выведен только тег «input» без «label» (см. описание выше для VABFWC_fields_filter).
 </li>
+ 
 
 ```
 add_filter( 'VABFWC_fields_filter', 'VABFWC_fields_filter', 10 );
@@ -44,6 +45,7 @@ if ( !function_exists(	'VABFWC_fields_filter'	) ){
   return $str;
  }}
 ``` 
+ 
 <li>
 VABFWC_validate_filter. Код ниже остановить отправку формы, если хоть одно условие вернет «true» (истину).
  <ol>
@@ -54,8 +56,9 @@ VABFWC_validate_filter. Код ниже остановить отправку ф
 </li>
 </ol>
 </li>
+ 
 
-```
+``` 
 add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
 if ( !function_exists( 'VABFWC_filter_function' ) ) {
  function VABFWC_filter_function( $str ){
@@ -67,9 +70,11 @@ if ( !function_exists( 'VABFWC_filter_function' ) ) {
   }
  }}
 ``` 
+ 
 <li>
 VABFWC_message_filter. Если «cookie» со значением «agree» не будет присутствовать (пользователь не дал согласие на использование «cookie»), код ниже выведет сообщение пользователю.
 </li>
+ 
 
 ```
 add_filter( 'VABFWC_message_filter', 'VABFWC_message_filter', 10 );
@@ -81,3 +86,15 @@ if ( !function_exists(	'VABFWC_message_filter' ) ){
  }}
 ``` 
 </ul>
+
+Если необходимо добавить фильтры для конкретной формы, Мы можем использовать глобальную переменную «post» и проверить идентификатор записи/страницы:
+
+``` 
+add_filter( 'VABFWC_validate_filter', 'my_filter_function', 10 );
+function my_filter_function( $str ){
+ global $post;
+ if($post->ID==1652){
+  if(!isset($_COOKIE['my_cookie_agree'])||$_COOKIE['my_cookie_agree']!=='agree'){
+   return true;
+  }}}
+``` 
