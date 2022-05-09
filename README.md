@@ -24,7 +24,7 @@ Version: 1.1.5
 <ul class="ul">
 Фильтры:
 <li>VABFWC_validate_filter - Возвращает либо true(истина), либо false(ложь). Если по какому-либо условию возвращается true (истина), форма остановит работу(сообщение не будет отправлено)</li>
- <li>VABFWC_fields_filter - Возвращает строку для вывода на экран. Разрешен Элемент HTML input с атрибутами 'type', 'id', 'class', 'name', 'value', 'checked', 'onfocus', 'onchange'</li>
+ <li>VABFWC_fields_filter - Возвращает строку для вывода на экран. Разрешен Элемент HTML input с атрибутами «type», «id», «class», «name», «value», «checked», «onfocus», «onchange»</li>
  <li>VABFWC_message_filter - Возвращает строку для вывода на экран как текст(сообщение)</li>
 </ul>
 Как использовать фильтры?
