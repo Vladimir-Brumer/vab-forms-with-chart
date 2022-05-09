@@ -93,8 +93,8 @@ if ( !function_exists(	'VABFWC_message_filter' ) ){
 add_filter( 'VABFWC_validate_filter', 'my_filter_function', 10 );
 function my_filter_function( $str ){
  global $post;
- if($post->ID==1652){
-  if(!isset($_COOKIE['my_cookie_agree'])||$_COOKIE['my_cookie_agree']!=='agree'){
+ if ( $post->ID == 1652 ) {
+  if ( !isset( $_COOKIE['my_cookie_agree'] ) || $_COOKIE['my_cookie_agree'] !== 'agree' ) {
    return true;
   }}}
 ``` 
