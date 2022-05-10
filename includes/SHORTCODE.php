@@ -87,6 +87,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	$validate_VABFWC			=	false;
 	$fields_VABFWC				=	false;
 	$message_VABFWC				=	false;
+	$message_after_VABFWC	=	false;
 	if ( ! empty( $VABFWC_FORMSA ) ) {
 		$VABFWC_FORMSA		= $VABFWC_FORMSA[$id];
 		/* HANDLER */
@@ -563,6 +564,10 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		$ResFY		= $ResF;
 		if ( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi']) ) {
 			ECHO '<div class="contact_message"><span class="VABFWCotrazhenie" title="' . esc_attr( $sentYN ) . '">' . esc_html( $sentYN ) . '</span></div>';
+		}
+		$message_after_VABFWC = apply_filters( 'VABFWC_message_after_filter', false );
+		if ( !empty($message_after_VABFWC) ) {
+			ECHO wp_kses_post( $message_after_VABFWC );
 		}
 	} else {
 		if ( isset($hasError) ) {

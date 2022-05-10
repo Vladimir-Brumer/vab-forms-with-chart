@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 6.0
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,7 @@ Where:
 * VABFWC_validate_filter - Returns either true or false. If any condition returns true, the form will stop working (message will not be sent)
 * VABFWC_fields_filter - Returns a string to display on the screen. Allowed HTML  tag <input> with attributes «type», «id», «class», «name», «value», «checked», «onfocus», «onchange»
 * VABFWC_message_filter - Returns a string to display as text (message)
+* VABFWC_message_after_filter - Returns a string to display as text (message). Fires after a successful email has been sent.
 
 = How to use filters? =
 
@@ -160,6 +161,25 @@ function my_filter_function( $str ){
    return true;
   }}}`
 
+**5.** VABFWC_message_after_filter. After successfully sending an email, we can perform any of our calculations and display their results on the screen
+
+`
+add_filter( 'VABFWC_message_after_filter', 'VABFWC_message_after_filter', 10 );
+if ( !function_exists('VABFWC_message_after_filter') ){
+	function VABFWC_message_after_filter( $str ){
+	 global $post;
+	 if ( $post->ID == 11057 ) {
+		// do something
+		$str .= 'Hellow';
+
+	 }
+	 if ( $post->ID == 11052 ) {
+		// do something
+		$str .= 'World';
+	 }
+		return $str ;
+}}
+`
 
 = Where are of the log files? =
 
@@ -198,6 +218,10 @@ The log files are in the uploads folder. Folder structure example:
 4. General view of an incoming E-mail message
 
 == Changelog ==
+
+= 1.1.6 =
+
+* Added a new filter to be able to add a message when the email is successfully sent;
 
 = 1.1.5 =
 
