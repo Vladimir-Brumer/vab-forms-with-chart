@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Forms with chart from VAB\n"
-"POT-Creation-Date: 2022-05-07 22:16+0500\n"
-"PO-Revision-Date: 2022-05-07 22:16+0500\n"
+"POT-Creation-Date: 2022-05-30 09:07+0500\n"
+"PO-Revision-Date: 2022-05-30 09:08+0500\n"
 "Last-Translator: \n"
 "Language-Team: VAB Team <m@it-vab.ru>\n"
 "Language: ru\n"
@@ -298,155 +298,159 @@ msgstr "Проверьте введенные данные"
 msgid "Uploaded file size bytes/Mb"
 msgstr "Размер загруженного файла байт/Mb"
 
-#: includes/SHORTCODE.php:134
+#: includes/SHORTCODE.php:105
+msgid "Confirm the reset by checking the box"
+msgstr "Подтвердите сброс, поставив галочку"
+
+#: includes/SHORTCODE.php:137
 msgid "Message from the site"
 msgstr "Сообщение с сайта"
 
-#: includes/SHORTCODE.php:138
+#: includes/SHORTCODE.php:141
 msgid "Form"
 msgstr "Форма"
 
-#: includes/SHORTCODE.php:142
+#: includes/SHORTCODE.php:145
 msgid "Questionnaire content"
 msgstr "Содержание анкеты"
 
-#: includes/SHORTCODE.php:143
+#: includes/SHORTCODE.php:146
 msgid "IP address"
 msgstr "IP-адрес"
 
-#: includes/SHORTCODE.php:145
+#: includes/SHORTCODE.php:148
 msgid "The form author Vladimir Anatolyevich Brumer"
 msgstr "Автор формы Владимир Анатольевич Брумер"
 
-#: includes/SHORTCODE.php:154
+#: includes/SHORTCODE.php:157
 msgid "Question"
 msgstr "Вопрос"
 
-#: includes/SHORTCODE.php:155
+#: includes/SHORTCODE.php:158
 msgid "Possible answer"
 msgstr "Вариант ответа"
 
-#: includes/SHORTCODE.php:156
+#: includes/SHORTCODE.php:159
 msgid "Your own answer"
 msgstr "Свой вариант ответа"
 
-#: includes/SHORTCODE.php:338
+#: includes/SHORTCODE.php:341
 msgid "Links not allowed"
 msgstr "Ссылки запрещены"
 
-#: includes/SHORTCODE.php:482
+#: includes/SHORTCODE.php:485
 msgid " One or more files exceed the allowed size "
 msgstr " Один или несколько файлов превышают допустимый размер "
 
-#: includes/SHORTCODE.php:482 includes/SHORTCODE.php:503
+#: includes/SHORTCODE.php:485 includes/SHORTCODE.php:506
 msgid " Мб"
 msgstr "Mb"
 
-#: includes/SHORTCODE.php:487
+#: includes/SHORTCODE.php:490
 msgid " One or more files are not in a valid format"
 msgstr " Один или несколько файлов имеют недопустимый формат"
 
-#: includes/SHORTCODE.php:488
+#: includes/SHORTCODE.php:491
 msgid "File"
 msgstr "Файл"
 
-#: includes/SHORTCODE.php:489
+#: includes/SHORTCODE.php:492
 msgid "have extension"
 msgstr "имеет расширение"
 
-#: includes/SHORTCODE.php:503
+#: includes/SHORTCODE.php:506
 msgid " The total size of files exceeds the allowed size "
 msgstr " Общий размер файлов превышает допустимый размер"
 
-#: includes/SHORTCODE.php:543
+#: includes/SHORTCODE.php:546
 msgid "Data array is empty"
 msgstr "Массив с данными пуст"
 
-#: includes/SHORTCODE.php:545
+#: includes/SHORTCODE.php:548
 msgid "Text input field..."
 msgstr "Поле для ввода текста..."
 
-#: includes/SHORTCODE.php:546
+#: includes/SHORTCODE.php:549
 msgid "Write your answer"
 msgstr "Напишите Ваш вариант ответа"
 
-#: includes/SHORTCODE.php:548
+#: includes/SHORTCODE.php:551
 msgid "Your message was successfully sent"
 msgstr "Ваше сообщение успешно отправлено"
 
-#: includes/SHORTCODE.php:549
+#: includes/SHORTCODE.php:552
 msgid "Message not sent"
 msgstr "Сообщение не отправлено"
 
-#: includes/SHORTCODE.php:559
+#: includes/SHORTCODE.php:562
 msgid "The results are displayed at the end of the questionnaire"
 msgstr "Результаты отображаются в конце анкеты"
 
-#: includes/SHORTCODE.php:560
+#: includes/SHORTCODE.php:563
 msgid ""
 "Results will be displayed after filling out and sending the questionnaire"
 msgstr "Результаты будут отображены после заполнения и отправки анкеты"
 
-#: includes/SHORTCODE.php:592
+#: includes/SHORTCODE.php:599
 msgid "URL input field"
 msgstr "Поле для ввода URL"
 
-#: includes/SHORTCODE.php:598
+#: includes/SHORTCODE.php:605
 msgid "Phone input field"
 msgstr "Поле для ввода телефона"
 
-#: includes/SHORTCODE.php:604
+#: includes/SHORTCODE.php:611
 msgid "Email input field"
 msgstr "Поле для ввода Email"
 
-#: includes/SHORTCODE.php:610
+#: includes/SHORTCODE.php:617
 msgid "Input field type «Date»"
 msgstr "Тип поля для ввода «Дата»"
 
-#: includes/SHORTCODE.php:616
+#: includes/SHORTCODE.php:623
 msgid "Input field type «Range»"
 msgstr "Тип поля ввода «Слайдер»"
 
-#: includes/SHORTCODE.php:616
+#: includes/SHORTCODE.php:623
 msgid "Input field type «Number»"
 msgstr "Тип поля ввода «Номер»"
 
-#: includes/SHORTCODE.php:639
+#: includes/SHORTCODE.php:646
 msgid "Input field type «Dropdown list»"
 msgstr "Тип поля «Раскрывающийся список»"
 
-#: includes/SHORTCODE.php:641
+#: includes/SHORTCODE.php:648
 msgid "Choose a variant"
 msgstr "Выберите вариант"
 
-#: includes/SHORTCODE.php:670 includes/SHORTCODE.php:674
-#: includes/SHORTCODE.php:675 includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:50
+#: includes/SHORTCODE.php:677 includes/SHORTCODE.php:681
+#: includes/SHORTCODE.php:682 includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:50
 #: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:69
 #: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:87
 msgid "Other"
 msgstr "Другое"
 
-#: includes/SHORTCODE.php:697
+#: includes/SHORTCODE.php:704
 msgid " Sorry, the message was not sent."
 msgstr " Извините, сообщение не было отправлено."
 
-#: includes/SHORTCODE.php:701 includes/controller.php:14
+#: includes/SHORTCODE.php:708 includes/controller.php:14
 msgid "Select files"
 msgstr "Выберите файлы"
 
-#: includes/SHORTCODE.php:702
+#: includes/SHORTCODE.php:709
 msgid "Valid File Format"
 msgstr "Допустимый формат файлов"
 
-#: includes/SHORTCODE.php:715
+#: includes/SHORTCODE.php:722
 msgid "Resetting the filled fields"
 msgstr "Сброс заполненных полей"
 
-#: includes/SHORTCODE.php:717 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:46
+#: includes/SHORTCODE.php:724 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:46
 msgid "Send"
 msgstr "Отправить"
 
-#: includes/SHORTCODE.php:726
+#: includes/SHORTCODE.php:733
 msgid "Table deleted successfully"
 msgstr "Таблица успешно удалена"
 

@@ -52,11 +52,14 @@
 	cursor:pointer;
 	padding:4px;
 }
-.vabfwc_spoiler-body, .formInput, .FormSContact input[type="text"].formInput{
+.vabfwc_spoiler-body,
+.formInput,
+.FormSContact input[type="text"].formInput,
+.FormSContact input[type="checkbox"].formInput{
 	display:none;
 }
-.vabfwc_spoiler-body, .vabfwc_spoiler-body input{
-	background:#000;
+.vabfwc_spoiler-body,
+.vabfwc_spoiler-body input{
 	color:#FFF;
 	border-radius:4px;
 	border:1px solid #29755f;
@@ -66,6 +69,9 @@
 	max-width:98%;
 	margin-left:0px;
 	overflow:auto;
+}
+.vabfwc_spoiler-body input[type="submit"]{
+	background:#000;
 }
 .vabfwc_spoiler-body a{
 	color:#FFF!important;

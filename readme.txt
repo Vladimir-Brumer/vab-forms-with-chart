@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 6.0
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,21 +111,6 @@ if ( !function_exists(	'VABFWC_fields_filter'	) ){
 **2.** VABFWC_validate_filter. The code below will stop the form from submitting if at least one condition returns «true».
 
 `
-/*************************************************************************
-**************************************************************************
- 1. The first condition checks for a «cookie» with a value of «agree» set.
-Let's say you have an "I agree" button on your site that, when clicked,
-sets a «cookie» with the value «agree»,
-which means that the user has consented to the use of cookies.
-Thus, until the user clicks the "I agree" button, the form will not work,
-and the life of the bots will become more complicated.
-
- 2. The second condition checks the value of the hidden field,
-if it is different from the default value («WordPress»),
-further processing of the form will be stopped.
-**************************************************************************
-**************************************************************************/
-
 add_filter( 'VABFWC_validate_filter', 'VABFWC_filter_function', 10 );
 if ( !function_exists( 'VABFWC_filter_function' ) ) {
  function VABFWC_filter_function( $str ){
@@ -138,8 +123,10 @@ if ( !function_exists( 'VABFWC_filter_function' ) ) {
  }}
 `
 
+Where:
 
-
+* The first condition checks for a «cookie» with a value of «agree» set. Let's say you have an "I agree" button on your site that, when clicked, sets a «cookie» with the value «agree», which means that the user has consented to the use of cookies. Thus, until the user clicks the "I agree" button, the form will not work, and the life of the bots will become more complicated;
+* The second condition checks the value of the hidden field, if it is different from the default value («WordPress»), further processing of the form will be stopped;
 
 **3.** VABFWC_message_filter. If a «cookie» with a value of «agree» is not present (the user has not consented to the use of the «cookie»), the code below will display a message to the user.
 
@@ -218,6 +205,11 @@ The log files are in the uploads folder. Folder structure example:
 4. General view of an incoming E-mail message
 
 == Changelog ==
+
+= 1.1.7 =
+
+* Minor styles tweaks;
+* Bugfix - table reset for administrator was performed without checkbox set;
 
 = 1.1.6 =
 

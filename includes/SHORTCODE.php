@@ -88,6 +88,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	$fields_VABFWC				=	false;
 	$message_VABFWC				=	false;
 	$message_after_VABFWC	=	false;
+	$hasErrorAdMassage		=	'';
 	if ( ! empty( $VABFWC_FORMSA ) ) {
 		$VABFWC_FORMSA		= $VABFWC_FORMSA[$id];
 		/* HANDLER */
@@ -99,8 +100,9 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	$hasErrorAd	= false;
 	if ( isset( $_POST['submitres'] ) ) {
 		$CheckFieldsErorAd	=	$VABFWC_AD->CheckFields();
-		if ( $CheckFieldsErorAd == true ) {
+		if ( $CheckFieldsErorAd == true || empty( $_POST['resTable'] ) ) {
 			$hasErrorAd = true;
+			$hasErrorAdMassage = esc_html__( 'Confirm the reset by checking the box', 'VABFWC' );
 		}
 		if ( $hasErrorAd !== true ) {
 			unlink( $VABFWC_Class->mIP );
@@ -732,6 +734,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				}
 			ECHO	'<div class="contact_message"><span class="VABFWCotrazhenie" title="' . esc_attr( $sentYN ) . '">' . esc_html( $sentYN ) . '</span></div>';
 			if ( !empty($VABFWC_FORMSA) ) {
+				ECHO !empty( $hasErrorAdMassage ) ? '<br /><span class="er">***</span> ' . esc_html( $hasErrorAdMassage ) . '<br />' : '';
 				$VABFWC = new VABFWC_Class_Adm( $id );
 				ECHO	'<br>' . wp_kses( $VABFWC->ShoW(), $Class_Adm_Arg );
 			}
