@@ -26,6 +26,7 @@ Version: 1.1.5
 <li>VABFWC_validate_filter - Возвращает либо true(истина), либо false(ложь). Если по какому-либо условию возвращается true (истина), форма остановит работу(сообщение не будет отправлено)</li>
  <li>VABFWC_fields_filter - Возвращает строку для вывода на экран. Разрешен Элемент HTML input с атрибутами «type», «id», «class», «name», «value», «checked», «onfocus», «onchange»</li>
  <li>VABFWC_message_filter - Возвращает строку для вывода на экран как текст(сообщение)</li>
+ <li>VABFWC_message_after_filter — Возвращает строку для вывода на экран как текст(сообщение). Срабатывает после успешной отправки электронного сообщения.</li>
 </ul>
 Как использовать фильтры?
 
@@ -85,6 +86,28 @@ if ( !function_exists(	'VABFWC_message_filter' ) ){
   }
  }}
 ``` 
+ 
+ <li>
+VABFWC_message_after_filter. После успешной отправки электронного письма мы можем выполнить какие-либо свои подсчеты и вывести их результаты на экран
+</li>
+ 
+ ```
+add_filter( 'VABFWC_message_after_filter', 'VABFWC_message_after_filter', 10 );
+if ( !function_exists('VABFWC_message_after_filter') ){
+    function VABFWC_message_after_filter( $str ){
+     global $post;
+     if ( $post->ID == 11057 ) {
+        // do something
+        $str .= 'Hellow';
+
+     }
+     if ( $post->ID == 11052 ) {
+        // do something
+        $str .= 'World';
+     }
+        return $str ;
+}}
+ ```
 </ul>
 
 Если необходимо добавить фильтры для конкретной формы, Мы можем использовать глобальную переменную «post» и проверить идентификатор записи/страницы:
