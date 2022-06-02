@@ -585,7 +585,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				 '<form ' . $form_id . $VABFWC_multipart . ' class="FormS FormSContact' . $form_class . '" action="' . esc_url( get_the_permalink() ) . '" method="post">';
 		ECHO '<div id="UlLi">';
 		foreach( $VABFWC_FORMSA as $k => $v ) {
-		ECHO '<fieldset><legend>&nbsp;&nbsp;' . esc_html( $v['question'] ) . ': &nbsp;&nbsp;</legend><ul>';
+		ECHO '<fieldset><legend>&nbsp;&nbsp;' . esc_html( $v['question'] ) . ': &nbsp;&nbsp;</legend><ul class="class_' . esc_attr( $k ) . '">';
 		if ( ${$k . 'Error'} != '' ) {
 			ECHO '<div class="errors"><span class="er">***</span> ' . esc_html( ${$k . 'Error'} ) . '</div>';
 		}
