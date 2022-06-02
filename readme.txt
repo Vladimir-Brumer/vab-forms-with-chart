@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 6.0
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,13 @@ Do you have questions or issues with Forms with chart from VAB? Use these suppor
 
 1. [FeedBack](https://it-vab.ru/контактная-форма/)
 2. [Plugin's website](https://it-vab.ru/vab-forms-with-chart/)
+
+= Can I add id and class attributes to a form element? =
+
+Yes. You can add any id and class to a form by adding the form_id and form_class attributes into a [VABFWC] shortcode.
+Example:
+
+`[VABFWC id="2228" form_id="ThisID" form_class="new-class two-new-class"]`
 
 = How to display form results anywhere else using shortcode? =
 
@@ -196,6 +203,11 @@ The log files are in the uploads folder. Folder structure example:
 	├── wp-config.php
 	...`
 
+= Demo video =
+
+Only Russian language
+
+https://www.youtube.com/watch?v=wKhP6wgN248
 
 == Screenshots ==
 
@@ -205,6 +217,12 @@ The log files are in the uploads folder. Folder structure example:
 4. General view of an incoming E-mail message
 
 == Changelog ==
+
+= 1.1.8 =
+
+* Fixed - notification about undefined variable;
+* Added a submenu where you can read about the current release;
+* Added attributes for shortcode. Now you can add any id and class to a form;
 
 = 1.1.7 =
 

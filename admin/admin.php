@@ -622,10 +622,12 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 add_filter( 'manage_vab_fwc_posts_columns', 'vabfwc_add_views_column', 4 );
 if ( ! function_exists( 'vabfwc_add_views_column' ) ) {
 	function vabfwc_add_views_column( $columns ) {
-		/*unset($columns['author']);*/
+		$i = 0;
 		$out = array();
 		foreach( $columns as $col => $name ) {
-			if ( ++$i == 3 ) $out['vab_fwc_shortcode'] = esc_html__( 'Shortcode', 'VABFWC' );
+			if ( ++$i == 3 ) {
+				$out['vab_fwc_shortcode'] = esc_html__( 'Shortcode', 'VABFWC' );
+			}
 			$out[$col] = $name;
 		}
 		return $out;
@@ -654,5 +656,133 @@ if ( ! function_exists( 'vabfwc_contact_forms_del' ) ) {
 			$VABFWC_Class = new VABFWC_Class( $pid );
 			$VABFWC_Class->DirDel();
 		}
+	}
+}
+add_action( 'admin_menu', 'add_vab_fwc_info' );
+if ( ! function_exists( 'add_vab_fwc_info' ) ) {
+  function add_vab_fwc_info() {
+		add_submenu_page(
+			'edit.php?post_type=vab_fwc',
+			esc_html__( 'About release', 'VABFWC' ),
+			esc_html__( 'About release', 'VABFWC' ),
+			'manage_options',
+			'vab_fwc_info',
+			'vab_fwc_info'
+		);
+	}
+}
+if ( ! function_exists( 'vab_fwc_info' ) ) {
+  function vab_fwc_info() {
+		echo	'<div id="wrap_vab_fwc_info" style="width:96%;margin-left:2%;">' .
+						'<center><h2>' . esc_html__( 'About release', 'VABFWC' ) . '</h2>' .
+							'<table cellpadding="4" border="1" cellpadding="4" width="100%">' .
+								'<tbody>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Plugin Name', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'Forms with chart from VAB' .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Description', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											esc_html__( 'Simple Plugin for creating forms, inquirer and questionnaires with the ability to display the results in the form of charts', 'VABFWC' ) .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Author', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											esc_html__( 'Vladimir Anatol`evich Brumer', 'VABFWC' ) .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Version', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											VABFWC_VERSION .
+										'</td>' .
+									'</tr>' .
+
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Version Wordpress at least', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'5.5.1' .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Tested Wordpress up to', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'6.0' .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Requires PHP', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'5.6.20 - 8.1.3' .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Plugin URI', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'<a target="_blank" href="' . esc_url( 'https://it-vab.ru/vab-forms-with-chart' ) . '">' .
+												esc_url( 'https://it-vab.ru/vab-forms-with-chart' ) .
+											'</a>' .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'GitHub', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'<a target="_blank" href="' . esc_url( 'https://github.com/Vladimir-Brumer/vab-forms-with-chart' ) . '">' .
+												esc_url( 'https://github.com/Vladimir-Brumer/vab-forms-with-chart' ) .
+											'</a>' .
+										'</td>' .
+									'</tr>' .
+									'<tr>' .
+										'<td>' .
+											esc_html__( 'Donate link', 'VABFWC' ) .
+										'</td>' .
+										'<td>' .
+											'<a target="_blank" href="' . esc_url( 'https://it-vab.ru/vab-forms-with-chart#donate' ) . '">' .
+												esc_url( 'https://it-vab.ru/vab-forms-with-chart#donate' ) .
+											'</a>' .
+										'</td>' .
+									'</tr>' .
+								'</tbody>' .
+							'</table>' .
+							'<h3>' . esc_html__( 'New in version', 'VABFWC' ) . ' ' . VABFWC_VERSION . '</h3>' .
+						'</center>' .
+						'<ol>' .
+							'<li>' . esc_html__( 'Fixed - notification about undefined variable', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added a submenu where you can read about the current release', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added attributes for shortcode. Now you can add any id and class to a form', 'VABFWC' ) .
+								'<ul>' .
+									'<li>' . esc_html__( 'Example', 'VABFWC' ) . ':' .
+										'<p>' .
+											'<code>' .
+												'[VABFWC id="2228" form_id="ThisID" form_class="new-class two-new-class"]' .
+											'</code>' .
+										'</p>' .
+									'</li>' .
+								'</ul>' .
+							'</li>' .
+						'</ol>' .
+					'</div>';
 	}
 }

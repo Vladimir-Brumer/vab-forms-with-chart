@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Forms with chart from VAB\n"
-"POT-Creation-Date: 2022-05-30 09:07+0500\n"
+"POT-Creation-Date: 2022-06-02 11:27+0500\n"
 "PO-Revision-Date: 2022-02-22 15:05+0500\n"
 "Last-Translator: \n"
 "Language-Team: VAB Team <m@it-vab.ru>\n"
@@ -282,172 +282,248 @@ msgstr ""
 msgid "Email to send the form to"
 msgstr ""
 
-#: admin/admin.php:628
+#: admin/admin.php:629
 msgid "Shortcode"
 msgstr ""
 
-#: includes/SHORTCODE.php:78
+#: admin/admin.php:666 admin/admin.php:667 admin/admin.php:677
+msgid "About release"
+msgstr ""
+
+#: admin/admin.php:682
+msgid "Plugin Name"
+msgstr ""
+
+#: admin/admin.php:690
+msgid "Description"
+msgstr ""
+
+#: admin/admin.php:693
+msgid ""
+"Simple Plugin for creating forms, inquirer and questionnaires with the "
+"ability to display the results in the form of charts"
+msgstr ""
+
+#: admin/admin.php:698
+msgid "Author"
+msgstr ""
+
+#. Author of the plugin/theme
+#: admin/admin.php:701
+msgid "Vladimir Anatol`evich Brumer"
+msgstr ""
+
+#: admin/admin.php:706
+msgid "Version"
+msgstr ""
+
+#: admin/admin.php:715
+msgid "Version Wordpress at least"
+msgstr ""
+
+#: admin/admin.php:723
+msgid "Tested Wordpress up to"
+msgstr ""
+
+#: admin/admin.php:731
+msgid "Requires PHP"
+msgstr ""
+
+#: admin/admin.php:739
+msgid "Plugin URI"
+msgstr ""
+
+#: admin/admin.php:749
+msgid "GitHub"
+msgstr ""
+
+#: admin/admin.php:759
+msgid "Donate link"
+msgstr ""
+
+#: admin/admin.php:769
+msgid "New in version"
+msgstr ""
+
+#: admin/admin.php:772
+msgid "Fixed - notification about undefined variable"
+msgstr ""
+
+#: admin/admin.php:773
+msgid "Added a submenu where you can read about the current release"
+msgstr ""
+
+#: admin/admin.php:774
+msgid ""
+"Added attributes for shortcode. Now you can add any id and class to a form"
+msgstr ""
+
+#: admin/admin.php:776
+msgid "Example"
+msgstr ""
+
+#: includes/SHORTCODE.php:80
 msgid "Check entered data"
 msgstr ""
 
-#: includes/SHORTCODE.php:83
+#: includes/SHORTCODE.php:85
 msgid "Uploaded file size bytes/Mb"
 msgstr ""
 
-#: includes/SHORTCODE.php:105
+#: includes/SHORTCODE.php:107
 msgid "Confirm the reset by checking the box"
 msgstr ""
 
-#: includes/SHORTCODE.php:137
+#: includes/SHORTCODE.php:139
 msgid "Message from the site"
 msgstr ""
 
-#: includes/SHORTCODE.php:141
+#: includes/SHORTCODE.php:143
 msgid "Form"
 msgstr ""
 
-#: includes/SHORTCODE.php:145
+#: includes/SHORTCODE.php:147
 msgid "Questionnaire content"
 msgstr ""
 
-#: includes/SHORTCODE.php:146
+#: includes/SHORTCODE.php:148
 msgid "IP address"
 msgstr ""
 
-#: includes/SHORTCODE.php:148
+#: includes/SHORTCODE.php:150
 msgid "The form author Vladimir Anatolyevich Brumer"
 msgstr ""
 
-#: includes/SHORTCODE.php:157
+#: includes/SHORTCODE.php:159
 msgid "Question"
 msgstr ""
 
-#: includes/SHORTCODE.php:158
+#: includes/SHORTCODE.php:160
 msgid "Possible answer"
 msgstr ""
 
-#: includes/SHORTCODE.php:159
+#: includes/SHORTCODE.php:161
 msgid "Your own answer"
 msgstr ""
 
-#: includes/SHORTCODE.php:341
+#: includes/SHORTCODE.php:343
 msgid "Links not allowed"
 msgstr ""
 
-#: includes/SHORTCODE.php:485
+#: includes/SHORTCODE.php:487
 msgid " One or more files exceed the allowed size "
 msgstr ""
 
-#: includes/SHORTCODE.php:485 includes/SHORTCODE.php:506
+#: includes/SHORTCODE.php:487 includes/SHORTCODE.php:508
 msgid " Мб"
 msgstr ""
 
-#: includes/SHORTCODE.php:490
+#: includes/SHORTCODE.php:492
 msgid " One or more files are not in a valid format"
 msgstr ""
 
-#: includes/SHORTCODE.php:491
+#: includes/SHORTCODE.php:493
 msgid "File"
 msgstr ""
 
-#: includes/SHORTCODE.php:492
+#: includes/SHORTCODE.php:494
 msgid "have extension"
 msgstr ""
 
-#: includes/SHORTCODE.php:506
+#: includes/SHORTCODE.php:508
 msgid " The total size of files exceeds the allowed size "
 msgstr ""
 
-#: includes/SHORTCODE.php:546
+#: includes/SHORTCODE.php:548
 msgid "Data array is empty"
 msgstr ""
 
-#: includes/SHORTCODE.php:548
+#: includes/SHORTCODE.php:550
 msgid "Text input field..."
 msgstr ""
 
-#: includes/SHORTCODE.php:549
+#: includes/SHORTCODE.php:551
 msgid "Write your answer"
 msgstr ""
 
-#: includes/SHORTCODE.php:551
+#: includes/SHORTCODE.php:553
 msgid "Your message was successfully sent"
 msgstr ""
 
-#: includes/SHORTCODE.php:552
+#: includes/SHORTCODE.php:554
 msgid "Message not sent"
 msgstr ""
 
-#: includes/SHORTCODE.php:562
+#: includes/SHORTCODE.php:564
 msgid "The results are displayed at the end of the questionnaire"
 msgstr ""
 
-#: includes/SHORTCODE.php:563
+#: includes/SHORTCODE.php:565
 msgid ""
 "Results will be displayed after filling out and sending the questionnaire"
 msgstr ""
 
-#: includes/SHORTCODE.php:599
+#: includes/SHORTCODE.php:601
 msgid "URL input field"
 msgstr ""
 
-#: includes/SHORTCODE.php:605
+#: includes/SHORTCODE.php:607
 msgid "Phone input field"
 msgstr ""
 
-#: includes/SHORTCODE.php:611
+#: includes/SHORTCODE.php:613
 msgid "Email input field"
 msgstr ""
 
-#: includes/SHORTCODE.php:617
+#: includes/SHORTCODE.php:619
 msgid "Input field type «Date»"
 msgstr ""
 
-#: includes/SHORTCODE.php:623
+#: includes/SHORTCODE.php:625
 msgid "Input field type «Range»"
 msgstr ""
 
-#: includes/SHORTCODE.php:623
+#: includes/SHORTCODE.php:625
 msgid "Input field type «Number»"
 msgstr ""
 
-#: includes/SHORTCODE.php:646
+#: includes/SHORTCODE.php:648
 msgid "Input field type «Dropdown list»"
 msgstr ""
 
-#: includes/SHORTCODE.php:648
+#: includes/SHORTCODE.php:650
 msgid "Choose a variant"
 msgstr ""
 
-#: includes/SHORTCODE.php:677 includes/SHORTCODE.php:681
-#: includes/SHORTCODE.php:682
+#: includes/SHORTCODE.php:679 includes/SHORTCODE.php:683
+#: includes/SHORTCODE.php:684
 #: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:50
 #: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:69
 #: includes/VABFWC_CLASS/VABFWC_Class_Graphic.php:87
 msgid "Other"
 msgstr ""
 
-#: includes/SHORTCODE.php:704
+#: includes/SHORTCODE.php:706
 msgid " Sorry, the message was not sent."
 msgstr ""
 
-#: includes/SHORTCODE.php:708 includes/controller.php:14
+#: includes/SHORTCODE.php:710 includes/controller.php:14
 msgid "Select files"
 msgstr ""
 
-#: includes/SHORTCODE.php:709
+#: includes/SHORTCODE.php:711
 msgid "Valid File Format"
 msgstr ""
 
-#: includes/SHORTCODE.php:722
+#: includes/SHORTCODE.php:724
 msgid "Resetting the filled fields"
 msgstr ""
 
-#: includes/SHORTCODE.php:724 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:46
+#: includes/SHORTCODE.php:726 includes/VABFWC_CLASS/VABFWC_Class_Adm.php:46
 msgid "Send"
 msgstr ""
 
-#: includes/SHORTCODE.php:733
+#: includes/SHORTCODE.php:735
 msgid "Table deleted successfully"
 msgstr ""
 
@@ -504,10 +580,6 @@ msgstr ""
 msgid ""
 "Simple Plugin for creating forms, inquirer and questionnaires with the "
 "ability to display the results in the form of charts."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Vladimir Anatol`evich Brumer"
 msgstr ""
 
 #. Author URI of the plugin/theme

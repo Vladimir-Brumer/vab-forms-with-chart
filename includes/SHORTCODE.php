@@ -13,6 +13,8 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	function vabfwc_short( $atts ) {
 	ob_start();
 	$id										= ! empty( $atts['id'] ) ? intval( $atts['id'] ) : '';
+	$form_id							= ! empty( $atts['form_id'] ) ? ' id="' . sanitize_text_field( $atts['form_id'] ) . '"' : '';
+	$form_class						= ! empty( $atts['form_class'] ) ? ' ' . sanitize_text_field( $atts['form_class'] ) : '';
 	$VABFWC_FORMSA				= get_post_meta( $id, 'VABFWC_FORM', true );
 	$VABFWC_FORMSA_OPT		= get_post_meta( $id, 'VABFWC_FORM_OPT', true );
 	$i										= esc_html( 'diagramm_' . $GLOBALS['vabfwc'] );
@@ -488,7 +490,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						}
 						if( is_array( $VABFWC_EXT ) && sizeof($VABFWC_EXT) !== 0 && ! in_array( str_replace( '.', '', $ext[$i] ), $VABFWC_EXT ) ){
 							$FileSendErorSize		 .= '<span class="er">***</span>' . esc_html__(' One or more files are not in a valid format', 'VABFWC') . '<br />';
-							$FileSendErorSizeInf .= ':<br />' . esc_html__('File', 'VABFWC') . ' ' . $vabFilesName[$i];
+							$FileSendErorSizeInf .= '<br />' . esc_html__('File', 'VABFWC') . ' ' . $vabFilesName[$i];
 							$FileSendErorSizeInf .= ' ' . esc_html__('have extension', 'VABFWC') . ' - ' . $ext[$i] . '<br />';
 							$hasError 						= true;
 						}
@@ -580,7 +582,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					esc_html( $message_VABFWC ),
 					'<h5>' . esc_html( $ResFY ) . '</h5></div><br>';
 		ECHO '<div id="anketa">',
-				 '<form ' . $VABFWC_multipart . ' class="FormS FormSContact" action="' . esc_url( get_the_permalink() ) . '" method="post">';
+				 '<form ' . $form_id . $VABFWC_multipart . ' class="FormS FormSContact' . $form_class . '" action="' . esc_url( get_the_permalink() ) . '" method="post">';
 		ECHO '<div id="UlLi">';
 		foreach( $VABFWC_FORMSA as $k => $v ) {
 		ECHO '<fieldset><legend>&nbsp;&nbsp;' . esc_html( $v['question'] ) . ': &nbsp;&nbsp;</legend><ul>';
