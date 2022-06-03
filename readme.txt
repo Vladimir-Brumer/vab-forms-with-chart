@@ -215,6 +215,8 @@ https://www.youtube.com/watch?v=wKhP6wgN248
 2. General view of diagrams on the frontend
 3. General view of additional options
 4. General view of an incoming E-mail message
+5. Questionnaire for personal qualities with Additional Styles
+6. Questionnaire of personal qualities. We calculate points using VABFWC_message_after_filter and issue a characteristic / recommendation
 
 == Changelog ==
 
