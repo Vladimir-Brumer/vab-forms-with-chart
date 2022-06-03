@@ -585,37 +585,37 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				 '<form ' . $form_id . $VABFWC_multipart . ' class="FormS FormSContact' . $form_class . '" action="' . esc_url( get_the_permalink() ) . '" method="post">';
 		ECHO '<div id="UlLi">';
 		foreach( $VABFWC_FORMSA as $k => $v ) {
-		ECHO '<fieldset><legend>&nbsp;&nbsp;' . esc_html( $v['question'] ) . ': &nbsp;&nbsp;</legend><ul class="class_' . esc_attr( $k ) . '">';
+		ECHO '<fieldset><legend>&nbsp;&nbsp;' . esc_html( $v['question'] ) . ': &nbsp;&nbsp;</legend><ul class="' . esc_attr( $k ) . '_ul">';
 		if ( ${$k . 'Error'} != '' ) {
 			ECHO '<div class="errors"><span class="er">***</span> ' . esc_html( ${$k . 'Error'} ) . '</div>';
 		}
 		if ( $v['type'] == 'text' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
-			ECHO	'<li tabindex="0">',
+			ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<input size="33" type="text" id="' . esc_attr( $k ) . '" name="' . esc_attr( $k ). '" placeholder="' . esc_html( $placeHolder ) . '" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'url' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
-			ECHO	'<li tabindex="0">',
+			ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<input size="33" type="url" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'URL input field', 'VABFWC' ) . '" placeholder="' . esc_html( $placeHolder ) . '" value="' . esc_url( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'tel' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
-			ECHO	'<li tabindex="0">',
+			ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<input size="33" type="tel" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Phone input field', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ($v['type'] == 'email' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
-			ECHO	'<li tabindex="0">',
+			ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<input size="33" type="email" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Email input field', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'date' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
-			ECHO	'<li tabindex="0">',
+			ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<input size="33" type="date" id="' . esc_attr( $k ). '" name="' . esc_attr( $k ). '" title="' . esc_html__( 'Input field type «Date»', 'VABFWC' ) . '" placeholder="'.esc_html( $placeHolder ).'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
@@ -628,13 +628,13 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			$mAx			= !empty($v['max']) 			? $v['max'] : '100';
 			$sTEp			= !empty($v['step']) 			? $v['step'] : '1';
 			ECHO	$TyPe == 'range' ? '<span id="' . esc_attr( $k . '_s' ) . '">' . esc_html( $isset ) . '</span>' : '' .
-						'<li tabindex="0">',
+						'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<input size="33" type="' . esc_attr( $TyPe ) . '" id="' . esc_attr( $k ). '" ' . esc_js( $ScRiPt ) .' name="' . esc_attr( $k ). '" title="' . esc_html( $titles ) . '" min="' . esc_attr( $mIn ) . '"  max="' . esc_attr( $mAx ) . '" step="' . esc_attr( $sTEp ) .'" value="' . esc_attr( $isset ) . '">',
 						'</li>';
 		}
 		if ( $v['type'] == 'textarea' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
-			ECHO '<li tabindex="0">',
+			ECHO '<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 							'<label  for="' . esc_attr( $k ) . '">&nbsp;</label>',
 							'<textarea id="' . esc_attr( $k ) . '" name="' . esc_attr( $k ) . '" rows="4" cols="40" placeholder="' . esc_html( $placeHolder ) . '" value="">',
 								esc_html( $isset ),
@@ -644,7 +644,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		if ( $v['type'] == 'radio' || $v['type'] == 'checkbox' || $v['type'] == 'select' ) {
 			$coanswer = count( $v['answer'] );
 			if ( $v['type'] == 'select' ) {
-				ECHO	'<li tabindex="0">',
+				ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 								'<select name="' . esc_attr( $k ) . '" title="' . esc_html__( 'Input field type «Dropdown list»', 'VABFWC') . '">',
 									'<option name="' . esc_attr( $k ) . '" value="default">',
 										esc_html__( 'Choose a variant', 'VABFWC' ),
@@ -663,7 +663,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					$isset = isset($_POST[$name]) && $_POST[$name] == $v['answer'][$ii] ? 'selected="selected"' : '';
 					ECHO	'<option name="' . esc_attr( $name ) . '" title="' . esc_attr( $v['answer'][$ii] ) . '" ' . esc_attr( $isset ) . ' value="' . esc_attr( $v['answer'][$ii] ) . '">' . esc_html( $v['answer'][$ii] ) . '</option>';
 				} else {
-					ECHO	'<li tabindex="0">',
+					ECHO	'<li class="' . esc_attr( $k . $ii ) . '_li" tabindex="0">',
 									'<label for="' . esc_attr( $k . $ii ) . '">',
 										'<input id="' . esc_attr( $k . $ii ) . '" type="' . esc_attr( $v['type'] ) . '" name="' . esc_attr( $name ) . '" ' . esc_attr( $isset ) . ' title="' . esc_attr( $v['answer'][$ii] ) . '" value="' . esc_attr( $v['answer'][$ii] ) . '"/>',
 										esc_html( $v['answer'][$ii] ),
@@ -678,7 +678,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			if ( $v['type'] == 'radio' && $v['plusArea'] == 'yes' ) {
 				$isset = isset($_POST[$k]) && $_POST[$k] == esc_html__( 'Other', 'VABFWC' ) ? 'checked="checked"' : '';
 				$issett = isset($_POST[$k . 'area']) ? sanitize_text_field( $_POST[$k . 'area'] ) : '';
-				ECHO	'<li tabindex="0">',
+				ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
 								'<label  for="' . esc_attr( $k ) . '">',
 									'<input id="' . esc_attr( $k ) . '" type="' . esc_attr( $v['type'] ) . '" name="' . esc_attr( $k ) . '" ' . esc_attr( $isset ) . ' title="' . esc_html__( 'Other', 'VABFWC' ) . '" value="' . esc_html__( 'Other', 'VABFWC' ) . '"/>',
 									esc_html__('Other','VABFWC'),
