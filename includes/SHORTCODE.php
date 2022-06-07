@@ -78,6 +78,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		),
 	);
 	$Erchik								= esc_html__( 'Check entered data', 'VABFWC' );
+	$VABFWC_USER_SEND_MAIL= '';
 	$VABFWC_SizeSum				=	0;
 	$F_S_M								=	! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_SIZE'] ) ? sanitize_text_field( intval( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_SIZE'] ) ) : '3';
 	$FileSendErorSizeInf	=	'';	/* filtering the output through wp_kses */
@@ -112,7 +113,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			unlink( $VABFWC_Class->mAGENT );
 		}
 	}
-	if ( isset( $_POST['submitted'] ) ) {
+	if ( isset( $_POST['submitted_' . $id] ) ) {
 		if ( ! file_exists( $VABFWC_Class->FD ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'] ) ) {
 			mkdir( $VABFWC_Class->FD, 0755, true );
 		}
@@ -238,6 +239,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					$ok = '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) && VABFWC_is_email( $_POST[$k] ) ) {
 						$ok = sanitize_text_field( $_POST[$k] );
+						$VABFWC_USER_SEND_MAIL = sanitize_text_field( $_POST[$k] );
 					}	else {
 						$hasError = true;
 						${$k . 'Error'} = $Erchik;
@@ -399,65 +401,67 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			),
 			'br'								=>	array(),
 		);
-		$body =	'<html xmlns="http://www.w3.org/1999/xhtml">' .
-							'<head>' .
-								'<title>' . $sub . '</title>' .
-							'</head>' .
-							'<body class="myBody" style="padding:0px;margin:0px;word-break:normal;">' .
-								'<table style="background-color:#014266;max-width:100%;min-width:100%;padding:0;width:100%;" width="100%" cellspacing="0" cellpadding="0" border="0">' .
-								'<tbody>' .
-									'<tr>' .
-										'<td valign="middle" align="center">' .
-											'<table style="border:0;max-width:600px;padding:0;width:100%;" cellspacing="0" cellpadding="0" border="0" align="center">' .
-												'<tbody>' .
-													'<tr>' .
-														$tdIn .
-														'<td style="padding-bottom:50px;padding-top:30px;" align="center">' .
-															'<p style="color:#FFF;font-size:20px;font-style:normal;font-weight:100;line-height:24px;margin-bottom:0;margin-top:0;padding-bottom:10px;">' .
-																'<strong>' . $Titla . '</strong>' .
-															'</p>' .
-															'<table style="border:0;max-width:600px;padding:0;width:100%;" cellspacing="2" border="1" cellpadding="5">' .
-																'<tbody>' .
-																	'<tr style="text-align:center;color:#FFF;">' .
-																		'<th ' . $sty . ' valign="top">' .
-																			'<p style="padding:4px;">' . $Qw .
-																		'</th>' .
-																		'<th ' . $sty . ' valign="top">' .
-																			'<p style="padding:4px;">' . $Ans .
-																		'</th>' .
-																		'<th ' . $sty . ' valign="top">' .
-																			'<p style="padding:4px;">' . $Oth .
-																		'</th>' .
-																	'</tr>' .
-																	$ChBody .
-																'</tbody>' .
-															'</table>' .
-															'<table cellspacing="0" cellpadding="0">' .
-																'<tbody>' .
-																		'<tr style="text-align:center;">' .
-																			'<td colspan="2" valign="top">' .
-																				'<p style="color:#FFF;font-size:14px;"> ' . $IP . ' </p>' .
-																			'</td>' .
+		if ( empty($VABFWC_FORMSA_OPT['VABFWC_NO_SEND_MAIL']) ) {
+			$body =	'<html xmlns="http://www.w3.org/1999/xhtml">' .
+								'<head>' .
+									'<title>' . $sub . '</title>' .
+								'</head>' .
+								'<body class="myBody" style="padding:0px;margin:0px;word-break:normal;">' .
+									'<table style="background-color:#014266;max-width:100%;min-width:100%;padding:0;width:100%;" width="100%" cellspacing="0" cellpadding="0" border="0">' .
+									'<tbody>' .
+										'<tr>' .
+											'<td valign="middle" align="center">' .
+												'<table style="border:0;max-width:600px;padding:0;width:100%;" cellspacing="0" cellpadding="0" border="0" align="center">' .
+													'<tbody>' .
+														'<tr>' .
+															$tdIn .
+															'<td style="padding-bottom:50px;padding-top:30px;" align="center">' .
+																'<p style="color:#FFF;font-size:20px;font-style:normal;font-weight:100;line-height:24px;margin-bottom:0;margin-top:0;padding-bottom:10px;">' .
+																	'<strong>' . $Titla . '</strong>' .
+																'</p>' .
+																'<table style="border:0;max-width:600px;padding:0;width:100%;" cellspacing="2" border="1" cellpadding="5">' .
+																	'<tbody>' .
+																		'<tr style="text-align:center;color:#FFF;">' .
+																			'<th ' . $sty . ' valign="top">' .
+																				'<p style="padding:4px;">' . $Qw .
+																			'</th>' .
+																			'<th ' . $sty . ' valign="top">' .
+																				'<p style="padding:4px;">' . $Ans .
+																			'</th>' .
+																			'<th ' . $sty . ' valign="top">' .
+																				'<p style="padding:4px;">' . $Oth .
+																			'</th>' .
 																		'</tr>' .
-																		'<tr style="text-align:center;">' .
-																			'<td style="padding:4px;font-size:14px;color:#FFF;" valign="top" align="center">' .
-																				$AVT .
-																			'</td>' .
-																		'</tr>' .
-																'</tbody>' .
-															'</table>' .
-														'</td>' .
-														$tdIn .
-													'</tr>' .
-												'</tbody>' .
-											'</table>' .
-										'</td>' .
-									'</tr>' .
-								'</tbody>' .
-							'</table>' .
-						'</body>' .
-					'</html>';
-		$body 												=	wp_kses( $body, $body_Arg );
+																		$ChBody .
+																	'</tbody>' .
+																'</table>' .
+																'<table cellspacing="0" cellpadding="0">' .
+																	'<tbody>' .
+																			'<tr style="text-align:center;">' .
+																				'<td colspan="2" valign="top">' .
+																					'<p style="color:#FFF;font-size:14px;"> ' . $IP . ' </p>' .
+																				'</td>' .
+																			'</tr>' .
+																			'<tr style="text-align:center;">' .
+																				'<td style="padding:4px;font-size:14px;color:#FFF;" valign="top" align="center">' .
+																					$AVT .
+																				'</td>' .
+																			'</tr>' .
+																	'</tbody>' .
+																'</table>' .
+															'</td>' .
+															$tdIn .
+														'</tr>' .
+													'</tbody>' .
+												'</table>' .
+											'</td>' .
+										'</tr>' .
+									'</tbody>' .
+								'</table>' .
+							'</body>' .
+						'</html>';
+			$body 												=	wp_kses( $body, $body_Arg );
+		}
 		$validate_VABFWC							=	apply_filters( 'VABFWC_validate_filter', false );
 		if ( $validate_VABFWC != false ) {
 			$hasError										= true;
@@ -525,18 +529,23 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					file_put_contents( $VABFWC_Class->mAGENT, $AGENTp, FILE_APPEND );
 				}
 			}
-			$ADMEm    = get_option('admin_email');
-			$ADMEm    = sanitize_email( $ADMEm );
-			$emailTo	= $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] : get_option('admin_email');
-			$emailTo	= sanitize_email( $emailTo );
-			$headers	= "From:" . $emailTo . "\r\n";
-			$headers .= "Reply-To: " . $ADMEm . "\r\n";
-			if ( $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL_Copy']) ) {
-				$headers .= "Bcc: " . $ADMEm . " <" . $ADMEm . ">\r\n";
+			if ( empty($VABFWC_FORMSA_OPT['VABFWC_NO_SEND_MAIL']) ) {
+				$ADMEm    = get_option('admin_email');
+				$ADMEm    = sanitize_email( $ADMEm );
+				$emailTo	= $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] : get_option('admin_email');
+				$emailTo	= sanitize_email( $emailTo );
+				$headers	= "From:" . $emailTo . "\r\n";
+				$headers .= "Reply-To: " . $ADMEm . "\r\n";
+				if ( $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL_Copy']) ) {
+					$headers .= "Bcc: " . $ADMEm . " <" . $ADMEm . ">\r\n";
+				}
+				if ( !empty($VABFWC_USER_SEND_MAIL) ) {
+					$headers .= "Cc: " . $VABFWC_USER_SEND_MAIL . " <" . $VABFWC_USER_SEND_MAIL . ">\r\n";
+				}				
+				$headers .= "Content-Type:text/html; charset=\"utf-8\"\r\n";
+				$headers .= "X-WPVABFWC-Content-Type: text/html\n";
+				wp_mail( $emailTo, $sub, $body, $headers, $attachment );
 			}
-			$headers .= "Content-Type:text/html; charset=\"utf-8\"\r\n";
-			$headers .= "X-WPVABFWC-Content-Type: text/html\n";
-			wp_mail( $emailTo, $sub, $body, $headers, $attachment );
 			if ( file_exists( $VABFWC_TEMP ) ) {
 				dirDel( $VABFWC_TEMP );
 			}
@@ -721,10 +730,10 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			ECHO wp_kses( $fields_VABFWC, $VABFWC_Prot_Arg );
 		}
 		ECHO wp_kses( $VABFWC->FieldS(), $VABFWC_Prot_Arg ) .
-						'<input id="anketaSbros" type="reset" name="profilereset" value="' . esc_attr__( 'Resetting the filled fields', 'VABFWC') . '">',
+						'<input id="anketaSbros" type="reset" name="profilereset_' . $id . '" value="' . esc_attr__( 'Resetting the filled fields', 'VABFWC') . '">',
 						'&nbsp;&nbsp;&nbsp;&nbsp;',
 						'<input id="anketaSend" type="submit" name="profilesubmit" value="' . esc_attr__( 'Send', 'VABFWC') . '">',
-						'<input type="hidden" name="submitted" id="submitted" value="true" />',
+						'<input type="hidden" name="submitted_' . $id . '" id="submitted" value="true" />',
 					'</form>',
 					'</div>';
 	}
@@ -744,7 +753,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 							'<input type="hidden" name="submitres" id="submitres" value="true" />';
 			ECHO	'</form>';
 			if	( !empty($VABFWC_FORMSA) &&
-						( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) ||
+						( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) &&
 							$sentYN == $SentY ) &&
 						empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) &&
 						(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||

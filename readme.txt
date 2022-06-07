@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 6.0
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,7 +68,7 @@ Do you have questions or issues with Forms with chart from VAB? Use these suppor
 = Can I add id and class attributes to a form element? =
 
 Yes. You can add any id and class to a form by adding the form_id and form_class attributes into a [VABFWC] shortcode.
-Example:
+For example:
 
 `[VABFWC id="2228" form_id="ThisID" form_class="new-class two-new-class"]`
 
@@ -203,11 +203,16 @@ The log files are in the uploads folder. Folder structure example:
 	├── wp-config.php
 	...`
 
-= Demo video =
+== Donate link: ==
+<a href="https://www.paypal.me/vladimirbrumer" target="_blank">PayPal</a>
+<a href="https://yoomoney.ru/to/4100110059331346" target="_blank">YandexMoney</a>
+
+
+== Demo video ==
 
 Only Russian language
 
-https://www.youtube.com/watch?v=wKhP6wgN248
+https://www.youtube.com/watch?v=efQ3uovLQSY
 
 == Screenshots ==
 
@@ -219,6 +224,13 @@ https://www.youtube.com/watch?v=wKhP6wgN248
 6. Questionnaire of personal qualities. We calculate points using VABFWC_message_after_filter and issue a characteristic / recommendation
 
 == Changelog ==
+
+= 1.1.9 =
+
+* Added an option that cancels sending emails;
+* Added classes and IDs to the form elements;
+* Added the ability to send a copy of an email to a user;
+* Added Gutenberg blocks for quick and easy output of forms and charts;
 
 = 1.1.8 =
 

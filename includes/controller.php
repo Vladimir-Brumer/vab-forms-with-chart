@@ -81,3 +81,81 @@ if ( ! function_exists( 'vabfwc_enqueue_admin_scripts' ) ) {
 		wp_enqueue_script( 'wp-color-picker' );
 	}
 }
+add_action( 'admin_enqueue_scripts', 'all_vabfwc_enqueue_admin_scripts' );
+if ( ! function_exists( 'all_vabfwc_enqueue_admin_scripts' ) ) {
+	function all_vabfwc_enqueue_admin_scripts() {
+		wp_enqueue_style(
+			'all-vabfwc-admin-styles',
+			VABFWC_PLUGIN_URL . '/includes/css/all-vabfwc-admin-styles.css',
+			array(),
+			VABFWC_VERSION,
+			'all'
+		);
+    wp_enqueue_script(
+			'vabfwc-add-gutenberg',
+			VABFWC_PLUGIN_URL . '/includes/js/admin/vabfwc-add-gutenberg.js',
+			array(
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-components'
+			),
+			VABFWC_VERSION
+		);
+    wp_localize_script('vabfwc-add-gutenberg', 'vabfwc_local',
+        array(
+            'selectformname' => esc_html__( 'Form name', 'VABFWC' ),
+            'emptyformname' => esc_html__( 'is empty', 'VABFWC' ),
+            'textforid' => esc_html__( 'Specify an ID for the form', 'VABFWC' ),
+            'textforclass' => esc_html__( 'Specify an class for the form', 'VABFWC' ),
+            'selectform' => esc_html__( 'Select form', 'VABFWC' ),
+            'idtoform' => esc_html__( 'Id to a form', 'VABFWC' ),
+            'classtoform' => esc_html__( 'Сlass to a form', 'VABFWC' ),
+            'formtag' => esc_html__( 'Tag for the title', 'VABFWC' ),
+            'formtitle' => esc_html__( 'Title to the chart', 'VABFWC' ),
+            'chartsshort' => esc_html__( 'Display form charts', 'VABFWC' ),
+            'textfortitle' => esc_html__( 'Specify an title for the chart', 'VABFWC' ),
+            'texttagfortitle' => esc_html__( 'Choose a tag for the title', 'VABFWC' ),
+            'classtotag' => esc_html__( 'Сlass for the tag in title', 'VABFWC' ),
+            'textclassfortag' => esc_html__( 'Specify an class for the tag', 'VABFWC' ),
+        )
+    );
+	}
+}
+add_action( 'admin_footer', 'vabfwc_form_from_gutenberg' );
+if ( ! function_exists( 'vabfwc_form_from_gutenberg' ) ) {
+	function  vabfwc_form_from_gutenberg() {
+	$args = array(
+			'post_type'      => 'vab_fwc',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
+	);
+	$query = new WP_Query( $args );
+	$number = 0 ;
+	$str_add_vabfwc_form = '';
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$str_add_vabfwc_form .='<input id="form' . esc_html( $query->post->ID ) . '" type="hidden" name="nameform" data-id="' . esc_html( $query->post->ID ) . '" checked></input><label for="form' . esc_html( $query->post->ID ) . '"><span>' . esc_html( get_the_title() ) . '</span></label>';
+		}
+	}
+	wp_reset_postdata();
+	echo '<div id="vabfwc_name_form">
+				' . wp_specialchars_decode( $str_add_vabfwc_form ) . '
+			 </div>';
+}}
+add_filter( 'block_categories_all', 'vabfwc_block_categories', 10, 2);
+if ( !function_exists( 'vabfwc_block_categories' ) ) {
+	function vabfwc_block_categories( $categories,$post ) {
+		return array_merge(
+			array(
+				array(
+					'slug'	=>	'vabfwc_category',
+					'title'	=>	esc_html__( 'Forms with chart from VAB', 'VABFWC' ),
+					'icon'	=>	'wordpress',
+				),
+			),
+			$categories
+		);
+	}
+}

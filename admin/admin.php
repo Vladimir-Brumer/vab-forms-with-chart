@@ -352,6 +352,8 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 			$VABFWC_FORMSA_OPT_EXT 							= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_EXT'] ) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_EXT'] : '';
 			$VABFWC_FORMSA_OPT_MAIL_Copy 				= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL_Copy'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_MAIL 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] ) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] : '';
+			$VABFWC_USER_SEND_MAIL							= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_USER_SEND_MAIL'] ) ? 'checked="checked"' : '';
+			$VABFWC_NO_SEND_MAIL								= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_NO_SEND_MAIL'] ) ? 'checked="checked"' : '';
 			echo '<style type="text/css">
 							.meta_forms label{
 								display:flex;
@@ -508,6 +510,22 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
+								<tr>
+									<td>
+										<label for="VABFWC_USER_SEND_MAIL">
+											<span class="ch">' . esc_html__( 'Sending an email to a user. You can activate the receipt of a copy of the letter by e-mail for the user who submitted the form.The user`s email will be taken from the «email» form field', 'VABFWC' ) . '</span>
+											<input id="VABFWC_USER_SEND_MAIL" type="checkbox" name="VABFWC_USER_SEND_MAIL" ' . esc_attr( $VABFWC_USER_SEND_MAIL ) . '>
+										</label>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="VABFWC_NO_SEND_MAIL">
+											<span class="ch">' . esc_html__( 'Do not send emails', 'VABFWC' ) . '</span>
+											<input id="VABFWC_NO_SEND_MAIL" type="checkbox" name="VABFWC_NO_SEND_MAIL" ' . esc_attr( $VABFWC_NO_SEND_MAIL ) . '>
+										</label>
+									</td>
+								</tr>
 								</tbody>
 							</table>';
 	}
@@ -571,6 +589,8 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_EXT							=	sanitize_text_field( str_replace( array( " ", "." ), "", $_POST['VABFWC_FORMSA_OPT_EXT'] ) );
 			$VABFWC_FORMSA_OPT_MAIL							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_MAIL', FILTER_VALIDATE_EMAIL );
 			$VABFWC_FORMSA_OPT_NoDi 						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoDi'] = $VABFWC_FORMSA_OPT_NoDi : false;
+			$VABFWC_USER_SEND_MAIL							=	filter_input( INPUT_POST, 'VABFWC_USER_SEND_MAIL', FILTER_VALIDATE_BOOLEAN );
+			$VABFWC_NO_SEND_MAIL								=	filter_input( INPUT_POST, 'VABFWC_NO_SEND_MAIL', FILTER_VALIDATE_BOOLEAN );
 			if ( $VABFWC_FORMSA_OPT_NoDi == false ) {
 				$VABFWC_Class->DirDel();
 			}
@@ -607,6 +627,8 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_EXT							?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_EXT']								= $VABFWC_FORMSA_OPT_EXT 							: true;
 			$VABFWC_FORMSA_OPT_MAIL_Copy 				? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_MAIL_Copy'] 				= $VABFWC_FORMSA_OPT_MAIL_Copy 				: true;
 			$VABFWC_FORMSA_OPT_MAIL 						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_MAIL'] 							= $VABFWC_FORMSA_OPT_MAIL 						: true;
+			$VABFWC_USER_SEND_MAIL							?	$VABFWC_FORM_OPT['VABFWC_USER_SEND_MAIL']								= $VABFWC_USER_SEND_MAIL 							: true;
+			$VABFWC_NO_SEND_MAIL								?	$VABFWC_FORM_OPT['VABFWC_NO_SEND_MAIL']									= $VABFWC_NO_SEND_MAIL 								: true;
 			if ( ! empty( $VABFWC_FORM_OPT ) ) {
 				update_post_meta( $post_ID, 'VABFWC_FORM_OPT', $VABFWC_FORM_OPT );
 			}else{
@@ -769,19 +791,10 @@ if ( ! function_exists( 'vab_fwc_info' ) ) {
 							'<h3>' . esc_html__( 'New in version', 'VABFWC' ) . ' ' . VABFWC_VERSION . '</h3>' .
 						'</center>' .
 						'<ol>' .
-							'<li>' . esc_html__( 'Fixed - notification about undefined variable', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Added a submenu where you can read about the current release', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Added attributes for shortcode. Now you can add any id and class to a form', 'VABFWC' ) .
-								'<ul>' .
-									'<li>' . esc_html__( 'Example', 'VABFWC' ) . ':' .
-										'<p>' .
-											'<code>' .
-												'[VABFWC id="2228" form_id="ThisID" form_class="new-class two-new-class"]' .
-											'</code>' .
-										'</p>' .
-									'</li>' .
-								'</ul>' .
-							'</li>' .
+							'<li>' . esc_html__( 'Added an option that cancels sending emails', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added classes and IDs to the form elements', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added the ability to send a copy of an email to a user', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added Gutenberg blocks for quick and easy output of forms and charts', 'VABFWC' ) . '</li>' .
 						'</ol>' .
 					'</div>';
 	}
