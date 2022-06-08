@@ -541,7 +541,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				}
 				if ( !empty($VABFWC_USER_SEND_MAIL) ) {
 					$headers .= "Cc: " . $VABFWC_USER_SEND_MAIL . " <" . $VABFWC_USER_SEND_MAIL . ">\r\n";
-				}				
+				}
 				$headers .= "Content-Type:text/html; charset=\"utf-8\"\r\n";
 				$headers .= "X-WPVABFWC-Content-Type: text/html\n";
 				wp_mail( $emailTo, $sub, $body, $headers, $attachment );

@@ -159,7 +159,7 @@ function idAttribute(value, name) {
             return (
                 el( 'div', { className: props.className },
                     el( 'div', { className: 'swap-add-vabfwc-form' },
-											el( 'div', { className: 'heading-add-vabfwc-form' }, 'Forms with chart from VAB'),
+											el( 'div', { className: 'heading-add-vabfwc-form' }, vabfwc_local.chartsshort ),
 											el( 'div', { className: 'block-add-vabfwc-form name-vabfwc-form' },
 												el( 'div', { className: 'text-add-vabfwc-form' }, vabfwc_local.selectform ),
 												el( 'div', { className: 'swap-select-vabfwc-form' },
