@@ -104,20 +104,19 @@ if ( ! function_exists( 'all_vabfwc_enqueue_admin_scripts' ) ) {
 		);
     wp_localize_script('vabfwc-add-gutenberg', 'vabfwc_local',
         array(
-            'selectformname' => esc_html__( 'Form name', 'VABFWC' ),
-            'emptyformname' => esc_html__( 'is empty', 'VABFWC' ),
-            'textforid' => esc_html__( 'Specify an ID for the form', 'VABFWC' ),
-            'textforclass' => esc_html__( 'Specify an class for the form', 'VABFWC' ),
-            'selectform' => esc_html__( 'Select form', 'VABFWC' ),
-            'idtoform' => esc_html__( 'Id to a form', 'VABFWC' ),
-            'classtoform' => esc_html__( 'Сlass to a form', 'VABFWC' ),
-            'formtag' => esc_html__( 'Tag for the title', 'VABFWC' ),
-            'formtitle' => esc_html__( 'Title to the chart', 'VABFWC' ),
-            'chartsshort' => esc_html__( 'Display form charts', 'VABFWC' ),
-            'textfortitle' => esc_html__( 'Specify an title for the chart', 'VABFWC' ),
-            'texttagfortitle' => esc_html__( 'Choose a tag for the title', 'VABFWC' ),
-            'classtotag' => esc_html__( 'Сlass for the tag in title', 'VABFWC' ),
-            'textclassfortag' => esc_html__( 'Specify an class for the tag', 'VABFWC' ),
+            'selectformname'		=> esc_html__( 'Form name', 'VABFWC' ),
+            'emptyformname'			=> esc_html__( 'is empty', 'VABFWC' ),
+            'textforid'					=> esc_html__( 'Specify an ID for the form', 'VABFWC' ),
+            'textforclass'			=> esc_html__( 'Specify an class for the form', 'VABFWC' ),
+            'selectform'				=> esc_html__( 'Select form', 'VABFWC' ),
+            'idtoform'					=> esc_html__( 'Id to a form', 'VABFWC' ),
+            'classtoform'				=> esc_html__( 'Сlass to a form', 'VABFWC' ),
+            'formtag'						=> esc_html__( 'Choose a tag for the title', 'VABFWC' ),
+            'formtitle'					=> esc_html__( 'Title to the chart', 'VABFWC' ),
+            'chartsshort'				=> esc_html__( 'Display form charts', 'VABFWC' ),
+            'textfortitle'			=> esc_html__( 'Specify an title for the chart', 'VABFWC' ),
+            'classtotag'				=> esc_html__( 'Сlass for the tag in title', 'VABFWC' ),
+            'textclassfortag'		=> esc_html__( 'Specify an class for the tag', 'VABFWC' ),
         )
     );
 	}
@@ -152,7 +151,7 @@ if ( !function_exists( 'vabfwc_block_categories' ) ) {
 				array(
 					'slug'	=>	'vabfwc_category',
 					'title'	=>	esc_html__( 'Forms with chart from VAB', 'VABFWC' ),
-					'icon'	=>	'wordpress',
+					// 'icon'	=>	'wordpress',
 				),
 			),
 			$categories
