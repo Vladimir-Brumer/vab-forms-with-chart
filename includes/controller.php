@@ -143,7 +143,11 @@ if ( ! function_exists( 'vabfwc_form_from_gutenberg' ) ) {
 				' . wp_specialchars_decode( $str_add_vabfwc_form ) . '
 			 </div>';
 }}
-add_filter( 'block_categories_all', 'vabfwc_block_categories', 10, 2);
+if ( VABFWC_WP_VERSION_CHECK < 580 ) {
+	add_filter( 'block_categories', 'vabfwc_block_categories', 10, 2);
+} else {
+	add_filter( 'block_categories_all', 'vabfwc_block_categories', 10, 2);
+}
 if ( !function_exists( 'vabfwc_block_categories' ) ) {
 	function vabfwc_block_categories( $categories,$post ) {
 		return array_merge(
@@ -158,3 +162,11 @@ if ( !function_exists( 'vabfwc_block_categories' ) ) {
 		);
 	}
 }
+if ( !function_exists( 'add_plugin_vabfwc_link' ) ) {
+	function add_plugin_vabfwc_link( $link ) {
+		$vabfwc_link	= '<a href="edit.php?post_type=vab_fwc">' . esc_html__( 'Create Form', 'VABFWC' ) . '</a>';
+		$link[]				= $vabfwc_link;
+		return $link;
+	}
+}
+add_filter( 'plugin_action_links_' . VABFWC_PLUGIN_BASENAME, 'add_plugin_vabfwc_link' );

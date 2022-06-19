@@ -199,6 +199,16 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
         return false;
     });
 		$('.wpColorChoose').wpColorPicker();
+		function tableClick( el ) {
+			$( document ).on( 'click', '.th_' + el, function() {
+				jQuery( this ).toggleClass( 'OpEn' );
+				jQuery( '.' + el ).fadeToggle( 500 );
+			});
+		}
+		tableClick('log_files');
+		tableClick('seet_diag');
+		tableClick('seet_attach');
+		tableClick('seet_mess');
 	});</script>
 	<?php
 	$ButMas = array(
@@ -350,6 +360,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 			$VABFWC_FORMSA_OPT_AddFileMulti			= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_AddFileMulti'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_SIZE 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_SIZE'] ) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_SIZE'] : '3';
 			$VABFWC_FORMSA_OPT_EXT 							= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_EXT'] ) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_EXT'] : '';
+			$VABFWC_FORMSA_OPT_TITLE_MAIL 			= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TITLE_MAIL'] ) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TITLE_MAIL'] : '';
 			$VABFWC_FORMSA_OPT_MAIL_Copy 				= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL_Copy'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_MAIL 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] ) ? $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL'] : '';
 			$VABFWC_USER_SEND_MAIL							= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_USER_SEND_MAIL'] ) ? 'checked="checked"' : '';
@@ -373,9 +384,10 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 								width:100%;
 							}
 						</style>
-						<table class="meta_forms" style="font-size:10px;">
+						<table class="meta_forms vabfwc_table" style="font-size:10px;">
 							<tbody>
-								<tr>
+								<tr class="th_log_files"><th><hr>'.esc_html__('Control of log files','VABFWC').'<hr></th></tr>
+								<tr class="log_files">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_NoDi">
 											<span class="ch">' . esc_html__( 'Write form responses to log files', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -383,7 +395,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="log_files">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_NoDate">
 											<span class="ch">' . esc_html__( 'Don`t write date to log files', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -391,7 +403,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="log_files">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_NoIP">
 											<span class="ch">' . esc_html__( 'Don`t write IP address to log files', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -399,7 +411,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="log_files">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_NoAgent">
 											<span class="ch">' . esc_html__( 'Don`t write user Agent to log files', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -407,7 +419,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="log_files">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_PROT">
 											<span class="ch">' . esc_html__( 'Block access to log files with htaccess', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -415,15 +427,16 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
-									<td><hr>
+								<tr class="th_seet_diag"><th><hr>'.esc_html__('Settings of charts','VABFWC').'<hr></th></tr>
+								<tr class="seet_diag">
+									<td>
 										<label for="VABFWC_FORMSA_OPT_HideDi">
 											<span class="ch">' . esc_html__( 'Don`t show chart', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
 											<input id="VABFWC_FORMSA_OPT_HideDi" type="checkbox" name="VABFWC_FORMSA_OPT_HideDi" ' . esc_attr( $VABFWC_FORMSA_OPT_HideDi ) . '>
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_diag">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_ShowDi">
 											<span class="ch">' . esc_html__( 'Always show the charts at the end of the questionnaire', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -431,7 +444,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_diag">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_ShowOnlyAdm">
 											<span class="ch">' . esc_html__( 'Show the charts only for the administrators', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -439,7 +452,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_diag">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_TotaL">
 											<span class="ch">' . esc_html__( 'Hide the total number of completed questionnaires', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -447,7 +460,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 									</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_diag">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_TotaL_Every_circ">
 											<span class="ch">' . esc_html__( 'Show total answers per question above pie chart', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -455,7 +468,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_diag">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_TotaL_Every_ceck">
 											<span class="ch">' . esc_html__( 'Hide the total selection number of each checkbox', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -463,14 +476,16 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
-									<td><hr>
+								<tr class="th_seet_attach"><th><hr>'.esc_html__('Settings of attachments','VABFWC').'<hr></th></tr>
+								<tr class="seet_attach">
+									<td>
 										<label for="VABFWC_FORMSA_OPT_AddFile">
 											<span class="ch">' . esc_html__( 'Add the ability to send a file', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
 											<input id="VABFWC_FORMSA_OPT_AddFile" type="checkbox" name="VABFWC_FORMSA_OPT_AddFile" ' . esc_attr( $VABFWC_FORMSA_OPT_AddFile ) . '>
 										</label>
 									</td>
-								</tr>								<tr>
+								</tr>
+								<tr class="seet_attach">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_AddFileMulti">
 											<span class="ch">' . esc_html__( 'Multiple File Upload', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -478,7 +493,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_attach">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_SIZE">
 											<span class="text">' . esc_html__( 'Total files size', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;-&nbsp;(&nbsp;Mb&nbsp;)&nbsp;&nbsp;&nbsp;</span>
@@ -486,7 +501,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_attach">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_EXT">
 											<span class="text">' . esc_html__( 'Allowed extensions. Separate by comma', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -494,15 +509,24 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
-									<td><hr>
+								<tr class="th_seet_mess"><th><hr>' . esc_html__('Email settings','VABFWC') . '<hr></th></tr>
+								<tr class="seet_mess">
+									<td>
+										<label for="VABFWC_FORMSA_OPT_TITLE_MAIL">
+											<span class="text">' . esc_html__( 'Table title', 'VABFWC' ) . ' :</span>
+											<input id="VABFWC_FORMSA_OPT_TITLE_MAIL" size="33" type="text" name="VABFWC_FORMSA_OPT_TITLE_MAIL" value="' . esc_attr( $VABFWC_FORMSA_OPT_TITLE_MAIL ) . '">
+										</label>
+									</td>
+								</tr>
+								<tr class="seet_mess">
+									<td>
 										<label for="VABFWC_FORMSA_OPT_MAIL_Copy">
 											<span class="ch">' . esc_html__( 'Send a copy of the form to the admin', 'VABFWC' ) . '.&nbsp;' . esc_html__( 'The field below must be filled', 'VABFWC' ) . '&nbsp;</span>
 											<input id="VABFWC_FORMSA_OPT_MAIL_Copy" type="checkbox" name="VABFWC_FORMSA_OPT_MAIL_Copy" ' . esc_attr( $VABFWC_FORMSA_OPT_MAIL_Copy ) . '>
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_mess">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_MAIL">
 											<span class="text">' . esc_html__( 'Email to send the form to', 'VABFWC' ) . ' :</span>
@@ -510,7 +534,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_mess">
 									<td>
 										<label for="VABFWC_USER_SEND_MAIL">
 											<span class="ch">' . esc_html__( 'Sending an email to a user. You can activate the receipt of a copy of the letter by e-mail for the user who submitted the form.The user`s email will be taken from the «email» form field', 'VABFWC' ) . '</span>
@@ -518,7 +542,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										</label>
 									</td>
 								</tr>
-								<tr>
+								<tr class="seet_mess">
 									<td>
 										<label for="VABFWC_NO_SEND_MAIL">
 											<span class="ch">' . esc_html__( 'Do not send emails', 'VABFWC' ) . '</span>
@@ -588,6 +612,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_SIZE							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_SIZE', FILTER_VALIDATE_INT );
 			$VABFWC_FORMSA_OPT_EXT							=	sanitize_text_field( str_replace( array( " ", "." ), "", $_POST['VABFWC_FORMSA_OPT_EXT'] ) );
 			$VABFWC_FORMSA_OPT_MAIL							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_MAIL', FILTER_VALIDATE_EMAIL );
+			$VABFWC_FORMSA_OPT_TITLE_MAIL				=	sanitize_text_field( $_POST['VABFWC_FORMSA_OPT_TITLE_MAIL'] );
 			$VABFWC_FORMSA_OPT_NoDi 						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoDi'] = $VABFWC_FORMSA_OPT_NoDi : false;
 			$VABFWC_USER_SEND_MAIL							=	filter_input( INPUT_POST, 'VABFWC_USER_SEND_MAIL', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_NO_SEND_MAIL								=	filter_input( INPUT_POST, 'VABFWC_NO_SEND_MAIL', FILTER_VALIDATE_BOOLEAN );
@@ -625,6 +650,7 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_AddFileMulti			?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_AddFileMulti']			= $VABFWC_FORMSA_OPT_AddFileMulti 		: true;
 			$VABFWC_FORMSA_OPT_SIZE							?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_SIZE']							= $VABFWC_FORMSA_OPT_SIZE 						: true;
 			$VABFWC_FORMSA_OPT_EXT							?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_EXT']								= $VABFWC_FORMSA_OPT_EXT 							: true;
+			$VABFWC_FORMSA_OPT_TITLE_MAIL 			? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TITLE_MAIL'] 				= $VABFWC_FORMSA_OPT_TITLE_MAIL 			: true;
 			$VABFWC_FORMSA_OPT_MAIL_Copy 				? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_MAIL_Copy'] 				= $VABFWC_FORMSA_OPT_MAIL_Copy 				: true;
 			$VABFWC_FORMSA_OPT_MAIL 						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_MAIL'] 							= $VABFWC_FORMSA_OPT_MAIL 						: true;
 			$VABFWC_USER_SEND_MAIL							?	$VABFWC_FORM_OPT['VABFWC_USER_SEND_MAIL']								= $VABFWC_USER_SEND_MAIL 							: true;
@@ -791,10 +817,9 @@ if ( ! function_exists( 'vab_fwc_info' ) ) {
 							'<h3>' . esc_html__( 'New in version', 'VABFWC' ) . ' ' . VABFWC_VERSION . '</h3>' .
 						'</center>' .
 						'<ol>' .
-							'<li>' . esc_html__( 'Added an option that cancels sending emails', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Added classes and IDs to the form elements', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Added the ability to send a copy of an email to a user', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Added Gutenberg blocks for quick and easy output of forms and charts', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Styling additional options', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added option - ability to change table header', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Fixed - small edits for better compatibility of gutenberg blocks;', 'VABFWC' ) . '</li>' .
 						'</ol>' .
 					'</div>';
 	}

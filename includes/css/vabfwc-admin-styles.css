@@ -13,3 +13,16 @@
 	margin-left:4px;
 	padding:0px 33px;
 }
+.log_files,.seet_diag,.seet_attach,.seet_mess{
+	display:none;
+}
+.vabfwc_table {
+	width:100%;
+}
+.vabfwc_table th{
+	cursor:pointer;
+}
+.vabfwc_table .OpEn{
+	color:#FF0000;
+	background:#FFFF00;
+}

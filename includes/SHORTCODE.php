@@ -145,7 +145,9 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 							. ' - '
 							. esc_html( get_the_title( $id ) )
 							. '»';
-		$Titla		= esc_html__( 'Questionnaire content', 'VABFWC' );
+		$Titla		= ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TITLE_MAIL'] )
+								? esc_html( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TITLE_MAIL'] )
+								: esc_html__( 'Questionnaire content', 'VABFWC' );
 		$IP				= esc_html__( 'IP address', 'VABFWC' )
 							. ": " . $GLOBALS['VABFWC_IP'];
 		$AVT			= esc_html__( 'The form author Vladimir Anatolyevich Brumer', 'VABFWC' )
@@ -361,7 +363,15 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				'xmlns'						=>	array(),
 			),
 			'head'							=>	array(),
+			'meta'							=>	array(
+				'http-equiv'			=>	array(),
+				'content'					=>	array(),
+				'charset'					=>	array(),
+			),
 			'title'							=>	array(),
+			'h1'								=>	array(
+				'style'						=>	array(),
+			),
 			'body'							=>	array(
 				'class'						=>	array(),
 				'style'						=>	array(),
@@ -404,6 +414,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		if ( empty($VABFWC_FORMSA_OPT['VABFWC_NO_SEND_MAIL']) ) {
 			$body =	'<html xmlns="http://www.w3.org/1999/xhtml">' .
 								'<head>' .
+									'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' .
 									'<title>' . $sub . '</title>' .
 								'</head>' .
 								'<body class="myBody" style="padding:0px;margin:0px;word-break:normal;">' .
@@ -417,7 +428,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 															$tdIn .
 															'<td style="padding-bottom:50px;padding-top:30px;" align="center">' .
 																'<p style="color:#FFF;font-size:20px;font-style:normal;font-weight:100;line-height:24px;margin-bottom:0;margin-top:0;padding-bottom:10px;">' .
-																	'<strong>' . $Titla . '</strong>' .
+																	'<h1 style="color:#FFF;font-size:20px">' . $Titla . '</h1>' .
 																'</p>' .
 																'<table style="border:0;max-width:600px;padding:0;width:100%;" cellspacing="2" border="1" cellpadding="5">' .
 																	'<tbody>' .
@@ -536,6 +547,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				$emailTo	= sanitize_email( $emailTo );
 				$headers	= "From:" . $emailTo . "\r\n";
 				$headers .= "Reply-To: " . $ADMEm . "\r\n";
+				$headers .= "List-Unsubscribe:<mailto:" . $ADMEm . "?subject=unsubscribe>\r\n";
 				if ( $VABFWC_FORMSA_OPT && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL']) && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_MAIL_Copy']) ) {
 					$headers .= "Bcc: " . $ADMEm . " <" . $ADMEm . ">\r\n";
 				}

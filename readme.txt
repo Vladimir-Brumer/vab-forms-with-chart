@@ -6,7 +6,7 @@ Tags: chart, contact, form, contact form, forms with chart, feedback, email, mul
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
 Tested up to: 6.0
-Stable tag: 1.1.9
+Stable tag: 1.2.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,6 +225,12 @@ https://www.youtube.com/watch?v=efQ3uovLQSY
 7. Screenshot of blocks gutenberg
 
 == Changelog ==
+
+= 1.2.0 =
+
+* Styling additional options;
+* Added option - ability to change table header;
+* Fixed - small edits for better compatibility of gutenberg blocks;
 
 = 1.1.9 =
 

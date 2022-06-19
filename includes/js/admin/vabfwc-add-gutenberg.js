@@ -38,7 +38,7 @@ function idAttribute(value, name) {
     const { registerBlockType } = blocks;
     registerBlockType( 'vabfwc-form/custom-block', {
         title: 'Forms with chart from VAB',
-				icon: vabfwcPhoto,
+				icon: vabfwcPhoto,/* chart-pie */
 				category:'vabfwc_category',
         keywords: [ 'email', 'subscribe', 'misha' ],
         attributes: {

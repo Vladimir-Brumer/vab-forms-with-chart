@@ -6,7 +6,7 @@
  * Author URI:				https://it-vab.ru/
  * Author:     				Vladimir Anatol`evich Brumer
  * License:						GPLv2
- * Version:     			1.1.9
+ * Version:     			1.2.0
  *
  * Text Domain:				VABFWC
  * Domain Path:				/languages
@@ -17,8 +17,22 @@
 if ( ! defined( 'ABSPATH' ) )  {
 	exit;
 }
+global $wp_version;
+if ( ! defined( 'VABFWC_WP_VERSION' ) ) {
+	define( 'VABFWC_WP_VERSION', $wp_version );
+}
+if ( ! defined( 'VABFWC_WP_VERSION_CHECK' ) ) {
+	define( 'VABFWC_WP_VERSION_CHECK', str_pad( str_replace( '.', '', VABFWC_WP_VERSION ), 3, '0', STR_PAD_RIGHT ) );
+}
+if ( VABFWC_WP_VERSION_CHECK < 551 ) {
+	return;
+}
 if ( ! defined( 'VABFWC_VERSION' ) ) {
-	define( 'VABFWC_VERSION', '1.1.9' );
+	define( 'VABFWC_VERSION', '1.2.0' );
+}
+global $wp_version;
+if ( ! defined( 'VABFWC_WP_VERSION' ) ) {
+	define( 'VABFWC_WP_VERSION', $wp_version );
 }
 if ( ! defined( 'VABFWCGSU' ) ) {
 	define( "VABFWCGSU", get_site_url() );
