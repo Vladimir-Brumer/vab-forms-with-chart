@@ -170,3 +170,53 @@ if ( !function_exists( 'add_plugin_vabfwc_link' ) ) {
 	}
 }
 add_filter( 'plugin_action_links_' . VABFWC_PLUGIN_BASENAME, 'add_plugin_vabfwc_link' );
+if ( ! function_exists( 'VABFWC_file_force_download' ) ) {
+	function VABFWC_file_force_download( $file ){
+		if ( file_exists( $file ) ) {
+			if ( ob_get_level() ) {
+				ob_end_clean();
+			}
+			header( 'Content-Description:File Transfer' );
+			header( 'Content-Type:application/octet-stream' );
+			header( 'Content-Disposition:attachment;filename=' . basename( $file ) );
+			header( 'Content-Transfer-Encoding:binary' );
+			header( 'Expires:0' );
+			header( 'Cache-Control:must-revalidate' );
+			header( 'Pragma:public' );
+			header( 'Content-Length:' . filesize( $file ) );
+			if ( $fd = fopen( $file, 'rb' ) ) {
+				while( ! feof( $fd ) ) {
+					print fread( $fd, 1024 );
+				}
+			fclose( $fd );
+			}
+			exit;
+		}
+	}
+}
+add_action( 'send_headers', 'VABFWC_download_file' );
+if	(	!	function_exists( 'VABFWC_download_file' ) ) {
+	function VABFWC_download_file() {
+		$SRC = VABFWC_UPLOAD_DIR . '/VABFWC/' . sanitize_title( stristr( VABFWCGSU, '://' ) ) . '/Diagram/';
+		if ( isset($_GET['id']) &&
+				 isset($_GET['my_file']) &&
+				 isset($_GET['my_type']) &&
+				 ( $_GET['my_type'] == 'adm_logs' || $_GET['my_type'] == 'csv_logs' ) &&
+				 isset($_GET['hash']) ) {
+					$getFileProtect	= 'HNUv6Q8YO4u8hTfhs6e5';
+					$id							= sanitize_text_field( $_GET['id'] );
+					$my_file				= sanitize_text_field( $_GET['my_file'] );
+					$my_type				= sanitize_text_field( $_GET['my_type'] );
+					$hash						= sanitize_text_field( $_GET['hash'] );
+					$ouCh 					= hash( 'sha1', $id . '&' . $my_file . '&' . $my_type . '&' . $getFileProtect );
+					if ( $hash === $ouCh ) {
+						$add_url 			= $my_type == 'csv_logs' ? '/csv_logs/' : '/';
+						$end_url 			= $my_type == 'csv_logs' ? '.csv' : '.txt';
+						$UPFile				=	$SRC . $id .  $add_url . $my_file . $end_url;
+						if ( file_exists( $UPFile ) ) {
+							VABFWC_file_force_download( $UPFile );
+						}
+					}
+		}
+	}
+}

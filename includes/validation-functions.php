@@ -1,7 +1,67 @@
 <?php
 /**
- * Additional filtering of form fields
+ * Additional filtering of form fields and Users
  */
+if ( ! function_exists( 'VABFWC_CHEK_ROLES' ) ) {
+	function VABFWC_CHEK_ROLES( $post_id ) {
+		global								$wp_roles;
+		$VABFWC_ROLES				= $wp_roles->get_names();
+		$VABFWC_FORMSA_OPT	= get_post_meta( $post_id, 'VABFWC_FORM_OPT', true );
+		foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ) {
+			if ( is_user_logged_in() ) {
+					$user_id	=	get_current_user_id();
+					$u_meta		=	get_userdata( $user_id );
+					if ( ! empty( $u_meta ) ) {
+						$u_roles	=	$u_meta->roles;
+						if ( in_array( $VABFWC_ROLE, $u_roles, true ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE] ) ) {
+							return true;
+						}}
+			}
+		}
+		return false;
+}}
+if ( ! function_exists( 'VABFWC_CHEK_CSV_ROLES' ) ) {
+	function VABFWC_CHEK_CSV_ROLES( $post_id ) {
+		global								$wp_roles;
+		$VABFWC_ROLES				= $wp_roles->get_names();
+		$VABFWC_FORMSA_OPT	= get_post_meta( $post_id, 'VABFWC_FORM_OPT', true );
+		foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ) {
+			if ( is_user_logged_in() ) {
+					$user_id	=	get_current_user_id();
+					$u_meta		=	get_userdata( $user_id );
+					if ( ! empty( $u_meta ) ) {
+						$u_roles	=	$u_meta->roles;
+						if ( in_array( $VABFWC_ROLE, $u_roles, true ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE] ) ) {
+							return true;
+						}}
+			}
+		}
+		return false;
+}}
+if ( ! function_exists( 'VABFWC_CHEK_OPT_ROLES' ) ) {
+	function VABFWC_CHEK_OPT_ROLES( $post_id ) {
+		global								$wp_roles;
+		$VABFWC_ROLES				= $wp_roles->get_names();
+		$VABFWC_FORMSA_OPT	= get_post_meta( $post_id, 'VABFWC_FORM_OPT', true );
+		foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ) {
+			if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE] ) ) {
+				return true;
+			}
+		}
+		return false;
+}}
+if ( ! function_exists( 'VABFWC_CHEK_CSV_OPT_ROLES' ) ) {
+	function VABFWC_CHEK_CSV_OPT_ROLES( $post_id ) {
+		global								$wp_roles;
+		$VABFWC_ROLES				= $wp_roles->get_names();
+		$VABFWC_FORMSA_OPT	= get_post_meta( $post_id, 'VABFWC_FORM_OPT', true );
+		foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ) {
+			if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE] ) ) {
+				return true;
+			}
+		}
+		return false;
+}}
 if ( ! function_exists( 'vabfwc_sanitize_text_field' ) ) {
 	function vabfwc_sanitize_text_field( $array ) {
 		foreach ( $array as $key => $value ) {

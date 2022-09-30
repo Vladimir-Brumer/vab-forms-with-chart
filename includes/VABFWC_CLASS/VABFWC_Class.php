@@ -27,6 +27,11 @@ class VABFWC_Class {
 			dirDel( $this->FD );
 		}
 	}
+	function DirDelCsv() {
+		if ( file_exists( $this->FD . 'csv_logs' ) ) {
+			dirDel( $this->FD . 'csv_logs' );
+		}
+	}
 	function FileDel() {
 		if ( file_exists( $this->FD ) ) {
 		$FileDir					= scandir( $this->FD );
@@ -37,9 +42,10 @@ class VABFWC_Class {
 					if ( $file != "." && $file != ".." &&
 							 $file != 'mIP_' . $this->PostID . '.txt' &&
 							 $file != 'mDATE_' . $this->PostID . '.txt' &&
-							 $file != 'mAGENT_' . $this->PostID . '.txt' ) {
-						$name				= basename( $file, ".txt" );
-						if ( !array_key_exists( $name, $VABFWC_FORMSA ) ) {
+							 $file != 'mAGENT_' . $this->PostID . '.txt' /* &&
+							 $file != $this->FD . 'csv_logs' */ ) {
+						$name			= basename( $file, ".txt" );
+						if ( !array_key_exists( $name, $VABFWC_FORMSA ) && $name !== 'csv_logs' ) {
 							unlink( $this->FD . $file );
 						}
 					}

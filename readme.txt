@@ -2,11 +2,11 @@
 Plugin Name: Forms with chart from VAB
 Contributors: vabtopic
 Donate link: https://it-vab.ru/vab-forms-with-chart#donate
-Tags: chart, contact, form, contact form, forms with chart, feedback, email, multilingual
+Tags: chart, contact, form, contact form, forms with chart, feedback, email, multilingual, csv logs, csv files, forms with csv
 Requires at least: 5.5.1
 Requires PHP: 5.6.20
-Tested up to: 6.0
-Stable tag: 1.2.0
+Tested up to: 6.0.2
+Stable tag: 1.2.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Simple Plugin for creating forms, inquirer and questionnaires with the ability t
 
 == Description ==
 
-Forms with chart from VAB can manage multiple contact forms, plus you can customize the form. The main direction of the plugin is polls and questionnaires with the output of results in the form of diagrams of such fields as «Check boxes», «Radio buttons», «Drop-down list» in pure css, but it is also suitable for creating simple feedback forms. Forms have their own protection against bots.
+Forms with chart from VAB can manage numerous contact forms where you can flexibly customize the content of the forms with fairly simple markup. The main direction of the plugin is polls and questionnaires with the output of results in the form of diagrams of such fields as «Check boxes», «Radio buttons», «Drop-down list» in pure css, but it is also suitable for creating other options for feedback forms, including those with the ability to send attachments , as well as write data to CSV files. Forms have built-in spam protection and more.
 
 = Docs and support =
 
@@ -36,6 +36,7 @@ With the default configuration, this plugin, in itself, does not:
 In the form settings, you can activate the plugin actions:
 
 * logs the entered form data to a file for displaying the results of diagrams.
+* logs the entered form data to a CSV files.
 
 
 = Recommended plugins =
@@ -223,51 +224,64 @@ https://www.youtube.com/watch?v=efQ3uovLQSY
 5. Questionnaire for personal qualities with Additional Styles
 6. Questionnaire of personal qualities. We calculate points using VABFWC_message_after_filter and issue a characteristic / recommendation
 7. Screenshot of blocks gutenberg
+8. CSV log file saved in xlsx format
 
 == Changelog ==
 
-= 1.2.0 =
+= 1.2.1 - 30.09.2022 =
+
+* Small changes in HTML markup;
+* Added the ability to upload data to a CSV file. Files will automatically be split by month;
+* Added options: «Manage the display of CSV files for users»;
+* Added the ability to hide/show the chart to specific users (optional);
+* Added option: «Show the number of answers for each question above the pie chart»;
+
+= 1.2.0 - 19.06.2022 =
 
 * Styling additional options;
 * Added option - ability to change table header;
 * Fixed - small edits for better compatibility of gutenberg blocks;
 
-= 1.1.9 =
+= 1.1.9 - 07.06.2022 =
 
 * Added an option that cancels sending emails;
 * Added classes and IDs to the form elements;
 * Added the ability to send a copy of an email to a user;
 * Added Gutenberg blocks for quick and easy output of forms and charts;
 
-= 1.1.8 =
+= 1.1.8 - 02.06.2022 =
 
 * Fixed - notification about undefined variable;
 * Added a submenu where you can read about the current release;
 * Added attributes for shortcode. Now you can add any id and class to a form;
 
-= 1.1.7 =
+= 1.1.7 - 30.05.2022 =
 
 * Minor styles tweaks;
 * Bugfix - table reset for administrator was performed without checkbox set;
 
-= 1.1.6 =
+= 1.1.6 - 10.05.2022 =
 
 * Added a new filter to be able to add a message when the email is successfully sent;
 
-= 1.1.5 =
+= 1.1.5 - 07.05.2022 =
 
 * Added an option to show charts to admins only;
 * Added filters for the ability to add (check) fields, as well as display a message;
 
-= 1.1.4 =
+= 1.1.4 - 02.05.2022 =
 
 * Added shortcode to display form results anywhere;
 * Include wp-color-picker;
 * Now the name of the log files depends on the form ID;
 
-= 1.1.3 =
+= 1.1.3 - 20.04.2022 =
 
 * Added the ability to move form elements (swap questions);
+
+= 1.1.2 - 14.04.2022 =
+
+* Loading plugin
 
 == Upgrade Notice ==
 

@@ -18,6 +18,7 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 		$AnswerCountchec				= 0;
 		$total									= array();
 		$otv										= esc_html__( 'Answers to the question', 'VABFWC' );
+		$Ans										= esc_html__( 'Answers', 'VABFWC' );
 		foreach( $VABFWC_FORMSA as $k => $v ) {
 			if ( file_exists( $this->$k ) ) {
 				if ( $v['type'] == 'radio' || $v['type'] == 'select' ) {
@@ -63,10 +64,36 @@ class VABFWC_Class_Graphic extends VABFWC_Class {
 					);
 					echo "<br><center><legend><h4> › " . esc_html( $v['question'] ) . ":</h4></legend>" . wp_kses( $Every, $Every_Arg ) . '<br>';
 					for( $i = 0; $i < $coanswer; $i++ ) {
+			//////**********//////
+						$preTot		= '';
+						$totAns 	= '';
+						$totAnsO	= '';
+						if ( !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans']) ) {
+							$preTot 	= ' ( ' . $Ans . ' - ';
+							$totAns  .= '0';
+							$totAnsO .= '0';
+							$searchefile		  	= file( $this->$k );
+							$countsearchefile 	= count( $searchefile );
+							for( $us = 0; $us < $countsearchefile; $us++ ) {
+								if ( ! empty($searchefile[$us]) ) {
+									if ( isset($v['answer'][$i]) ) {
+										if ( $v['answer'][$i] . "\n" == $searchefile[$us] ) {
+											$totAns++;
+										}
+									}
+									if ( esc_html__( 'Other', 'VABFWC' ) . "\n" ==  $searchefile[$us] ) {
+										$totAnsO++;
+									}
+								}
+							}
+							$totAns 	.= ' )';
+							$totAnsO 	.= ' )';
+						}
+			//////**********//////
 						if ( isset($v['answer'][$i]) ) {
-							echo '<center>' . esc_html( $v['answer'][$i] ) . ' - <span class="cub" style="background-color:' . esc_html( $v['color'][$i] ) . ';"></span>&nbsp;&nbsp;</center>';
+							echo '<center>' . esc_html( $v['answer'][$i] ) . ' - <span class="cub" style="background-color:' . esc_html( $v['color'][$i] ) . ';"></span>&nbsp;&nbsp; ' . $preTot . $totAns . '</center>';
 						} else {
-							echo '<center>' . esc_html__( 'Other', 'VABFWC' ) . ' - <span class="cub" style="background-color:#A8A8A8;"></span>&nbsp;&nbsp;</center>';}}
+							echo '<center>' . esc_html__( 'Other', 'VABFWC' ) . ' - <span class="cub" style="background-color:#A8A8A8;"></span>&nbsp;&nbsp; ' . $preTot . $totAnsO . '</center>';}}
 					echo "</center><br>";
 					for( $i = 0; $i < $coanswer; $i++ ) {
 						${$k . 'Count_' . $i} = 0;

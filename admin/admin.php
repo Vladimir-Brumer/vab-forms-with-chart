@@ -54,19 +54,20 @@ if ( ! function_exists( 'vabfwc_contact_forms_meta_box' ) ) {
 if ( ! function_exists( 'vabfwc_contact_forms_meta_box_callback' ) ) {
 	function vabfwc_contact_forms_meta_box_callback( $post,$meta ) {
 		wp_nonce_field( 'VABFWC_mode_FORMS_nonce', 'VABFWC_FORMS_nonce' );
-		$id 						= intval( $post->ID );
-		$VABFWC_FORMSA	= get_post_meta( $id, 'VABFWC_FORM', true );
-		$Button_del 		= '<img style="margin-bottom:-7px!important;" class="VABFWC_remove_Volna_Soc" src="' . esc_url( VABFWC_PLUGIN_URL . '/images/delete.png' ) . '" width="auto" height="33">';
-		$Button_del_PP	= '<img style="margin-bottom:-7px!important;" class="remove_Parent_Parent" src="' . esc_url( VABFWC_PLUGIN_URL . '/images/delete.png' ) . '" width="auto" height="33">';
-		$Button_del_arg	= 	array( /* wp_kses */
-		'img'						=>	array(
-			'style'				=>	array(),
-			'class'				=>	array(),
-			'src'					=>	array(),
-			'width'				=>	array(),
-			'height'			=>	array(),
-		),
-	);
+		$id 								= intval( $post->ID );
+		$VABFWC_FORMSA			= get_post_meta( $id, 'VABFWC_FORM', true );
+		$VABFWC_FORMSA_OPT 	= get_post_meta( $id, 'VABFWC_FORM_OPT', true );
+		$Button_del 				= '<img style="margin-bottom:-7px!important;" class="VABFWC_remove_Volna_Soc" src="' . esc_url( VABFWC_PLUGIN_URL . '/images/delete.png' ) . '" width="auto" height="33">';
+		$Button_del_PP			= '<img style="margin-bottom:-7px!important;" class="remove_Parent_Parent" src="' . esc_url( VABFWC_PLUGIN_URL . '/images/delete.png' ) . '" width="auto" height="33">';
+		$Button_del_arg			= 	array( /* wp_kses */
+				'img'						=>	array(
+					'style'				=>	array(),
+					'class'				=>	array(),
+					'src'					=>	array(),
+					'width'				=>	array(),
+					'height'			=>	array(),
+				),
+			);
 	$this_value = 'jQuery( this ).prev().val( this.value )';
 ?>
 	<script async="async" type="text/javascript">
@@ -237,17 +238,19 @@ if ( ! empty( $VABFWC_FORMSA ) ) {
 							<h2>' . $ButMas[ 0 ] . '</h2>
 						</legend>';
 		$iB = 1;
-		foreach( $VABFWC_FORMSA as $k => $v ) {
-			echo	'<div>',
-							'<span class="vabfwc_moving vabfwc_up" title="' . esc_html__( 'Up', 'VABFWC' ) . '">' . esc_html__( 'Up', 'VABFWC' ) . '</span>',
-							'<span class="vabfwc_moving vabfwc_down" title="' . esc_html__( 'Down', 'VABFWC' ) . '">' . esc_html__( 'Down', 'VABFWC' ) . '</span>';
-			$type = $v['type'];
-			$type = $typeText["$type"];
-			echo	'<div class="vabfwc_spoiler-head folded" style="text-align:center;cursor:pointer;background:#282828!important;color:#FFF;padding:7px;">' . esc_html( $iB ) . ' - ' . esc_html__( 'Collapse/Expand block', 'VABFWC' ) . '</div>
-						<div class="vabfwc_spoiler-body" style="display:none;border:4px double rgba(125,125,125,.75);">';
-			echo	'<textarea cols="11" rows="1" placeholder="' . esc_html__( 'Specify an identifier', 'VABFWC' ) . '" class="VALTEXTARREA" name="' . $id . '[' . $k . ']" value="' . esc_html( $k ) . '" required="">' . esc_html( $k ) . '</textarea>
-						<textarea cols="44" rows="1" placeholder="' . esc_html__( 'Formulate your question', 'VABFWC' ) . '" name="' . $id . '[' . $k . '][question]" value="" required="">' . esc_html( $v['question'] ) . '</textarea>
-						<input type="hidden" size="7" name="' . $id . '[' . $k . '][type]" value="' . esc_html( $v['type'] ) . '" required="" readonly="">' . wp_kses( $Button_del, $Button_del_arg ) . ' - ' . esc_html( $type );
+	foreach( $VABFWC_FORMSA as $k => $v ) {
+		echo	'<div>';
+		// if ( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS']) ) {
+			echo	'<span class="vabfwc_moving vabfwc_up" title="' . esc_html__( 'Up', 'VABFWC' ) . '">' . esc_html__( 'Up', 'VABFWC' ) . '</span>',
+						'<span class="vabfwc_moving vabfwc_down" title="' . esc_html__( 'Down', 'VABFWC' ) . '">' . esc_html__( 'Down', 'VABFWC' ) . '</span>';
+		// }
+		$type = $v['type'];
+		$type = $typeText["$type"];
+		echo	'<div class="vabfwc_spoiler-head folded" style="text-align:center;cursor:pointer;background:#282828!important;color:#FFF;padding:7px;">' . esc_html( $iB ) . ' - ' . esc_html__( 'Collapse/Expand block', 'VABFWC' ) . '</div>
+					<div class="vabfwc_spoiler-body" style="display:none;border:4px double rgba(125,125,125,.75);">';
+		echo	'<textarea cols="11" rows="1" placeholder="' . esc_html__( 'Specify an identifier', 'VABFWC' ) . '" class="VALTEXTARREA" name="' . $id . '[' . $k . ']" value="' . esc_html( $k ) . '" required="">' . esc_html( $k ) . '</textarea>
+					<textarea cols="44" rows="1" placeholder="' . esc_html__( 'Formulate your question', 'VABFWC' ) . '" name="' . $id . '[' . $k . '][question]" value="" required="">' . esc_html( $v['question'] ) . '</textarea>
+					<input type="hidden" size="7" name="' . $id . '[' . $k . '][type]" value="' . esc_html( $v['type'] ) . '" required="" readonly="">' . wp_kses( $Button_del, $Button_del_arg ) . ' - ' . esc_html( $type );
 		if ( $v['type'] == 'number' || $v['type'] == 'range' ) {
 			echo	'<br /><br />',
 							'<table>',
@@ -343,18 +346,27 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box' ) ) {
 if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 	function vabfwc_contact_forms_options_meta_box_callback( $post, $meta ) {
 		wp_nonce_field( 'VABFWC_mode_FORMS_opt_nonce', 'VABFWC_FORMS_opt_nonce' );
-		$id = $post->ID;
-		$VABFWC_FORMSA_OPT = get_post_meta( $id, 'VABFWC_FORM_OPT', true );
+		global $wp_roles;
+		$id									= $post->ID;
+		$VABFWC_ROLES				= $wp_roles->get_names();
+		$VABFWC_FORMSA_OPT 	= get_post_meta( $id, 'VABFWC_FORM_OPT', true );
 			$VABFWC_FORMSA_OPT_NoDi 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'] ) ? 'checked="checked"' : '';
+			$VABFWC_FORMSA_OPT_CSV_LOGS 				= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ? 'checked="checked"' : '';
+			foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+				${'VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE} = $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE] ) ? 'checked="checked"' : '';
+			}
 			$VABFWC_FORMSA_OPT_NoDate 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDate'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_NoIP 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoIP'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_NoAgent 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoAgent'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_PROT 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_PROT'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_HideDi 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_ShowDi 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi'] ) ? 'checked="checked"' : '';
-			$VABFWC_FORMSA_OPT_ShowOnlyAdm 			= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm'] ) ? 'checked="checked"' : '';
+			foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+				${'VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE} = $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE] ) ? 'checked="checked"' : '';
+			}
 			$VABFWC_FORMSA_OPT_TotaL 						= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_TotaL_Every_circ = $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_circ'] ) ? 'checked="checked"' : '';
+			$VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans 	= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_TotaL_Every_ceck = $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_TotaL_Every_ceck'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_AddFile 					= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_AddFile'] ) ? 'checked="checked"' : '';
 			$VABFWC_FORMSA_OPT_AddFileMulti			= $VABFWC_FORMSA_OPT && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_AddFileMulti'] ) ? 'checked="checked"' : '';
@@ -396,6 +408,27 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 									</td>
 								</tr>
 								<tr class="log_files">
+									<td>
+										<label for="VABFWC_FORMSA_OPT_CSV_LOGS">
+											<span class="ch">' . esc_html__( 'Write form responses to csv files', 'VABFWC' ) . '. ' . esc_html__( 'Option required', 'VABFWC' ) . ' - ' . esc_html__( 'Write form responses to log files', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
+											<input id="VABFWC_FORMSA_OPT_CSV_LOGS" type="checkbox" name="VABFWC_FORMSA_OPT_CSV_LOGS" ' . esc_attr( $VABFWC_FORMSA_OPT_CSV_LOGS ) . '>
+										</label>
+									</td>
+								</tr>';
+		$VABFWC_CHEKER_ROLS = '';
+		foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+			$VABFWC_CHEKER_ROLS .= '<label for="VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE . '">
+																<span class="ch">' . $VABFWC_ROLE . '&nbsp;&nbsp;&nbsp;</span>
+																<input id="VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE . '" type="checkbox" name="VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE . '" ' . esc_attr( ${'VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE} ) . '>
+															</label>';
+		}
+		echo			'<tr class="log_files">
+									<td>
+										<span class="ch">' . esc_html__( 'Show the CSV files only for', 'VABFWC' ) . ':&nbsp;&nbsp;&nbsp;</span>
+										' . $VABFWC_CHEKER_ROLS . '
+									</td>
+								</tr>';
+			echo			'<tr class="log_files">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_NoDate">
 											<span class="ch">' . esc_html__( 'Don`t write date to log files', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -443,16 +476,21 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 											<input id="VABFWC_FORMSA_OPT_ShowDi" type="checkbox" name="VABFWC_FORMSA_OPT_ShowDi" ' . esc_attr( $VABFWC_FORMSA_OPT_ShowDi ) . '>
 										</label>
 									</td>
-								</tr>
-								<tr class="seet_diag">
+								</tr>';
+		$VABFWC_CHEKER_ROLE = '';
+		foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+			$VABFWC_CHEKER_ROLE .= '<label for="VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE . '">
+																<span class="ch">' . $VABFWC_ROLE . '&nbsp;&nbsp;&nbsp;</span>
+																<input id="VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE . '" type="checkbox" name="VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE . '" ' . esc_attr( ${'VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE} ) . '>
+															</label>';
+		}
+		echo			'<tr class="seet_diag">
 									<td>
-										<label for="VABFWC_FORMSA_OPT_ShowOnlyAdm">
-											<span class="ch">' . esc_html__( 'Show the charts only for the administrators', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
-											<input id="VABFWC_FORMSA_OPT_ShowOnlyAdm" type="checkbox" name="VABFWC_FORMSA_OPT_ShowOnlyAdm" ' . esc_attr( $VABFWC_FORMSA_OPT_ShowOnlyAdm ) . '>
-										</label>
+										<span class="ch">' . esc_html__( 'Show the charts only for', 'VABFWC' ) . ':&nbsp;&nbsp;&nbsp;</span>
+										' . $VABFWC_CHEKER_ROLE . '
 									</td>
-								</tr>
-								<tr class="seet_diag">
+								</tr>';
+			echo			'<tr class="seet_diag">
 									<td>
 										<label for="VABFWC_FORMSA_OPT_TotaL">
 											<span class="ch">' . esc_html__( 'Hide the total number of completed questionnaires', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
@@ -465,6 +503,14 @@ if ( ! function_exists( 'vabfwc_contact_forms_options_meta_box_callback' ) ) {
 										<label for="VABFWC_FORMSA_OPT_TotaL_Every_circ">
 											<span class="ch">' . esc_html__( 'Show total answers per question above pie chart', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
 											<input id="VABFWC_FORMSA_OPT_TotaL_Every_circ" type="checkbox" name="VABFWC_FORMSA_OPT_TotaL_Every_circ" ' . esc_attr( $VABFWC_FORMSA_OPT_TotaL_Every_circ ) . '>
+										</label>
+									</td>
+								</tr>
+								<tr class="seet_diag">
+									<td>
+										<label for="VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans">
+											<span class="ch">' . esc_html__( 'Show the number of answers for each question above the pie chart', 'VABFWC' ) . '&nbsp;&nbsp;&nbsp;</span>
+											<input id="VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans" type="checkbox" name="VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans" ' . esc_attr( $VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans ) . '>
 										</label>
 									</td>
 								</tr>
@@ -580,6 +626,9 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			if ( ! current_user_can( 'edit_post', $post_ID ) ) {
 				return;
 			}
+			global $wp_roles;
+			$VABFWC_ROLES					= $wp_roles->get_names();
+			$VABFWC_FORMSA				= get_post_meta( $post_ID, 'VABFWC_FORM', true );
 			$VABFWC_FORMS_filds 	= array();
 			$VABFWC_FORMS_All 		= isset( $_POST[$post_ID] ) ? vabfwc_sanitize_text_field( $_POST[$post_ID] ) : '';
 			$VABFWC_FORMS_All ? $VABFWC_FORMS_filds[$post_ID] = vabfwc_sanitize_text_field( $VABFWC_FORMS_All ) : true;
@@ -596,15 +645,22 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			}
 			$VABFWC_FORM_OPT										= array();
 			$VABFWC_FORMSA_OPT_NoDi							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_NoDi', FILTER_VALIDATE_BOOLEAN );
+			$VABFWC_FORMSA_OPT_CSV_LOGS					=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_CSV_LOGS', FILTER_VALIDATE_BOOLEAN );
+			foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+				${'VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE} = filter_input( INPUT_POST, 'VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE, FILTER_VALIDATE_BOOLEAN );
+			}
 			$VABFWC_FORMSA_OPT_NoDate						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_NoDate', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_NoIP							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_NoIP', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_NoAgent					=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_NoAgent', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_PROT							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_PROT', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_HideDi						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_HideDi', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_ShowDi						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_ShowDi', FILTER_VALIDATE_BOOLEAN );
-			$VABFWC_FORMSA_OPT_ShowOnlyAdm			=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_ShowOnlyAdm', FILTER_VALIDATE_BOOLEAN );
+			foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+				${'VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE} = filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE, FILTER_VALIDATE_BOOLEAN );
+			}
 			$VABFWC_FORMSA_OPT_TotaL						=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_TotaL', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_TotaL_Every_circ	=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_TotaL_Every_circ', FILTER_VALIDATE_BOOLEAN );
+			$VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans		=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_TotaL_Every_ceck	=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_TotaL_Every_ceck', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_MAIL_Copy				=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_MAIL_Copy', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_FORMSA_OPT_AddFile					=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_AddFile', FILTER_VALIDATE_BOOLEAN );
@@ -614,18 +670,32 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 			$VABFWC_FORMSA_OPT_MAIL							=	filter_input( INPUT_POST, 'VABFWC_FORMSA_OPT_MAIL', FILTER_VALIDATE_EMAIL );
 			$VABFWC_FORMSA_OPT_TITLE_MAIL				=	sanitize_text_field( $_POST['VABFWC_FORMSA_OPT_TITLE_MAIL'] );
 			$VABFWC_FORMSA_OPT_NoDi 						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoDi'] = $VABFWC_FORMSA_OPT_NoDi : false;
+			$VABFWC_FORMSA_OPT_CSV_LOGS 				? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] = $VABFWC_FORMSA_OPT_CSV_LOGS : false;
+			foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+				${'VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE} ? $VABFWC_FORM_OPT['VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE]	= ${'VABFWC_FORMSA_CSV_Show_' . $VABFWC_ROLE}	: true;
+			}
 			$VABFWC_USER_SEND_MAIL							=	filter_input( INPUT_POST, 'VABFWC_USER_SEND_MAIL', FILTER_VALIDATE_BOOLEAN );
 			$VABFWC_NO_SEND_MAIL								=	filter_input( INPUT_POST, 'VABFWC_NO_SEND_MAIL', FILTER_VALIDATE_BOOLEAN );
 			if ( $VABFWC_FORMSA_OPT_NoDi == false ) {
 				$VABFWC_Class->DirDel();
 			}
+			if ( $VABFWC_FORMSA_OPT_CSV_LOGS == false ) {
+				$VABFWC_Class->DirDelCsv();
+			}
 			$VABFWC_FORMSA_OPT_PROT 						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_PROT'] = $VABFWC_FORMSA_OPT_PROT : false;
 			if ( ! file_exists( $VABFWC_Class->FD ) && ! empty( $VABFWC_FORMSA_OPT_NoDi ) ) {
 				mkdir( $VABFWC_Class->FD, 0755, true );
 			}
-			$VABFWC_Silence	 	= $VABFWC_Class->FD . "/index.php";
+			if ( ! file_exists( $VABFWC_Class->FD . 'csv_logs' ) && ! empty( $VABFWC_FORMSA_OPT_NoDi ) && ! empty( $VABFWC_FORMSA_OPT_CSV_LOGS ) ) {
+				mkdir( $VABFWC_Class->FD . 'csv_logs', 0755, true );
+			}
+			$VABFWC_Silence	 		= $VABFWC_Class->FD . "/index.php";
 			if ( file_exists( $VABFWC_Class->FD ) && ! file_exists( $VABFWC_Silence ) ) {
 				file_put_contents( $VABFWC_Silence, "<?php\n// Silence is golden." );
+			}
+			$VABFWC_Silence_CSV	= $VABFWC_Class->FD . "csv_logs/index.php";
+			if ( file_exists( $VABFWC_Class->FD . 'csv_logs' ) && ! file_exists( $VABFWC_Silence_CSV ) ) {
+				file_put_contents( $VABFWC_Silence_CSV, "<?php\n// Silence is golden." );
 			}
 			$AccessFile				= $VABFWC_Class->FD . "/.htaccess";
 			if ( ! empty( $VABFWC_FORMSA_OPT_PROT ) && ! empty( $VABFWC_FORMSA_OPT_NoDi ) ) {
@@ -637,14 +707,27 @@ if ( ! function_exists( 'vabfwc_contact_forms_save_meta' ) ) {
 					unlink( $AccessFile );
 				}
 			}
+			$AccessFile_CSV		= $VABFWC_Class->FD . "csv_logs/.htaccess";
+			if ( ! empty( $VABFWC_FORMSA_OPT_PROT ) && ! empty( $VABFWC_FORMSA_OPT_CSV_LOGS ) ) {
+				if ( ! file_exists( $AccessFile_CSV ) && file_exists( $VABFWC_Class->FD . 'csv_logs' ) ) {
+					file_put_contents( $AccessFile_CSV, "Require all denied" );
+				}
+			} else {
+				if ( file_exists( $AccessFile_CSV ) ) {
+					unlink( $AccessFile_CSV );
+				}
+			}
 			$VABFWC_FORMSA_OPT_NoDate						?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoDate']						= $VABFWC_FORMSA_OPT_NoDate 					: true;
 			$VABFWC_FORMSA_OPT_NoIP							?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoIP']							= $VABFWC_FORMSA_OPT_NoIP 						: true;
 			$VABFWC_FORMSA_OPT_NoAgent					?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_NoAgent']						= $VABFWC_FORMSA_OPT_NoAgent 					: true;
 			$VABFWC_FORMSA_OPT_HideDi						?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_HideDi']						= $VABFWC_FORMSA_OPT_HideDi 					: true;
 			$VABFWC_FORMSA_OPT_ShowDi						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_ShowDi']					  = $VABFWC_FORMSA_OPT_ShowDi 					: true;
-			$VABFWC_FORMSA_OPT_ShowOnlyAdm			? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']				= $VABFWC_FORMSA_OPT_ShowOnlyAdm 			: true;
+			foreach( $VABFWC_ROLES as $VABFWC_ROLE => $VABFWC_NAME ){
+				${'VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE} ? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE]	= ${'VABFWC_FORMSA_OPT_Show_' . $VABFWC_ROLE}	: true;
+			}
 			$VABFWC_FORMSA_OPT_TotaL						? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TotaL']							= $VABFWC_FORMSA_OPT_TotaL						: true;
 			$VABFWC_FORMSA_OPT_TotaL_Every_circ ? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TotaL_Every_circ']	= $VABFWC_FORMSA_OPT_TotaL_Every_circ : true;
+			$VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans 	? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans']		= $VABFWC_FORMSA_OPT_Tot_Ev_cir_Ans 	: true;
 			$VABFWC_FORMSA_OPT_TotaL_Every_ceck ? $VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_TotaL_Every_ceck']	= $VABFWC_FORMSA_OPT_TotaL_Every_ceck : true;
 			$VABFWC_FORMSA_OPT_AddFile					?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_AddFile']						= $VABFWC_FORMSA_OPT_AddFile 					: true;
 			$VABFWC_FORMSA_OPT_AddFileMulti			?	$VABFWC_FORM_OPT['VABFWC_FORMSA_OPT_AddFileMulti']			= $VABFWC_FORMSA_OPT_AddFileMulti 		: true;
@@ -771,7 +854,7 @@ if ( ! function_exists( 'vab_fwc_info' ) ) {
 											esc_html__( 'Tested Wordpress up to', 'VABFWC' ) .
 										'</td>' .
 										'<td>' .
-											'6.0' .
+											'6.0.2' .
 										'</td>' .
 									'</tr>' .
 									'<tr>' .
@@ -817,9 +900,11 @@ if ( ! function_exists( 'vab_fwc_info' ) ) {
 							'<h3>' . esc_html__( 'New in version', 'VABFWC' ) . ' ' . VABFWC_VERSION . '</h3>' .
 						'</center>' .
 						'<ol>' .
-							'<li>' . esc_html__( 'Styling additional options', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Added option - ability to change table header', 'VABFWC' ) . '</li>' .
-							'<li>' . esc_html__( 'Fixed - small edits for better compatibility of gutenberg blocks;', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Small changes in HTML markup', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added the ability to upload data to a CSV file. Files will automatically be split by month', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added options: «Manage the display of CSV files for users»', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added the ability to hide/show the chart to specific users (optional)', 'VABFWC' ) . '</li>' .
+							'<li>' . esc_html__( 'Added option: «Show the number of answers for each question above the pie chart»', 'VABFWC' ) . '</li>' .
 						'</ol>' .
 					'</div>';
 	}

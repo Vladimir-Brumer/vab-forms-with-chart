@@ -166,6 +166,64 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		$sty			= 'style="padding-bottom:22px;padding-top:44px;"';
 		$ChBody		= '';
 		$hasError	= false;
+		if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) && file_exists( $VABFWC_Class->FD . 'csv_logs' ) ) {
+			$csv_logs 				= $VABFWC_Class->FD . 'csv_logs';
+			$csv_log_report 	= $csv_logs . '/' . date( 'm_Y') . '.csv';
+			$csv_t						= ! empty( get_the_title( $id ) ) ? get_the_title( $id ) : esc_html__( 'Title not specified', 'VABFWC' );
+			$csv_title				= array( esc_html__( 'Title the form', 'VABFWC' ) . ': ' . $csv_t . ' ( ID - ' . $id .').' );
+			$csv_f_srtok			= array( '№', esc_html__( 'Date', 'VABFWC' ) );
+			foreach( $VABFWC_FORMSA as $k => $v ) {
+				$csv_f_srtok[]	= esc_html ( $v['question'] );
+			}
+			$csv_line					= array(
+														$csv_title,
+														$csv_f_srtok,
+													);
+			if ( file_exists( $csv_logs ) && ! file_exists( $csv_log_report ) ) {
+				$csv_file				= fopen( $csv_log_report, 'w' );
+				fputs( $csv_file, chr(0xEF) . chr(0xBB) . chr(0xBF) );
+				foreach( $csv_line as $line ){
+					fputcsv( $csv_file, $line, ';' );
+				}
+				fclose( $csv_file );
+			}
+			$number_csv				= array();
+			$chek_csv_array		= array();//наполним текущим
+			if ( file_exists( $csv_logs ) && file_exists( $csv_log_report ) ) {
+				$chek_csv_file	= fopen( $csv_log_report, 'r' );
+				while ( ($data 	= fgetcsv($chek_csv_file, 1000, ";") ) !== FALSE){
+						if ( is_numeric ($data[0]) ) {
+							$number_csv[]			= $data[0];
+						}
+						if ( $data[0] == '№' ) {
+							$chek_csv_array[] = $data;
+						}
+				}
+			}
+			fclose( $chek_csv_file );
+			if ( !empty($number_csv) ) {
+				$number_csv_max = max($number_csv) + 1;
+			}
+			$csv_diff 			= array_diff( $csv_line[1], end($chek_csv_array) ); //получим расхождение
+			$csv_assoc 			= array_diff_assoc( $csv_line[1], end($chek_csv_array) );
+			$csv_diff_rev 	= array_diff( end($chek_csv_array), $csv_line[1] ); //получим расхождение
+			$csv_assoc_rev 	= array_diff_assoc( end($chek_csv_array), $csv_line[1] );
+// print_r($csv_line[1]);
+			if ( ! empty($csv_diff) || ! empty($csv_assoc) || ! empty($csv_diff_rev) || ! empty($csv_assoc_rev) ) {//если расход есть
+				$new_csv_array			= array( $csv_line[1] ); //будущий нормальный массив
+				if ( file_exists( $csv_logs ) && file_exists( $csv_log_report ) ) {
+					$update_csv_file	= fopen( $csv_log_report, 'a+' );
+					while ( ($data 		= fgetcsv($update_csv_file, 1000, ";") ) !== FALSE ) {
+						fputcsv( $update_csv_file, $new_csv_array[0], ';' );
+					}
+				}
+				fclose( $update_csv_file );
+			}
+			$massivfile		  	= file( $csv_log_report, FILE_SKIP_EMPTY_LINES );
+			$countmassivfile	= count( $massivfile );
+			$dates						= date( 'H \h. i \m\i\n. d.m.Y' );
+			$answers					= array ( !empty ($number_csv_max) ? $number_csv_max: $countmassivfile -1, $dates );
+		}
 		foreach( $VABFWC_FORMSA as $k => $v ) {
 			if ( ! file_exists( $VABFWC_Class->$k ) && ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'] ) ) {
 				file_put_contents( $VABFWC_Class->$k, '', FILE_APPEND );
@@ -178,12 +236,14 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 											. '</td>'
 											. '<td valign="top" align="center">';
 				$chekX			= 0;
+				$okChek			= '';
 				for ( $i = 0; $i < $coanswer; $i++ ) {
 					if ( isset($_POST[$k . $i]) && $_POST[$k . $i] !== '' ) {
 						$chekX++;
 						$ok = sanitize_text_field( $_POST[$k . $i] );
 						$ChBody .= '<p>' . $ok . '';
 						${$k . 'put'} .= $ok . "\n";
+						$okChek	.= " - " . $ok . "| ";
 					}
 				}
 				$ChBody .= '</td>'
@@ -191,6 +251,9 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 									. ' - '
 								. '</td>'
 							. '</tr>';
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[] = $okChek;
+				}
 				if ( $chekX == 0 ) {
 					$hasError = true;
 					${$k . 'Error'} = $Erchik;
@@ -204,19 +267,22 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}
 					${$k . 'put'} .= $ok . "\n";
-			$ChBody .= '<tr style="color:#FFF;">'
-								. '<td valign="top">'
-									. esc_html ( $v['question'] )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. '<a style="color:#FFF;" href="' . esc_url( $ok ) . '" target="_blank" rel="noopener noreferrer">'
-										. esc_html ( $ok )
-									. '</a>'
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. ' - '
-								. '</td>'
-							. '</tr>';
+				$ChBody .= '<tr style="color:#FFF;">'
+									. '<td valign="top">'
+										. esc_html ( $v['question'] )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. '<a style="color:#FFF;" href="' . esc_url( $ok ) . '" target="_blank" rel="noopener noreferrer">'
+											. esc_html ( $ok )
+										. '</a>'
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. ' - '
+									. '</td>'
+								. '</tr>';
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[]	= $ok;
+				}
 			}else if($v['type']=='tel' ) {
 					$ok = '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) && VABFWC_is_tel( $_POST[$k] ) ) {
@@ -226,17 +292,21 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}
 					${$k . 'put'} .= $ok . "\n";
-			$ChBody .= '<tr style="color:#FFF;">'
-								. '<td valign="top">'
-									. esc_html ( $v['question'] )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. esc_html ( $ok )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. ' - '
-								. '</td>'
-							. '</tr>';
+				$ChBody .= '<tr style="color:#FFF;">'
+									. '<td valign="top">'
+										. esc_html ( $v['question'] )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. esc_html ( $ok )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. ' - '
+									. '</td>'
+								. '</tr>';
+
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[]	= $ok;
+				}
 			}else if($v['type']=='email' ) {
 					$ok = '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) && VABFWC_is_email( $_POST[$k] ) ) {
@@ -247,19 +317,22 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}
 					${$k . 'put'} .= $ok . "\n";
-			$ChBody .= '<tr style="color:#FFF;">'
-								. '<td valign="top">'
-									. esc_html ( $v['question'] )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. '<a style="color:#FFF;" href="' . esc_url( $ok ) . '" target="_blank" rel="noopener noreferrer">'
-										. esc_html ( $ok )
-									. '</a>'
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. ' - '
-								. '</td>'
-							. '</tr>';
+				$ChBody .= '<tr style="color:#FFF;">'
+									. '<td valign="top">'
+										. esc_html ( $v['question'] )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. '<a style="color:#FFF;" href="' . esc_url( $ok ) . '" target="_blank" rel="noopener noreferrer">'
+											. esc_html ( $ok )
+										. '</a>'
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. ' - '
+									. '</td>'
+								. '</tr>';
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[]	= $ok;
+				}
 			}else if($v['type']=='date' ) {
 					$ok = '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) && VABFWC_is_date( $_POST[$k] ) ) {
@@ -269,17 +342,20 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}
 					${$k . 'put'} .= $ok . "\n";
-			$ChBody .= '<tr style="color:#FFF;">'
-								. '<td valign="top">'
-									. esc_html ( $v['question'] )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. esc_html ( $ok )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. ' - '
-								. '</td>'
-							. '</tr>';
+				$ChBody .= '<tr style="color:#FFF;">'
+									. '<td valign="top">'
+										. esc_html ( $v['question'] )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. esc_html ( $ok )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. ' - '
+									. '</td>'
+								. '</tr>';
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[]	= $ok;
+				}
 			}else if($v['type']=='number'||$v['type']=='range' ) {
 					$ok = '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) && VABFWC_is_number( $_POST[$k] ) ) {
@@ -289,17 +365,20 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}
 					${$k . 'put'} .= $ok . "\n";
-			$ChBody .= '<tr style="color:#FFF;">'
-								. '<td valign="top">'
-									. esc_html ( $v['question'] )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. esc_html ( $ok )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. ' - '
-								. '</td>'
-							. '</tr>';
+				$ChBody .= '<tr style="color:#FFF;">'
+									. '<td valign="top">'
+										. esc_html ( $v['question'] )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. esc_html ( $ok )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. ' - '
+									. '</td>'
+								. '</tr>';
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[]	= $ok;
+				}
 			} else if ( $v['type'] == 'select') {
 					$ok = '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && $_POST[$k] !== 'default' && !VABFWC_Chek_url( $_POST[$k] ) ) {
@@ -309,20 +388,24 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}
 					${$k . 'put'} .= $ok . "\n";
-			$ChBody .= '<tr style="color:#FFF;">'
-								. '<td valign="top">'
-									. esc_html ( $v['question'] )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. esc_html ( $ok )
-								. '</td>'
-								. '<td valign="top" align="center">'
-									. ' - '
-								. '</td>'
-							. '</tr>';
+				$ChBody .= '<tr style="color:#FFF;">'
+									. '<td valign="top">'
+										. esc_html ( $v['question'] )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. esc_html ( $ok )
+									. '</td>'
+									. '<td valign="top" align="center">'
+										. ' - '
+									. '</td>'
+								. '</tr>';
+				if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+					$answers[]	= $ok;
+				}
 			}	else {
 				if ( ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) ) || ( !empty( $_POST[$k . 'area'] ) && !VABFWC_Chek_url( $_POST[$k . 'area'] ) ) ) {
-					$ok = '';
+					$ok			= '';
+					$okArea	= '';
 					if ( isset($_POST[$k]) && $_POST[$k] !== '' && !VABFWC_Chek_url( $_POST[$k] ) ) {
 						$ok = sanitize_text_field( $_POST[$k] );
 					} else {
@@ -330,18 +413,22 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 						${$k . 'Error'} = $Erchik;
 					}/*remove so that the field is different without choosing the radio passed*/
 					${$k . 'put'} .= $ok . "\n";
-				$ChBody .= '<tr style="color:#FFF;">'
-									. '<td valign="top">'
-										. esc_html ( $v['question'] )
-									. '</td>'
-									. '<td valign="top" align="center">'
-										. esc_html ( $ok )
-									. '</td>';
+					$ChBody .= '<tr style="color:#FFF;">'
+										. '<td valign="top">'
+											. esc_html ( $v['question'] )
+										. '</td>'
+										. '<td valign="top" align="center">'
+											. esc_html ( $ok )
+										. '</td>';
+					$okArea .= $ok;
 					if ( !empty($_POST[$k . 'area']) && !VABFWC_Chek_url( $_POST[$k . 'area'] ) ) {
 						$ChBody .= '<td valign="top" align="center">'
 												. sanitize_text_field( $_POST[$k . 'area'] )
 										. '</td>'
 								. '</tr>';
+						$okArea .= " ( ";
+						$okArea .= sanitize_text_field( $_POST[$k . 'area'] );
+						$okArea .= " )";
 					} else if ( !empty($_POST[$k . 'area']) && VABFWC_Chek_url( $_POST[$k . 'area'] ) ) {
 						$hasError = true;
 						${$k . 'Error'} = $Erchik . '. ' . esc_html__( 'Links not allowed', 'VABFWC' ) . ' !!!';
@@ -351,12 +438,21 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 												. ' - '
 										. '</td>'
 									. '</tr>';
+						// $okArea .= " - ";
+					}
+					if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) ) {
+						$answers[]	= $okArea;
 					}
 				} else {
 					$hasError = true;
 					${$k . 'Error'} = $Erchik;
 				}
 			}
+		}
+		if ( ! empty( $VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS'] ) && file_exists( $VABFWC_Class->FD . 'csv_logs' ) && $hasError !== true ) {
+			$csv_file_add = fopen( $csv_log_report, 'a+' );
+			fputcsv( $csv_file_add, $answers, ';' );
+			fclose( $csv_file_add );
 		}
 		$body_Arg							= 	array( /* wp_kses */
 			'html'							=>	array(
@@ -568,22 +664,21 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 	} else {
 		return '<div class="contact_message"><h5>' . esc_html__( 'Data array is empty', 'VABFWC' ) . '</h5></div>';
 	}
-	$placeHolder		= __( 'Text input field...', 'VABFWC' );
-	$HolderPlus			= esc_html__( 'Write your answer', 'VABFWC' );
-	$sentYN					= '';
-	$SentY					= esc_html__( 'Your message was successfully sent', 'VABFWC' ) . '!';
-	$SentN					= esc_html__( 'Message not sent', 'VABFWC' ) . '!';
-	$ResF						= "";
-	$ResFY					= (	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'])	) ||
-										(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) ) ||
-										(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
-											( ( is_user_logged_in() && !current_user_can( 'administrator' ) ) || !is_user_logged_in() ) ) ? ''
-										: ( !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) &&
-										(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||
-											(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
-												is_user_logged_in() &&
-												current_user_can( 'administrator' ) ) ) ? esc_html__( 'The results are displayed at the end of the questionnaire', 'VABFWC' ) . '!'
-										: esc_html__( 'Results will be displayed after filling out and sending the questionnaire', 'VABFWC' ) . '!' );
+	$VABFWC_CHEK_ROLES					= VABFWC_CHEK_ROLES( $id );
+	$VABFWC_CHEK_OPT_ROLES			= VABFWC_CHEK_OPT_ROLES( $id );
+	$VABFWC_CHEK_CSV_ROLES			= VABFWC_CHEK_CSV_ROLES( $id );
+	$VABFWC_CHEK_CSV_OPT_ROLES	= VABFWC_CHEK_CSV_OPT_ROLES( $id );
+	$placeHolder								= __( 'Text input field...', 'VABFWC' );
+	$HolderPlus									= esc_html__( 'Write your answer', 'VABFWC' );
+	$sentYN											= '';
+	$SentY											= esc_html__( 'Your message was successfully sent', 'VABFWC' ) . '!';
+	$SentN											= esc_html__( 'Message not sent', 'VABFWC' ) . '!';
+	$ResF												= "";
+	$ResFY											= (	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi'])	) ||
+																(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) && empty($VABFWC_CHEK_ROLES) ) ||
+																(	!empty($VABFWC_CHEK_OPT_ROLES) && empty($VABFWC_CHEK_ROLES) ) ? '' :
+																( ( ( !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) && empty($VABFWC_CHEK_OPT_ROLES) ) ||
+																(	!empty($VABFWC_CHEK_ROLES) ) ) ? esc_html__( 'The results are displayed at the end of the questionnaire', 'VABFWC' ) . '!' : esc_html__( 'Results will be displayed after filling out and sending the questionnaire', 'VABFWC' ) . '!' );
 	if ( isset($emailSent) && $emailSent == true ) {
 		$sentYN		= $SentY;
 		$ResFY		= $ResF;
@@ -656,7 +751,7 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 		if ( $v['type'] == 'textarea' ) {
 			$isset = isset($_POST[$k]) ? sanitize_text_field( $_POST[$k] ) : '';
 			ECHO '<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
-							'<label  for="' . esc_attr( $k ) . '">&nbsp;</label>',
+							'<label for="' . esc_attr( $k ) . '">&nbsp;</label>',
 							'<textarea id="' . esc_attr( $k ) . '" name="' . esc_attr( $k ) . '" rows="4" cols="40" placeholder="' . esc_html( $placeHolder ) . '" value="">',
 								esc_html( $isset ),
 							'</textarea>',
@@ -685,8 +780,8 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					ECHO	'<option name="' . esc_attr( $name ) . '" title="' . esc_attr( $v['answer'][$ii] ) . '" ' . esc_attr( $isset ) . ' value="' . esc_attr( $v['answer'][$ii] ) . '">' . esc_html( $v['answer'][$ii] ) . '</option>';
 				} else {
 					ECHO	'<li class="' . esc_attr( $k . $ii ) . '_li" tabindex="0">',
-									'<label for="' . esc_attr( $k . $ii ) . '">',
-										'<input id="' . esc_attr( $k . $ii ) . '" type="' . esc_attr( $v['type'] ) . '" name="' . esc_attr( $name ) . '" ' . esc_attr( $isset ) . ' title="' . esc_attr( $v['answer'][$ii] ) . '" value="' . esc_attr( $v['answer'][$ii] ) . '"/>',
+									'<label for="' . esc_attr( $k . 'id' . $ii ) . '">',
+										'<input id="' . esc_attr( $k . 'id' . $ii ) . '" type="' . esc_attr( $v['type'] ) . '" name="' . esc_attr( $name ) . '" ' . esc_attr( $isset ) . ' title="' . esc_attr( $v['answer'][$ii] ) . '" value="' . esc_attr( $v['answer'][$ii] ) . '"/>',
 										esc_html( $v['answer'][$ii] ),
 									'</label>',
 								'</li>';
@@ -699,8 +794,8 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 			if ( $v['type'] == 'radio' && $v['plusArea'] == 'yes' ) {
 				$isset = isset($_POST[$k]) && $_POST[$k] == esc_html__( 'Other', 'VABFWC' ) ? 'checked="checked"' : '';
 				$issett = isset($_POST[$k . 'area']) ? sanitize_text_field( $_POST[$k . 'area'] ) : '';
-				ECHO	'<li class="' . esc_attr( $k ) . '_li" tabindex="0">',
-								'<label  for="' . esc_attr( $k ) . '">',
+				ECHO	'<li class="vabfwc_click ' . esc_attr( $k ) . '_li" tabindex="0">',
+								'<label for="' . esc_attr( $k ) . '">',
 									'<input id="' . esc_attr( $k ) . '" type="' . esc_attr( $v['type'] ) . '" name="' . esc_attr( $k ) . '" ' . esc_attr( $isset ) . ' title="' . esc_html__( 'Other', 'VABFWC' ) . '" value="' . esc_html__( 'Other', 'VABFWC' ) . '"/>',
 									esc_html__('Other','VABFWC'),
 								'</label>',
@@ -749,6 +844,60 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 					'</form>',
 					'</div>';
 	}
+	if ( ( empty($VABFWC_CHEK_CSV_OPT_ROLES) || ! empty($VABFWC_CHEK_CSV_ROLES) ) &&
+			 ! empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_CSV_LOGS']) &&
+			 file_exists( $VABFWC_Class->FD . 'csv_logs' ) ) {
+		$csv_table_arg				= 	array( /* wp_kses */
+			'center'						=>	array(),
+			'div'								=>	array(
+				'class'						=>	array(),
+				'tabindex'				=>	array(),
+			),
+			'table'							=>	array(
+				'style'						=>	array(),
+			),
+			'tr'								=>	array(),
+			'td'								=>	array(),
+			'a'									=>	array(
+				'target'					=>	array(),
+				'href'						=>	array(),
+			),
+		);
+		$csv_logs 						= $VABFWC_Class->FD . 'csv_logs';
+		$csv_logs_Dir					= scandir( $csv_logs );
+		$getFileProtect				= 'HNUv6Q8YO4u8hTfhs6e5';
+		$csv_table						= '';
+		$csv_table .=	'<center>
+									 <div class="vabfwc_spoiler-wrap">
+										<div class="vabfwc_spoiler-head folded" tabindex="0">' . esc_html__('CSV log files', 'VABFWC') . '</div>
+											<div class="vabfwc_spoiler-body">
+												<table style="width:100%;text-align:center;">';
+		$PostW					=	get_post();
+		$Link						=	$PostW->guid;
+		foreach( $csv_logs_Dir as $file ) {
+				if ( $file != "." &&
+						 $file != ".."  &&
+						 $file != '.htaccess' &&
+						 $file != 'index.php' ) {
+						 $name	= basename( $file, ".csv" );
+				$my_file		= $name;
+				$my_type		=	'csv_logs';
+				$ouCh				= hash( 'sha1', $id . '&' . $my_file . '&' . $my_type . '&' . $getFileProtect );
+				$GetLink		=	$Link . '&id=' . $id . '&my_file=' . $my_file . '&my_type=' . $my_type . '&hash=' . $ouCh;
+				$csv_table .=	'<tr>
+												<td>' . $name . '</td>
+												<td>
+													<a target="_blank" href="' . esc_url( $GetLink ) . '">' . esc_html__( 'Download', 'VABFWC' ) . '</a>
+												</td>
+											 </tr>';
+				}
+			}
+		$csv_table .=	'			</table>
+											</div>
+										</div>
+										</center>';
+		echo wp_kses( $csv_table, $csv_table_arg );
+	}
 	if ( ! empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_NoDi']) ) {
 		if ( $sentYN == $SentY || is_user_logged_in() && current_user_can( 'administrator' ) ) {
 			ECHO	'<form class="FormS FormSContact" action="' . esc_url( get_the_permalink() ) . '" method="post">';
@@ -764,25 +913,14 @@ if ( ! function_exists( 'vabfwc_short' ) ) {
 				ECHO	wp_kses( $VABFWC_AD->FieldS(), $VABFWC_Prot_Arg ) .
 							'<input type="hidden" name="submitres" id="submitres" value="true" />';
 			ECHO	'</form>';
-			if	( !empty($VABFWC_FORMSA) &&
-						( empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) &&
-							$sentYN == $SentY ) &&
-						empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) &&
-						(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||
-							(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
-								is_user_logged_in() &&
-								current_user_can( 'administrator' ) ) ) ) {
-				$VABFWC = new VABFWC_Class_Graphic( $id );
-				ECHO	wp_kses( $VABFWC->ShoW(), $Class_Graphic_Arg );
-			}
 		}
-		if (	$sentYN != $SentY &&
-					!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) &&
-					empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) &&
-					(	empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) ||
-						(	!empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowOnlyAdm']) &&
-							is_user_logged_in() &&
-							current_user_can( 'administrator' ) ) ) ) {
+		if (	!empty($VABFWC_FORMSA) &&
+					(
+						(	$sentYN == $SentY && empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) && empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) && empty($VABFWC_CHEK_OPT_ROLES) ) ||
+						( $sentYN != $SentY && !empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_ShowDi']) && empty($VABFWC_FORMSA_OPT['VABFWC_FORMSA_OPT_HideDi']) && empty($VABFWC_CHEK_OPT_ROLES) ) ||
+						( $sentYN != $SentY && !empty($VABFWC_CHEK_ROLES) )
+					)
+				) {
 			$VABFWC = new VABFWC_Class_Graphic( $id );
 			ECHO	wp_kses( $VABFWC->ShoW(), $Class_Graphic_Arg );
 		}
@@ -798,39 +936,43 @@ add_shortcode( "VABFWC_Graphic", "vabfwc_short_Graphic" );
 if ( ! function_exists( 'vabfwc_short_Graphic' ) ) {
 	function vabfwc_short_Graphic( $atts ) {
 		ob_start();
-		$id										= ! empty( $atts['id'] ) 				? intval( $atts['id'] ) : '';
-		$short_class					= ! empty( $atts['class'] )			? 'class="' . sanitize_text_field( $atts['class'] ) . '"' : '';
-		$short_tag						= ! empty( $atts['tag'] ) 			? sanitize_text_field( $atts['tag'] ) : '';
-		$short_tags_st				= ! empty( $short_tag )					? '<' . sanitize_text_field( $short_tag ) . ' ' . $short_class . '>' : '';
-		$short_tag_end				= ! empty( $short_tag )					? '</' . sanitize_text_field( $short_tag ) . '>' : '';
-		$short_title					= ! empty( $atts['title'] ) 		? $short_tags_st . sanitize_text_field( $atts['title'] ) . $short_tag_end : '';
-		$title_Arg		= 	array( /* wp_kses */
-			'h1'								=>	array(
-				'class'						=>	array(),
+		$id													= ! empty( $atts['id'] ) 				? intval( $atts['id'] ) : '';
+		$VABFWC_CHEK_ROLES					= VABFWC_CHEK_ROLES( $id );
+		$VABFWC_CHEK_OPT_ROLES			= VABFWC_CHEK_OPT_ROLES( $id );
+		$VABFWC_CHEK_CSV_ROLES			= VABFWC_CHEK_CSV_ROLES( $id );
+		$VABFWC_CHEK_CSV_OPT_ROLES	= VABFWC_CHEK_CSV_OPT_ROLES( $id );
+		$short_class								= ! empty( $atts['class'] )			? 'class="' . sanitize_text_field( $atts['class'] ) . '"' : '';
+		$short_tag									= ! empty( $atts['tag'] ) 			? sanitize_text_field( $atts['tag'] ) : '';
+		$short_tags_st							= ! empty( $short_tag )					? '<' . sanitize_text_field( $short_tag ) . ' ' . $short_class . '>' : '';
+		$short_tag_end							= ! empty( $short_tag )					? '</' . sanitize_text_field( $short_tag ) . '>' : '';
+		$short_title								= ! empty( $atts['title'] ) 		? $short_tags_st . sanitize_text_field( $atts['title'] ) . $short_tag_end : '';
+		$title_Arg									= 	array( /* wp_kses */
+			'h1'											=>	array(
+				'class'									=>	array(),
 			),
-			'h2'								=>	array(
-				'class'						=>	array(),
+			'h2'											=>	array(
+				'class'									=>	array(),
 			),
-			'h3'								=>	array(
-				'class'						=>	array(),
+			'h3'											=>	array(
+				'class'									=>	array(),
 			),
-			'h4'								=>	array(
-				'class'						=>	array(),
+			'h4'											=>	array(
+				'class'									=>	array(),
 			),
-			'h5'								=>	array(
-				'class'						=>	array(),
+			'h5'											=>	array(
+				'class'									=>	array(),
 			),
-			'h6'								=>	array(
-				'class'						=>	array(),
+			'h6'											=>	array(
+				'class'									=>	array(),
 			),
-			'div'								=>	array(
-				'class'						=>	array(),
+			'div'											=>	array(
+				'class'									=>	array(),
 			),
-			'p'									=>	array(
-				'class'						=>	array(),
+			'p'												=>	array(
+				'class'									=>	array(),
 			),
-			'center'						=>	array(
-				'class'						=>	array(),
+			'center'									=>	array(
+				'class'									=>	array(),
 			),
 		);
 		ECHO	wp_kses( $short_title, $title_Arg );

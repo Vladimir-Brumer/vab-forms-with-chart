@@ -3,6 +3,9 @@ var VABFWC_p_now	=	VABFWC_SenD_In.VABFWC_p_now_Out,
 		VABFWC_Chu_Fs	=	VABFWC_SenD_In.VABFWC_Chu_Fs_Out;
 jQuery ( document ).ready( function ( $ ) {
 	'use strict';
+	$( document ).on( 'click', '.vabfwc_click', function() {
+		jQuery( this ).children( 'textarea' ).focus();
+	});
 	$( document ).on( 'click', '.vabfwc_spoiler-head', function() {
 		jQuery( this ).next().slideToggle( 400 );
 	});
